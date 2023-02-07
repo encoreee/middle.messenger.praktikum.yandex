@@ -1,0 +1,77 @@
+.page {
+  height: 100vh;
+  display: flex;
+}
+
+.register-area {
+  height: 600px;
+  width: 360px;
+  margin: auto;
+  border: 2px solid;
+  border-radius: 10px;
+  background: linear-gradient(to right, #7965b1, #db69dd);
+}
+
+.align-area {
+  margin: 2.5rem;
+}
+
+.label-area {
+}
+
+.label-area__main-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+}
+
+.singin-form {
+  font-family: 'Roboto', sans-serif;
+}
+
+.singin-form__input {
+  height: 3.5rem;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: inherit;
+  border: 0px solid;
+  border-radius: 10px;
+  text-indent: 20px;
+  font-size: 16px;
+}
+
+.singin-form__button {
+  height: 3.5rem;
+  display: block;
+  width: 100%;
+  margin-top: 140px;
+  margin-bottom: 20px;
+  font-family: inherit;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: #147cf6;
+  color: white;
+  font-size: 20px;
+}
+
+.singin-form__input::placeholder {
+  color: #212529;
+  opacity: 0.4;
+  text-indent: 20px;
+}
+
+.singin-form__input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+.label-area__link-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  display: block;
+}

@@ -1,0 +1,37 @@
+---
+registration: Регистрация
+enter: Войти
+---
+
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="register-area">
+        <div class="align-area">
+          <div class="label-area">
+             {{> mainPageLabel label="Item Messanger" }}
+             {{> mainPageLabel label="Вход" }}
+          </div>
+          <div>
+            <form class="singin-form">
+              <input class="singin-form__input" id="login" name="username" placeholder="Введите имя пользователя"/>
+              <input class="singin-form__input" id="password" name="password" placeholder="Введите пароль"/>
+              <button class="singin-form__button">{{enter}}</button>
+            </form>
+          </div>
+          <div>
+            <a href="views/regPage.hbs" class="label-area__link-label ">{{registration}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>c
