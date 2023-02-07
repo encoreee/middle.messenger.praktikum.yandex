@@ -3,15 +3,28 @@
   "version": "1.0.0",
   "license": "MIT",
   "browserslist": "> 0.5%, last 2 versions, not dead",
- 
   "scripts": {
-    "dev": "parcel src/index.hbs src/*.hbs--no-cache",
+    "dev": "parcel src/index.hbs src/views/regPage.hbs --no-cache",
     "build": "parcel build src/index.hbs src/views/*.hbs --no-cache",
     "test": "echo \"Error: no test sprcified\" && exit 1"
   },
   "dependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "autoprefixer": "^10.4.13",
     "handlebars": "^4.7.7",
-    "parcel": "^2.8.3"
+    "parcel": "^2.8.3",
+    "postcss-modules": "^4.3.0"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.21",
+    "postcss-font-magician": "^3.0.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-font-magician":{
+        
+      }
+    }
   }
 }
