@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/chatPage.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="chat-area">
+        <div class="menu-area">
+          <div class="align-area">
+            <div class="myuser-area">
+              <div class="myuser-area__user-avatar">
+                Ava
+              </div>
+              <input
+                class="myuser-area__search-input"
+                id="search"
+                name="search"
+                placeholder="Поиск..."
+              />
+            </div>
+            <div class="users-area">
+              {{!-- {{> userCellSelected name="Александр" messege="Какое то сообщение" time="20:23" messegeCount="4"}}
+                   {{> userCell name="Вика" messege="Привет, как дела?" time="11:45" messegeCount="1"}}
+                   {{> userCell name="Настя" messege="А ты знаешь..." time="23:00" messegeCount="3"}} --}}
+            </div>
+          </div>
+        </div>
+        <div class="messege-area">
+          <div class="messege-area__personal-area">
+            <div class="messege-area__personal-area__avatar-wrapper">
+              <img
+                class="messege-area__personal-area__avatar"
+                src="../../static/foto.jpg"
+                alt="ava"
+              />
+            </div>
+            <div class="messege-area__personal-area__label-wrapper">
+              <p class="messege-area__personal-area__label"><b>Александр</b></p>
+            </div>
+          </div>
+          <div class="messege-area__conversation-area">
+            {{> myMessage text="
+  Роджерс первым ввел в научный обиход понятие «клиент», 
+      так как идентификация понимает гомеостаз в силу которого смешивает 
+      субъективное и объективное, переносит свои внутренние побуждения 
+      на реальные связи вещей." time="11:43"
+            }}
+            {{> userMessage text="
+ Элемент <big> (от англ. big — большой) увеличивает размер шрифта на единицу по сравнению с
+   обычным текстом. В HTML размер шрифта измеряется в условных единицах от 1 до 7, средний размер текста, используемый 
+   по умолчанию, принят 3. Таким образом, добавление <big> увеличивает текст на одну условную единицу." time="20:13"
+            }}
+
+
+
+
+
+          </div>
+          <div class="messege-area__input-area">
+            <div class="messege-area__input-area_attach-wrapper">
+              <img
+                class="messege-area__input-area_attach_icon"
+                src="../../static/attach.svg"
+                alt="attch"
+              />
+            </div>
+            <div class="messege-area__input-area_input-wrapper">
+              <input
+                class="messege-area__input-area_input"
+                id="send"
+                name="send"
+                placeholder="Сообщение"
+              />
+            </div>
+            <div class="messege-area__input-area_button-wrapper">
+              <img
+                class="messege-area__input-area_attach_icon"
+                src="../../static/send.svg"
+                alt="send"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -4,8 +4,8 @@
   "license": "MIT",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel src/index.hbs src/views/regPage.hbs --no-cache",
-    "build": "parcel build src/index.hbs src/views/*.hbs --no-cache",
+    "dev": "parcel src/index.hbs --no-cache",
+    "build": "parcel build src/index --no-cache",
     "test": "echo \"Error: no test sprcified\" && exit 1"
   },
   "dependencies": {
@@ -18,13 +18,6 @@
   "devDependencies": {
     "postcss": "^8.4.21",
     "postcss-font-magician": "^3.0.0"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {},
-      "postcss-font-magician":{
-        
-      }
-    }
   }
+ 
 }
