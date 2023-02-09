@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/index.hbs --no-cache",
     "build": "parcel build src/index.hbs --no-cache",
-    "start": "npm run build && node app.js",
+    "start": "parcel build && node app.js",
     "test": "echo \"Error: no test sprcified\" && exit 1"
   },
   "dependencies": {
