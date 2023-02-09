@@ -1,0 +1,41 @@
+.page {
+  height: 100vh;
+  display: flex;
+}
+
+.not-found-area {
+  height: 600px;
+  width: 360px;
+  margin: auto;
+  border: 2px solid;
+  border-radius: 10px;
+  background: linear-gradient(to right, #7965b1, #db69dd);
+  display: flex;
+  flex-direction: column;
+}
+
+.align-area {
+  margin: auto auto;
+}
+
+.label-area {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.label-area__main-label {
+  font-family: inherit;
+  font-size: 60px;
+}
+
+.label-area__secondary-label {
+  font-family: inherit;
+  font-size: 22px;
+  color: rgb(68, 68, 68);
+}
+
+.back-button {
+  margin: 1rem;
+  height: 40px;
+  width: 40px;
+}

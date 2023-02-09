@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/serverErrorPage.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="server-error-area">
+        <div class="align-area">
+          <div class="label-area">
+             {{> mainPageLabel label="500" }}
+             {{> secondaryPageLabel label="Сервис в данный момент недоступен" }}
+          </div>
+        </div>
+          <img
+                class="back-button"
+                src="../../static/back.svg"
+                alt="back"
+              />
+      </div>
+    </div>
+  </body>
+</html>

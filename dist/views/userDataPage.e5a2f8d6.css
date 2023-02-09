@@ -1,0 +1,115 @@
+.page {
+  height: 100vh;
+  display: flex;
+}
+
+.change-data-area {
+  height: 600px;
+  width: 600px;
+  background: #e2cce9;
+  border: 2px solid;
+  border-radius: 10px;
+  flex-direction: column;
+  margin: auto;
+  display: flex;
+}
+
+.align-area {
+  margin: auto;
+}
+
+.label-area__main-label {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-size: 24px;
+}
+
+.user-data {
+  font-family: Roboto, sans-serif;
+}
+
+.user-data__data-field {
+  height: 3.5rem;
+  width: 400px;
+  border: 0 solid;
+  border-radius: 10px;
+  justify-content: space-between;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  display: flex;
+  position: relative;
+}
+
+.user-data__data-field:after {
+  content: " ";
+  width: 100%;
+  border-bottom: 2px solid #000;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: absolute;
+  bottom: 0;
+}
+
+.user-data__data-field_key {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.user-data__data-field_value {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: gray;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.personal-area {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.personal-area:after {
+  content: " ";
+  width: 90%;
+  border-bottom: 2px solid #000;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+}
+
+.personal-area__avatar-wrapper {
+  margin-left: 1rem;
+  display: flex;
+}
+
+.personal-area__avatar {
+  height: 60px;
+  width: 60px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.personal-area__label-wrapper {
+  margin-left: 1rem;
+  display: flex;
+}
+
+.personal-area__label {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: Roboto, sans-serif;
+  font-size: 24px;
+}
+
+/*# sourceMappingURL=userDataPage.e5a2f8d6.css.map */
