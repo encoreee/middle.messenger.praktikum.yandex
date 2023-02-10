@@ -6,4 +6,4 @@ S# Global settings applied to the whole site.
 # “publish” is the directory to publish (relative to the root of your repo).
 
 [build]
-  publish = "dist" 
+  publish = "dist"
