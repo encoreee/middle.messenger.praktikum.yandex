@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@anikin/parcel-transformer-handlebars@^1.0.9":
+"@anikin/parcel-transformer-handlebars@1.0.9":
   "integrity" "sha512-8/4qe3uLvG0lc26bs7ZGcZcJISyRJl/KWPLEJgcHHKolLehNobOfdrwPY46c6V0dFrqgLN3ga3xYyaWVyYHD9w=="
   "resolved" "https://registry.npmjs.org/@anikin/parcel-transformer-handlebars/-/parcel-transformer-handlebars-1.0.9.tgz"
   "version" "1.0.9"
@@ -1011,7 +1011,7 @@
   dependencies:
     "gulp-header" "^1.7.1"
 
-"autoprefixer@^10.4.13":
+"autoprefixer@10.4.13":
   "integrity" "sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg=="
   "resolved" "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.13.tgz"
   "version" "10.4.13"
@@ -1500,6 +1500,11 @@
   "resolved" "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-5.1.0.tgz"
   "version" "5.1.0"
 
+"dotenv@^16.0.3":
+  "integrity" "sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz"
+  "version" "16.0.3"
+
 "dotenv@^7.0.0":
   "integrity" "sha512-M3NhsLbV1i6HuGzBUH8vXrtxOk+tWmzWKDMbAVSUp3Zsjm7ywFeuwrUXhmhQyRK1q5B5GGy7hcXPbj3bnfZg2g=="
   "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-7.0.0.tgz"
@@ -1590,7 +1595,7 @@
     "snapdragon" "^0.8.1"
     "to-regex" "^3.0.1"
 
-"express@^4.18.2":
+"express@4.18.2":
   "integrity" "sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.18.2.tgz"
   "version" "4.18.2"
@@ -1908,7 +1913,7 @@
     "object-assign" "^4.1.1"
     "require-glob" "^3.2.0"
 
-"handlebars@^4.0.11", "handlebars@^4.7.7":
+"handlebars@^4.0.11", "handlebars@4.7.7":
   "integrity" "sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA=="
   "resolved" "https://registry.npmjs.org/handlebars/-/handlebars-4.7.7.tgz"
   "version" "4.7.7"
@@ -2741,7 +2746,7 @@
   "resolved" "https://registry.npmjs.org/ordered-binary/-/ordered-binary-1.4.0.tgz"
   "version" "1.4.0"
 
-"parcel@^2.8.3":
+"parcel@2.8.3":
   "integrity" "sha512-5rMBpbNE72g6jZvkdR5gS2nyhwIXaJy8i65osOqs/+5b7zgf3eMKgjSsDrv6bhz3gzifsba6MBJiZdBckl+vnA=="
   "resolved" "https://registry.npmjs.org/parcel/-/parcel-2.8.3.tgz"
   "version" "2.8.3"
@@ -2852,7 +2857,7 @@
   "resolved" "https://registry.npmjs.org/posix-character-classes/-/posix-character-classes-0.1.1.tgz"
   "version" "0.1.1"
 
-"postcss-font-magician@^3.0.0":
+"postcss-font-magician@3.0.0":
   "integrity" "sha512-PqGk9TeIoWzytZeLW6AtgzuL1sJb0bO0xPr4daI6MEhidqyCMECJmwXIlAS6ypf18y6tR04cDFbLqlQruXQiIA=="
   "resolved" "https://registry.npmjs.org/postcss-font-magician/-/postcss-font-magician-3.0.0.tgz"
   "version" "3.0.0"
@@ -2889,10 +2894,10 @@
   dependencies:
     "icss-utils" "^5.0.0"
 
-"postcss-modules@^4.3.0":
-  "integrity" "sha512-ItUhSUxBBdNamkT3KzIZwYNNRFKmkJrofvC2nWab3CPKhYBQ1f27XXh1PAPE27Psx58jeelPsxWB/+og+KEH0Q=="
-  "resolved" "https://registry.npmjs.org/postcss-modules/-/postcss-modules-4.3.1.tgz"
-  "version" "4.3.1"
+"postcss-modules@4.3.0":
+  "integrity" "sha512-zoUttLDSsbWDinJM9jH37o7hulLRyEgH6fZm2PchxN7AZ8rkdWiALyNhnQ7+jg7cX9f10m6y5VhHsrjO0Mf/DA=="
+  "resolved" "https://registry.npmjs.org/postcss-modules/-/postcss-modules-4.3.0.tgz"
+  "version" "4.3.0"
   dependencies:
     "generic-names" "^4.0.0"
     "icss-replace-symbols" "^1.1.0"
@@ -2933,7 +2938,7 @@
     "picocolors" "^0.2.1"
     "source-map" "^0.6.1"
 
-"postcss@^8.0.0", "postcss@^8.1.0", "postcss@^8.3.11", "postcss@^8.4.21":
+"postcss@^8.0.0", "postcss@^8.1.0", "postcss@^8.3.11", "postcss@8.4.21":
   "integrity" "sha512-tP7u/Sn/dVxK2NnruI4H9BG+x+Wxz6oeZ1cJ8P6G/PZY0IKk4k/63TDsQf2kQq3+qoJeLm2kIBUNlZe3zgb4Zg=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.4.21.tgz"
   "version" "8.4.21"
