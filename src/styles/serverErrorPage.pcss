@@ -1,15 +1,17 @@
+@import "appStyles.pcss";
+
 .page {
   height: 100vh;
   display: flex;
 }
 
-.not-found-area {
+.server-error-area {
   height: 600px;
   width: 360px;
   margin: auto;
   border: 2px solid;
   border-radius: 10px;
-  background: linear-gradient(to right, #7965b1, #db69dd);
+  background: linear-gradient(to right, $mainGradientLeft, $mainGradientRight);
   display: flex;
   flex-direction: column;
 }
@@ -19,7 +21,7 @@
 }
 
 .label-area {
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   text-align: center;
 }
 
@@ -31,7 +33,7 @@
 .label-area__secondary-label {
   font-family: inherit;
   font-size: 22px;
-  color: rgb(68, 68, 68);
+  color: $secondaryLabelTextColor;
 }
 
 .back-button {

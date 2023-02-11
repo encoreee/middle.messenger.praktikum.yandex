@@ -1,3 +1,5 @@
+@import "appStyles.pcss";
+
 .page {
   height: 100vh;
   display: flex;
@@ -9,7 +11,7 @@
   margin: auto;
   border: 2px solid;
   border-radius: 10px;
-  background: #e2cce9;
+  background: $chatBackGround;
   display: flex;
 }
 
@@ -17,7 +19,7 @@
   border-radius: 10px 0px 0px 10px;
   height: 600px;
   width: 250px;
-  background: #d9d9d9;
+  background: $menuBackGround;
   display: inline-block;
   position: relative;
 }
@@ -47,7 +49,7 @@
   width: 50px;
   margin-right: 10px;
   border-radius: 50%;
-  border: 0.2px solid #707070;
+  border: 0.2px solid $searchInputBorderColor;
   background-color: wheat;
   text-align: center;
   font-size: 15px;
@@ -61,24 +63,24 @@
   margin-top: 12px;
   margin-bottom: 12px;
   font-family: inherit;
-  border: 0.2px solid #707070;
+  border: 0.2px solid $searchInputBorderColor;
   border-radius: 3px;
   text-indent: 20px;
   font-size: 16px;
 }
 
 .myuser-area__search-input::placeholder {
-  color: #212529;
+  color: $placeholderColor;
   opacity: 0.4;
   text-indent: 20px;
 }
 
 .myuser-area__search-input:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #bdbdbd;
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  box-shadow: $inputFocusBoxShadow;
 }
 
 .users-area {
@@ -90,8 +92,8 @@
   margin-top: 12px;
   margin-bottom: 12px;
   font-family: inherit;
-  border: 0.2px solid #707070;
-  background-color: white;
+  border: 0.2px solid $userCellborderColor;
+  background-color: $userCellBackGround;
   border-radius: 5px;
   font-size: 16px;
   display: flex;
@@ -100,7 +102,7 @@
 }
 
 .users-area__user-cell.selected{
-  background-color: #cafbe6;
+  background-color: $userCellBackGroundSelected;
 }
 
 .users-area__user-cell__avatar {
@@ -109,13 +111,13 @@
   margin-right: 10px;
   margin-left: 10px;
   border-radius: 50%;
-  background-color: rgb(184, 182, 182);
+  background-color: $userCellAvatarBackGround;
   text-align: center;
   font-size: 15px;
 }
 
 .users-area__user-cell__data{
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   margin: 3px;
 }
 
@@ -128,7 +130,7 @@
   font-family: inherit;
   font-size: 10px;
   margin-top: 5px;
-  color: #0f1113;
+  color: $userCellMessegeColor;
   opacity: 0.4;
 }
 
@@ -146,7 +148,7 @@
 .users-area__user-cell__info__time-label{
   font-family: inherit;
   font-size: 14px;
-  color: #0f1113;
+  color: $userCellMessegeColor;
   opacity: 0.4;
 }
 
@@ -157,8 +159,8 @@
   margin-left: 3px;
   margin-top: 3px;
   border-radius: 50%;
-  background-color: #ccb8de;
-  color :white;
+  background-color: $userCellInfoCountLabelBackground;
+  color : $userCellInfoCountLabelTextColor;
 }
 
 .users-area__user-cell__info__count-label__text{
@@ -174,9 +176,9 @@
 
 
 .messege-area__not-selected-label{
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   font-size: 24px;
-  color: #0f1113;
+  color: $userCellMessegeColor;
   opacity: 0.4;
 }
 
@@ -199,8 +201,8 @@
   margin-right: 10px;
   margin-bottom: 10px;
   padding: 10px; 
-  border: 1px solid grey;
-  background-color: #cafbe6;
+  border: 1px solid $myMessageBorderColor;
+  background-color: $myMessageBackGroundColor;
   max-width: 450px;
   max-height: 600px;
   width: max-content; 
@@ -219,8 +221,8 @@
   margin-left: 10px;
   margin-bottom: 10px;
   padding: 10px; 
-  border: 1px solid grey;
-  background-color: white;
+  border: 1px solid $myMessageBorderColor;
+  background-color: $userMessageBackGroundColor;
   max-width: 450px;
   max-height: 600px;
   width: max-content; 
@@ -229,10 +231,10 @@
 }
 
 .messege-area__conversation-area__user-time{
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   margin-top: 4px;
   font-size: 14px;
-  color: #0f1113;
+  color: $userCellMessegeColor;
   opacity: 0.4;
   width: max-content; 
   float: right;
@@ -252,11 +254,11 @@
 
 
 .messege-area__conversation-area__my-time{
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   margin-top: 4px;
   margin-right: 3px;
   font-size: 14px;
-  color: #0f1113;
+  color: $userCellMessegeColor;
   opacity: 0.4;
   width: max-content; 
   float: right;
@@ -299,7 +301,7 @@
   width: 100%;
   margin: auto;
   font-family: inherit;
-  border: 0.2px solid #707070;
+  border: 0.2px solid $userCellborderColor;
   border-radius: 3px;
   text-indent: 20px;
   font-size: 16px;
@@ -357,6 +359,6 @@
 .messege-area__personal-area__label{
   margin-top: auto;
   margin-bottom: auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   font-size: 24px;
 }

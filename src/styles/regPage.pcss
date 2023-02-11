@@ -1,3 +1,5 @@
+@import "appStyles.pcss";
+
 .page {
   height: 100vh;
   display: flex;
@@ -9,7 +11,7 @@
   margin: auto;
   border: 2px solid;
   border-radius: 10px;
-  background: linear-gradient(to right, #7965b1, #db69dd);
+  background: linear-gradient(to right, $mainGradientLeft, $mainGradientRight);
 }
 
 .align-area {
@@ -20,20 +22,20 @@
 }
 
 .label-area__main-label {
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   font-size: 24px;
 }
 
 .singin-form {
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
 }
 
 .singin-form__input {
   height: 3.5rem;
   display: block;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   font-family: inherit;
   border: 0px solid;
   border-radius: 10px;
@@ -45,33 +47,26 @@
   height: 3.5rem;
   display: block;
   width: 100%;
-  margin-top: 140px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-family: inherit;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #147cf6;
-  color: white;
+  background-color: $buttonsColor;
+  color: $buttonTextColor;
   font-size: 20px;
 }
 
 .singin-form__input::placeholder {
-  color: #212529;
+  color: $placeholderColor;
   opacity: 0.4;
   text-indent: 20px;
 }
 
 .singin-form__input:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #bdbdbd;
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
-}
-
-.label-area__link-label {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  text-align: center;
-  display: block;
+  box-shadow: $inputFocusBoxShadow;
 }

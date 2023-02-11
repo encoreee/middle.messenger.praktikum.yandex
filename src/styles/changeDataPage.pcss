@@ -1,3 +1,5 @@
+@import "appStyles.pcss";
+
 .page {
   height: 100vh;
   display: flex;
@@ -9,7 +11,7 @@
   margin: auto;
   border: 2px solid;
   border-radius: 10px;
-  background: #e2cce9;
+  background: $chatBackGround;
   display: flex;
   flex-direction: column;
 }
@@ -22,12 +24,12 @@
 }
 
 .label-area__main-label {
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   font-size: 24px;
 }
 
 .change-data-form {
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
 }
 
 .change-data-form__input {
@@ -52,23 +54,23 @@
   font-family: inherit;
   border: 0px solid;
   border-radius: 10px;
-  background-color: #147cf6;
-  color: white;
+  background-color: $buttonsColor;
+  color: $buttonTextColor;
   font-size: 20px;
 }
 
 .change-data-form__input::placeholder {
-  color: #212529;
+  color: $placeholderColor;
   opacity: 0.4;
   text-indent: 20px;
 }
 
 .change-data-form__input:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #bdbdbd;
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  box-shadow: $inputFocusBoxShadow;
 }
 
 .personal-area {
@@ -111,6 +113,6 @@
 .personal-area__label{
   margin-top: auto;
   margin-bottom: auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: $globalFontFamily;
   font-size: 24px;
 }
