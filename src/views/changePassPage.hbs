@@ -1,0 +1,44 @@
+---
+enter: Сохранить
+---
+
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/changePassPage.pcss" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="change-data-area">
+         <div class="personal-area">
+            <div class="personal-area__avatar-wrapper">
+              <img
+                class="personal-area__avatar"
+                src="../../static/foto.jpg"
+                alt="ava"
+              />
+            </div>
+            <div class="personal-area__label-wrapper">
+              <p class="personal-area__label"><b>Александр</b></p>
+            </div>
+          </div>
+         <div class="align-area">
+          <div class="label-area">
+             {{> mainPageLabel label="Изменение пароля" }}
+          </div>
+          <div>
+            <form class="change-pass-form">
+              <input class="change-pass-form__input" id="pass" name="pass" placeholder="Пароль"/>
+              <input class="change-pass-form__input" id="repeate-pass" name="repeate-pass" placeholder="Повторите пароль"/>
+               <button class="change-pass-form__button">{{enter}}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+@import "appStyles.pcss";
+
+.page {
+  height: 100vh;
+  display: flex;
+}
+
+.server-error-area {
+  height: 600px;
+  width: 360px;
+  margin: auto;
+  border: 2px solid;
+  border-radius: 10px;
+  background: linear-gradient(to right, $mainGradientLeft, $mainGradientRight);
+  display: flex;
+  flex-direction: column;
+}
+
+.align-area {
+  margin: auto auto;
+}
+
+.label-area {
+  font-family: $globalFontFamily;
+  text-align: center;
+}
+
+.label-area__main-label {
+  font-family: inherit;
+  font-size: 60px;
+}
+
+.label-area__secondary-label {
+  font-family: inherit;
+  font-size: 22px;
+  color: $secondaryLabelTextColor;
+}
+
+.back-button {
+  margin: 1rem;
+  height: 40px;
+  width: 40px;
+}
