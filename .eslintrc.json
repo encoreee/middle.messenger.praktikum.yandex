@@ -3,9 +3,16 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "max-len": [2, 100],
+    "max-len": [2, 120],
     "@typescript-eslint/no-unused-vars": 2,
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [  "error", {
+      "devDependencies": false, 
+      "optionalDependencies": false, 
+      "peerDependencies": false, 
+      "packageDir": "./"
+   }]
   },
   "parserOptions": {
     "ecmaVersion": "latest",
