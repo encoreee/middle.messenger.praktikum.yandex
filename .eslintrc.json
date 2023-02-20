@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb",  "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
@@ -12,7 +12,8 @@
       "optionalDependencies": false, 
       "peerDependencies": false, 
       "packageDir": "./"
-   }]
+   }],
+   "import/extensions": [ "error", "ignorePackages", { "": "never" } ]
   },
   "parserOptions": {
     "ecmaVersion": "latest",

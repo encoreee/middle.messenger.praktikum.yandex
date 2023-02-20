@@ -1,0 +1,35 @@
+---
+chatStartPage: Стартовая страница
+chatPage: Страница чатов
+registration: Регистрация
+changeData: Изменение данных
+userData: Данные пользователя
+changePass: Изменение данных
+notFound: Не найдено
+serverError: Ошибка сервера
+---
+
+<div class="{{ styles.page }}">
+  <div class="{{ styles.register-area }}">
+    <div class="{{ styles.align-area }}">
+      <div class="{{ styles.label-area }}">
+        {{{ mainLabel }}}
+        {{{ enterLabel }}}
+      </div>
+      <div>
+        {{{ singinForm }}}
+      </div>
+      <div>
+         {{{ linkLabel }}}
+      </div>
+    </div>
+  </div>
+</div>
+<a href="../../views/regPage.hbs">{{registration}}</a><br />
+<a href="../../views/chatPage.hbs">{{chatPage}}</a><br />
+<a href="../../views/chatStartPage.hbs">{{chatStartPage}}</a><br />
+<a href="../../views/changeDataPage.hbs">{{changeData}}</a><br />
+<a href="../../views/userDataPage.hbs">{{userData}}</a><br />
+<a href="../../views/changePassPage.hbs">{{changePass}}</a><br />
+<a href="../../views/notFoundPage.hbs">{{notFound}}</a><br />
+<a href="../../views/serverErrorPage.hbs">{{serverError}}</a><br />
