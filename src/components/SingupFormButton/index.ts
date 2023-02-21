@@ -1,16 +1,16 @@
 import Block from '../../utils/Block';
-import template from './linkLabel.hbs';
+import template from './singupFormButton.hbs';
 import styles from './styles.module.pcss';
 
-interface LinkLabelProps {
+interface SingupFormButtonProps {
   label: string;
   events: {
     click: () => void;
   };
 }
 
-export class LinkLabel extends Block<LinkLabelProps> {
-  constructor(props: LinkLabelProps) {
+export class SingupFormButton extends Block<SingupFormButtonProps> {
+  constructor(props: SingupFormButtonProps) {
     super({...props });
   }
 

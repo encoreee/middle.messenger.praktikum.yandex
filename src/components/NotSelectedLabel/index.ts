@@ -1,16 +1,13 @@
 import Block from '../../utils/Block';
-import template from './linkLabel.hbs';
+import template from './notSelectedLabel.hbs';
 import styles from './styles.module.pcss';
 
-interface LinkLabelProps {
+interface NotSelectedLabelProps {
   label: string;
-  events: {
-    click: () => void;
-  };
 }
 
-export class LinkLabel extends Block<LinkLabelProps> {
-  constructor(props: LinkLabelProps) {
+export class NotSelectedLabel extends Block<NotSelectedLabelProps> {
+  constructor(props: NotSelectedLabelProps) {
     super({...props });
   }
 

@@ -4,6 +4,9 @@ import styles from './styles.module.pcss';
 
 interface SinginFormButtonProps {
   label: string;
+  events?: {
+    click: () => void;
+  };
 }
 
 export class SinginFormButton extends Block<SinginFormButtonProps> {

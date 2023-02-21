@@ -1,5 +1,7 @@
+import { MainLabel } from '../../components/MainLabel';
+import { SingupForm } from '../../components/SingupForm';
 import Block from '../../utils/Block';
-import template from './login.hbs';
+import template from './registration.hbs';
 
 import styles from './styles.module.pcss';
 
@@ -10,7 +12,11 @@ export class RegistrationPage extends Block {
   }
 
   init() {
-   
+    this.children.mainLabel = new MainLabel({
+      label: 'Регистрация',
+    });
+
+    this.children.singupForm = new SingupForm({});
   }
 
   onSubmit() {

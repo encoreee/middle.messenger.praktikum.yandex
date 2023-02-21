@@ -1,4 +1,4 @@
-@import "appStyles.pcss";
+@import '../../styles/appStyles.pcss';
 
 .page {
   height: 100vh;
@@ -39,54 +39,7 @@
   margin: 1rem;
 }
 
-.myuser-area {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.myuser-area__user-avatar {
-  height: 50px;
-  width: 50px;
-  margin-right: 10px;
-  border-radius: 50%;
-  border: 0.2px solid $searchInputBorderColor;
-  background-color: wheat;
-  text-align: center;
-  font-size: 15px;
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.myuser-area__search-input {
-  height: 2rem;
-  width: 70%;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  font-family: inherit;
-  border: 0.2px solid $searchInputBorderColor;
-  border-radius: 3px;
-  text-indent: 20px;
-  font-size: 16px;
-}
-
-.myuser-area__search-input::placeholder {
-  color: $placeholderColor;
-  opacity: 0.4;
-  text-indent: 20px;
-}
-
-.myuser-area__search-input:focus {
-  color: $placeholderColor;
-  background-color: $inputFocusBackGround;
-  border-color: $placeholderFocusBorderColor;
-  outline: 0;
-  box-shadow: $inputFocusBoxShadow;
-}
-
-.users-area {
-}
-
-.users-area__user-cell{
+.users-area__user-cell {
   height: 4rem;
   width: 100%;
   margin-top: 12px;
@@ -101,7 +54,7 @@
   align-items: center;
 }
 
-.users-area__user-cell.selected{
+.users-area__user-cell.selected {
   background-color: $userCellBackGroundSelected;
 }
 
@@ -116,17 +69,17 @@
   font-size: 15px;
 }
 
-.users-area__user-cell__data{
+.users-area__user-cell__data {
   font-family: $globalFontFamily;
   margin: 3px;
 }
 
-.users-area__user-cell__data__name-label{
+.users-area__user-cell__data__name-label {
   font-family: inherit;
   font-size: 14px;
 }
 
-.users-area__user-cell__data__messege-label{
+.users-area__user-cell__data__messege-label {
   font-family: inherit;
   font-size: 10px;
   margin-top: 5px;
@@ -134,7 +87,7 @@
   opacity: 0.4;
 }
 
-.users-area__user-cell__info{
+.users-area__user-cell__info {
   margin-right: 10x;
   margin-left: 3px;
   text-align: center;
@@ -142,17 +95,16 @@
   justify-content: center;
   align-items: center;
   float: right;
-  
 }
 
-.users-area__user-cell__info__time-label{
+.users-area__user-cell__info__time-label {
   font-family: inherit;
   font-size: 14px;
   color: $userCellMessegeColor;
   opacity: 0.4;
 }
 
-.users-area__user-cell__info__count-label{
+.users-area__user-cell__info__count-label {
   height: 20px;
   width: 20px;
   margin-right: 3px;
@@ -160,18 +112,13 @@
   margin-top: 3px;
   border-radius: 50%;
   background-color: $userCellInfoCountLabelBackground;
-  color : $userCellInfoCountLabelTextColor;
+  color: $userCellInfoCountLabelTextColor;
 }
 
-.users-area__user-cell__info__count-label__text{
+.users-area__user-cell__info__count-label__text {
   text-align: center;
   padding-top: 2px;
   font-size: 14px;
-}
-
-.messege-area {
-  height: 600px;
-  width: 550px;
 }
 
 .messege-area__conversation-area {
@@ -183,22 +130,22 @@
 }
 
 .messege-area__conversation-area__my-message-wrapper {
- display: flex;
- justify-content: flex-end;
- width: 100%;
- height: max-content; 
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: max-content;
 }
 
 .messege-area__conversation-area__my-message {
   margin-right: 10px;
   margin-bottom: 10px;
-  padding: 10px; 
+  padding: 10px;
   border: 1px solid $myMessageBorderColor;
   background-color: $myMessageBackGroundColor;
   max-width: 450px;
   max-height: 600px;
-  width: max-content; 
-  height: max-content; 
+  width: max-content;
+  height: max-content;
   border-radius: 10px 10px 0px 10px;
 }
 
@@ -206,56 +153,53 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  height: max-content; 
- }
+  height: max-content;
+}
 
 .messege-area__conversation-area__user-message {
   margin-left: 10px;
   margin-bottom: 10px;
-  padding: 10px; 
+  padding: 10px;
   border: 1px solid $myMessageBorderColor;
   background-color: $userMessageBackGroundColor;
   max-width: 450px;
   max-height: 600px;
-  width: max-content; 
-  height: max-content; 
+  width: max-content;
+  height: max-content;
   border-radius: 10px 10px 10px 0px;
 }
 
-.messege-area__conversation-area__user-time{
+.messege-area__conversation-area__user-time {
   font-family: $globalFontFamily;
   margin-top: 4px;
   font-size: 14px;
   color: $userCellMessegeColor;
   opacity: 0.4;
-  width: max-content; 
+  width: max-content;
   float: right;
 }
 
-.messege-area__conversation-area__info{
+.messege-area__conversation-area__info {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
 }
 
-.messege-area__conversation-area__checked{
+.messege-area__conversation-area__checked {
   float: right;
   margin-right: 3px;
 }
 
-
-.messege-area__conversation-area__my-time{
+.messege-area__conversation-area__my-time {
   font-family: $globalFontFamily;
   margin-top: 4px;
   margin-right: 3px;
   font-size: 14px;
   color: $userCellMessegeColor;
   opacity: 0.4;
-  width: max-content; 
+  width: max-content;
   float: right;
 }
-
 
 .messege-area__conversation-area:after {
   content: ' ';
@@ -299,13 +243,13 @@
   font-size: 16px;
 }
 
-.messege-area__input-area_attach_icon{
+.messege-area__input-area_attach_icon {
   height: 40px;
   width: 40px;
   margin: auto;
 }
 
-.messege-area__input-area_send_icon{
+.messege-area__input-area_send_icon {
   height: 40px;
   width: 40px;
   margin: auto;
@@ -318,7 +262,6 @@
   position: relative;
 }
 
-
 .messege-area__personal-area:after {
   content: ' ';
   position: absolute;
@@ -329,12 +272,12 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-.messege-area__personal-area__avatar-wrapper{
+.messege-area__personal-area__avatar-wrapper {
   display: flex;
   margin-left: 1rem;
 }
 
-.messege-area__personal-area__avatar{
+.messege-area__personal-area__avatar {
   height: 60px;
   width: 60px;
   border-radius: 50%;
@@ -343,12 +286,12 @@
   overflow: hidden;
 }
 
-.messege-area__personal-area__label-wrapper{
+.messege-area__personal-area__label-wrapper {
   display: flex;
   margin-left: 1rem;
 }
 
-.messege-area__personal-area__label{
+.messege-area__personal-area__label {
   margin-top: auto;
   margin-bottom: auto;
   font-family: $globalFontFamily;

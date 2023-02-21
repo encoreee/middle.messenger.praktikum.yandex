@@ -1,0 +1,47 @@
+@import "../../styles/appStyles.pcss";
+
+.myuser-area {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.myuser-area__user-avatar {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 0.2px solid $searchInputBorderColor;
+  background-color: wheat;
+  text-align: center;
+  font-size: 15px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.myuser-area__search-input {
+  height: 2rem;
+  width: 65%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-right: 12px;
+  font-family: inherit;
+  border: 0.2px solid $searchInputBorderColor;
+  border-radius: 3px;
+  text-indent: 20px;
+  font-size: 16px;
+}
+
+.myuser-area__search-input::placeholder {
+  color: $placeholderColor;
+  opacity: 0.4;
+  text-indent: 20px;
+}
+
+.myuser-area__search-input:focus {
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
+  outline: 0;
+  box-shadow: $inputFocusBoxShadow;
+}

@@ -4,6 +4,7 @@ import styles from './styles.module.pcss';
 import { SinginForm } from './../../components/SinginForm/index';
 import { MainLabel } from './../../components/MainLabel/index';
 import { LinkLabel } from '../../components/LinkLabel';
+import { renderDom } from '../../utils/renderDOM';
 
 export class LoginPage extends Block {
   constructor() {
@@ -23,6 +24,11 @@ export class LoginPage extends Block {
 
     this.children.linkLabel = new LinkLabel({
       label: 'Регистрация',
+      events : {
+        click: () => {
+          renderDom('registration');
+        }
+      } 
     });
   }
 
