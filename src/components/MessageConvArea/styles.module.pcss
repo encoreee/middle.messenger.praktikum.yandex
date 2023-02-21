@@ -1,0 +1,73 @@
+@import '../../styles/appStyles.pcss';
+
+.message-area__conversation-area {
+  display: flex;
+  height: 440px;
+  width: 550px;
+  position: relative;
+  flex-direction: column-reverse;
+}
+
+.message-area__conversation-area__user-message-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: max-content; 
+ }
+
+.message-area__conversation-area__user-message {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px; 
+  border: 1px solid $myMessageBorderColor;
+  background-color: $userMessageBackGroundColor;
+  max-width: 450px;
+  max-height: 600px;
+  width: max-content; 
+  height: max-content; 
+  border-radius: 10px 10px 10px 0px;
+}
+
+.message-area__conversation-area__user-time{
+  font-family: $globalFontFamily;
+  margin-top: 4px;
+  font-size: 14px;
+  color: $userCellMessegeColor;
+  opacity: 0.4;
+  width: max-content; 
+  float: right;
+}
+
+.message-area__conversation-area__info{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.message-area__conversation-area__checked{
+  float: right;
+  margin-right: 3px;
+}
+
+.message-area__conversation-area__my-time{
+  font-family: $globalFontFamily;
+  margin-top: 4px;
+  margin-right: 3px;
+  font-size: 14px;
+  color: $userCellMessegeColor;
+  opacity: 0.4;
+  width: max-content; 
+  float: right;
+}
+
+.message-area__conversation-area:after {
+  content: ' ';
+  position: absolute;
+  border-bottom: 2px black solid;
+  right: 5%;
+  bottom: 0;
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}

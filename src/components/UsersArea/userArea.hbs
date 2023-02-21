@@ -1,5 +1,5 @@
 <div class="{{styles.users-area}}">
-  {{!-- {{> userCell name="Александр" messege="Какое то сообщение" time="20:23" messegeCount="4"}}
-          {{> userCell name="Вика" messege="Привет, как дела?" time="11:45" messegeCount="1"}}
-          {{> userCell name="Настя" messege="А ты знаешь..." time="23:00" messegeCount="3"}} --}}
+    {{#each userCells}}
+        {{{this}}}
+    {{/each}}
 </div>
