@@ -191,13 +191,12 @@ export class SingupForm extends Block<SingupFormProps> {
           .filter((child) => child instanceof SingupFormInput)
           .filter((child) => (child as SingupFormInput).getId() === InputIds.mail)[0] as SingupFormInput;
 
-          let caseMatch = element.value.match(/^[^A-Z^А-Я]/);
-          let lettersMatch = element.value.match(/.[^a-z^а-я^ё^-]/);
+          let match = element.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+          console.log()
 
-          if (caseMatch || lettersMatch) {
+          if (!match) {
             this.setError(element);
             mailInput.setValidate(false);
-
 
           } else {
             this.setIdle(element);
@@ -213,10 +212,12 @@ export class SingupForm extends Block<SingupFormProps> {
           .filter((child) => child instanceof SingupFormInput)
           .filter((child) => (child as SingupFormInput).getId() === InputIds.login)[0] as SingupFormInput;
 
-          let caseMatch = element.value.match(/^[^A-Z^А-Я]/);
-          let lettersMatch = element.value.match(/.[^a-z^а-я^ё^-]/);
 
-          if (caseMatch || lettersMatch) {
+          let ifRightLength = element.value.length <= 3 || element.value.length >= 20;
+          let lettersMatch = element.value.match(/[^0-9^A-Z^А-Я^a-z^а-я^ё^Ё^-^_]/);
+          let onlyDigits = element.value.match(/^\d+$/);
+
+          if (ifRightLength || lettersMatch || onlyDigits) {
             this.setError(element);
             loginInput.setValidate(false);
           } else {
@@ -244,47 +245,10 @@ export class SingupForm extends Block<SingupFormProps> {
           }
 
           break;
+
         }
         case InputIds.name: {
-        
-          const name = Object.values(this.children)
-          .filter((child) => child instanceof SingupFormInput)
-          .filter((child) => (child as SingupFormInput).getId() === InputIds.name)[0] as SingupFormInput;
-
-          let caseMatch = element.value.match(/^[^A-Z^А-Я]/);
-          let lettersMatch = element.value.match(/.[^a-z^а-я^ё^-]/);
-
-          if (caseMatch || lettersMatch) {
-            this.setError(element);
-            name.setValidate(false);
-          } else {
-            this.setIdle(element);
-            name.setValidate(true);
-          }
-
-          break;
-        }
-        case InputIds.password: {
-          
-          const password = Object.values(this.children)
-          .filter((child) => child instanceof SingupFormInput)
-          .filter((child) => (child as SingupFormInput).getId() === InputIds.password)[0] as SingupFormInput;
-
-          let caseMatch = element.value.match(/^[^A-Z^А-Я]/);
-          let lettersMatch = element.value.match(/.[^a-z^а-я^ё^-]/);
-
-          if (caseMatch || lettersMatch) {
-            this.setError(element);
-            password.setValidate(false);
-          } else {
-            this.setIdle(element);
-            password.setValidate(true);
-          }
-
-          break;
-        }
-        case InputIds.repeatepassword: {
-        
+     
           const repeatepassword = Object.values(this.children)
           .filter((child) => child instanceof SingupFormInput)
           .filter((child) => (child as SingupFormInput).getId() === InputIds.repeatepassword)[0] as SingupFormInput;
@@ -298,6 +262,46 @@ export class SingupForm extends Block<SingupFormProps> {
           } else {
             this.setIdle(element);
             repeatepassword.setValidate(true);
+          }
+
+          break;
+        }
+        case InputIds.password: {
+          
+          const name = Object.values(this.children)
+          .filter((child) => child instanceof SingupFormInput)
+          .filter((child) => (child as SingupFormInput).getId() === InputIds.name)[0] as SingupFormInput;
+
+          let ifRightLength = element.value.length <= 8 || element.value.length >= 40;
+          let lettersMatch = element.value.match(/[^0-9^A-Z^А-Я^a-z^а-я^ё^Ё^]/);
+          let haveCase = element.value.match(/[A-ZА-Я]/);
+          let haveDigits = element.value.match(/[0-9]/);
+
+          if (ifRightLength || lettersMatch || !haveCase || !haveDigits) {
+            this.setError(element);
+            name.setValidate(false);
+          } else {
+            this.setIdle(element);
+            name.setValidate(true);
+          }
+
+          break;
+        }
+        case InputIds.repeatepassword: {
+        
+          const password = Object.values(this.children)
+          .filter((child) => child instanceof SingupFormInput)
+          .filter((child) => (child as SingupFormInput).getId() === InputIds.password)[0] as SingupFormInput;
+
+          let caseMatch = element.value.match(/^[^A-Z^А-Я]/);
+          let lettersMatch = element.value.match(/.[^a-z^а-я^ё^-]/);
+
+          if (caseMatch || lettersMatch) {
+            this.setError(element);
+            password.setValidate(false);
+          } else {
+            this.setIdle(element);
+            password.setValidate(true);
           }
 
           break;
