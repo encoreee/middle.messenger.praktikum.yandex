@@ -1,11 +1,11 @@
 import Block from '../../utils/Block';
 import template from './singupFormButton.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 
 interface SingupFormButtonProps {
   label: string;
   events: {
-    click: () => void;
+    click: (event : Event) => void;
   };
 }
 

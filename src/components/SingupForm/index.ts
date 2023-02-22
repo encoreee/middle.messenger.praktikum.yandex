@@ -1,9 +1,11 @@
+import { SignupData } from '../../contracts/auth';
+import  AuthController  from '../../controllers/authController';
 import Block from '../../utils/Block';
 import { renderDom } from '../../utils/renderDOM';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import template from './singupForm.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 
 interface SingupFormProps {
 }
@@ -53,13 +55,29 @@ export class SingupForm extends Block<SingupFormProps> {
     this.children.button = new SingupFormButton({
       label: 'Войти',
       events : {
-        click: () => {
+        click: (event) => {
+
+
+
+          event.preventDefault();
+          this.onSubmit()
           renderDom('chatStartPage');
         }
       } 
     });
   }
 
+  onSubmit() {
+    const values = Object
+      .values(this.children)
+      .filter(child => child instanceof SingupFormInput)
+      .map((child) => ([(child as SingupFormInput).getName(), (child as SingupFormInput).getValue()]))
+
+    const data = Object.fromEntries(values);
+
+    AuthController.signup(data as SignupData);
+  }
+  
   render() {
     return this.compile(template, { ...this.props, styles });
   }

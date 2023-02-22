@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './userArea.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 import { UserCell } from '../UserCell';
 
 interface UsersAreaProps {}

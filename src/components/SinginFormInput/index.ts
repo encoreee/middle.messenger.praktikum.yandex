@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './singinFormInput.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 
 interface SinginFormInputProps {
   id: string;
@@ -11,6 +11,14 @@ interface SinginFormInputProps {
 export class SinginFormInput extends Block<SinginFormInputProps> {
   constructor(props: SinginFormInputProps) {
     super({...props });
+  }
+
+  public getName() {
+    return (this.element as HTMLInputElement).name;
+  }
+
+  public getValue() {
+    return (this.element as HTMLInputElement).value;
   }
 
   render() {

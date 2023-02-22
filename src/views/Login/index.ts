@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './login.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 import { SinginForm } from './../../components/SinginForm/index';
 import { MainLabel } from './../../components/MainLabel/index';
 import { LinkLabel } from '../../components/LinkLabel';
@@ -31,6 +31,7 @@ export class LoginPage extends Block {
       } 
     });
   }
+
 
   render() {
     return this.compile(template, { ...this.props, styles });

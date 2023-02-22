@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './linkLabel.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 
 interface LinkLabelProps {
   label: string;

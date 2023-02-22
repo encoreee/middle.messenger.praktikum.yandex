@@ -1,13 +1,10 @@
 import Block from '../../utils/Block';
-import template from './myMessage.hbs';
+import template from './userMessage.hbs';
 import * as styles from './styles.module.pcss';
+import { MessageProps } from '../MyMessage';
 
-export interface MessageProps {
-  text: string;
-  time: string;
-}
 
-export class MyMessage extends Block<MessageProps> {
+export class UserMessage extends Block<MessageProps> {
   constructor(props: MessageProps) {
     super({...props });
   }

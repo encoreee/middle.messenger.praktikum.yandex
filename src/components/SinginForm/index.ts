@@ -2,7 +2,9 @@ import Block from '../../utils/Block';
 import { SinginFormButton } from '../SinginFormButton';
 import { SinginFormInput } from '../SinginFormInput';
 import template from './singinForm.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
+import { SigninData } from './../../contracts/auth';
+import AuthController from '../../controllers/authController';
 
 interface SinginFormProps {
 }
@@ -26,9 +28,27 @@ export class SinginForm extends Block<SinginFormProps> {
     });
 
     this.children.button = new SinginFormButton({
-      label: 'Войти'
+      label: 'Войти',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          this.onSubmit()
+        }
+      },
     });
   }
+
+  onSubmit() {
+    const values = Object
+      .values(this.children)
+      .filter(child => child instanceof SinginFormInput)
+      .map((child) => ([(child as SinginFormInput).getName(), (child as SinginFormInput).getValue()]))
+
+    const data = Object.fromEntries(values);
+
+    AuthController.signin(data as SigninData);
+  }
+
 
   render() {
     return this.compile(template, { ...this.props, styles });

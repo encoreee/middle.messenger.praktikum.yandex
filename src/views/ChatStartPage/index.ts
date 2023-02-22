@@ -2,7 +2,7 @@ import { MyUserArea } from '../../components/MyUserArea';
 import { UsersArea } from '../../components/UsersArea';
 import Block from '../../utils/Block';
 import template from './chatStartPage.hbs';
-import styles from './styles.module.pcss';
+import * as styles from './styles.module.pcss';
 import { MessageArea } from './../../components/MessageArea';
 
 
