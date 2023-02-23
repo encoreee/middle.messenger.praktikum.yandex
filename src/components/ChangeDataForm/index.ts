@@ -1,33 +1,30 @@
 import { SignupData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
 import Block from '../../utils/Block';
-import { renderDom } from '../../utils/renderDOM';
+import  InputValidator  from '../../utils/InputValidator';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
-import template from './singupForm.hbs';
-import InputValidator from '../../utils/InputValidator';
+import template from './changeDataForm.hbs';
 import * as styles from './styles.module.pcss';
 
-interface SingupFormProps {}
+interface ChangeDataFormProps {}
 
 const InputIds: {
   mail: string;
   login: string;
   name: string;
   lastname: string;
-  password: string;
-  repeatepassword: string;
+
 } = {
   mail: 'mail',
   login: 'login',
   name: 'name',
   lastname: 'lastname',
-  password: 'password',
-  repeatepassword: 'repeatepassword',
+
 };
 
-export class SingupForm extends Block<SingupFormProps> {
-  constructor(props: SingupFormProps) {
+export class ChangeDataForm extends Block<ChangeDataFormProps> {
+  constructor(props: ChangeDataFormProps) {
     super({ ...props });
   }
 
@@ -86,7 +83,7 @@ export class SingupForm extends Block<SingupFormProps> {
       },
     });
 
-    this.children.lastNameInput = new SingupFormInput({
+    this.children.lastnameInput = new SingupFormInput({
       id: InputIds.lastname,
       name: 'lastname',
       placeholder: 'Фамилия',
@@ -104,49 +101,13 @@ export class SingupForm extends Block<SingupFormProps> {
       },
     });
 
-    this.children.repeatPasswordInput = new SingupFormInput({
-      id: InputIds.password,
-      name: 'password',
-      placeholder: 'Пароль',
-      events: {
-        blur: (event) => {
-          if (event.target) {
-            this.onBlurValidate(event.target);
-          }
-        },
-        focus: (event) => {
-          if (event.target) {
-            this.onFocusValidate(event.target);
-          }
-        },
-      },
-    });
-
-    this.children.passwordInput = new SingupFormInput({
-      id: InputIds.repeatepassword,
-      name: 'repeatepassword',
-      placeholder: 'Повторите пароль',
-      events: {
-        blur: (event) => {
-          if (event.target) {
-            this.onBlurValidate(event.target);
-          }
-        },
-        focus: (event) => {
-          if (event.target) {
-            this.onFocusValidate(event.target);
-          }
-        },
-      },
-    });
-
+   
     this.children.button = new SingupFormButton({
-      label: 'Войти',
+      label: 'Сохранить',
       events: {
         click: (event) => {
           event.preventDefault();
           this.onSubmit();
-          renderDom('chatStartPage');
         },
       },
     });
@@ -169,7 +130,7 @@ export class SingupForm extends Block<SingupFormProps> {
     const data = Object.fromEntries(values);
 
     inputs.forEach((element) => {
-      if (!this.validateInputOnSubmit(element.element as HTMLInputElement)) {
+      if (!this.validateInputOnSubmit(element.element as HTMLInputElement)){
         return;
       }
     });
@@ -211,9 +172,9 @@ export class SingupForm extends Block<SingupFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.mail
             )[0] as SingupFormInput;
 
-          let match = InputValidator.validateMail(element.value);
+            let match = InputValidator.validateMail(element.value);
 
-          if (!match) {
+            if (!match) {
             this.setError(element);
             mailInput.setValidate(false);
           } else {
@@ -230,9 +191,9 @@ export class SingupForm extends Block<SingupFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.login
             )[0] as SingupFormInput;
 
-          let match = InputValidator.validateLogin(element.value);
+            let match = InputValidator.validateLogin(element.value);
 
-          if (!match) {
+            if (!match) {
             this.setError(element);
             loginInput.setValidate(false);
           } else {
@@ -250,9 +211,9 @@ export class SingupForm extends Block<SingupFormProps> {
                 (child as SingupFormInput).getId() === InputIds.lastname
             )[0] as SingupFormInput;
 
-          let match = InputValidator.validateName(element.value);
+            let match = InputValidator.validateName(element.value);
 
-          if (!match) {
+            if (!match) {
             this.setError(element);
             lastname.setValidate(false);
           } else {
@@ -269,9 +230,9 @@ export class SingupForm extends Block<SingupFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.name
             )[0] as SingupFormInput;
 
-          let match = InputValidator.validateName(element.value);
+            let match = InputValidator.validateName(element.value);
 
-          if (!match) {
+            if (!match) {
             this.setError(element);
             name.setValidate(false);
           } else {
@@ -279,54 +240,6 @@ export class SingupForm extends Block<SingupFormProps> {
             name.setValidate(true);
           }
 
-          break;
-        }
-        case InputIds.password: {
-          const password = Object.values(this.children)
-            .filter((child) => child instanceof SingupFormInput)
-            .filter(
-              (child) =>
-                (child as SingupFormInput).getId() === InputIds.password
-            )[0] as SingupFormInput;
-
-          let match = InputValidator.validateName(element.value);
-
-          if (!match) {
-            this.setError(element);
-            password.setValidate(false);
-          } else {
-            this.setIdle(element);
-            password.setValidate(true);
-          }
-
-          break;
-        }
-        case InputIds.repeatepassword: {
-          const repeatepassword = Object.values(this.children)
-            .filter((child) => child instanceof SingupFormInput)
-            .filter(
-              (child) =>
-                (child as SingupFormInput).getId() === InputIds.repeatepassword
-            )[0] as SingupFormInput;
-
-          const password = Object.values(this.children)
-            .filter((child) => child instanceof SingupFormInput)
-            .filter(
-              (child) =>
-                (child as SingupFormInput).getId() === InputIds.password
-            )[0] as SingupFormInput;
-
-          let pass = password.getValue();
-
-          let isNotEqual = element.value !== pass;
-
-          if (isNotEqual) {
-            this.setError(element);
-            repeatepassword.setValidate(false);
-          } else {
-            this.setIdle(element);
-            repeatepassword.setValidate(true);
-          }
           break;
         }
       }
@@ -352,12 +265,9 @@ export class SingupForm extends Block<SingupFormProps> {
           this.setIdle(element);
           break;
         }
-        case InputIds.password: {
-          this.setIdle(element);
-          break;
-        }
-        case InputIds.repeatepassword: {
-          this.setIdle(element);
+       
+        default: {
+          //statements;
           break;
         }
       }
@@ -396,19 +306,6 @@ export class SingupForm extends Block<SingupFormProps> {
         }
         case InputIds.name: {
           return InputValidator.validateName(element.value);
-        }
-        case InputIds.password: {
-          return InputValidator.validatePass(element.value);
-        }
-        case InputIds.repeatepassword: {
-          const password = Object.values(this.children)
-            .filter((child) => child instanceof SingupFormInput)
-            .filter(
-              (child) =>
-                (child as SingupFormInput).getId() === InputIds.password
-            )[0] as SingupFormInput;
-
-          return element.value === password.getValue();
         }
       }
     }

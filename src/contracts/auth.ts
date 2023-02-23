@@ -11,3 +11,10 @@ export interface SignupData {
   password: string;
   phone: string;
 }
+
+export interface ChangeData {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+}

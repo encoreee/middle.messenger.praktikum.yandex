@@ -1,4 +1,4 @@
-import { SigninData, SignupData } from "../contracts/auth";
+import { ChangeData, SigninData, SignupData } from "../contracts/auth";
 
 export class AuthController {
 
@@ -15,6 +15,14 @@ export class AuthController {
   }
 
   async signup(data: SignupData) {
+    try {
+      console.log(data);
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  }
+
+  async changeDate(data: ChangeData) {
     try {
       console.log(data);
     } catch (e: any) {

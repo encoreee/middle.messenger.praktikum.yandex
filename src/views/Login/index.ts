@@ -27,7 +27,7 @@ export class LoginPage extends Block {
       events : {
         click: () => {
         //  renderDom('registration');
-          renderDom('userDataPage');
+          renderDom('changeDataPage');
         }
       } 
     });
