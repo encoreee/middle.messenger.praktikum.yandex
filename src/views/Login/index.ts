@@ -26,7 +26,8 @@ export class LoginPage extends Block {
       label: 'Регистрация',
       events : {
         click: () => {
-          renderDom('registration');
+        //  renderDom('registration');
+          renderDom('userDataPage');
         }
       } 
     });

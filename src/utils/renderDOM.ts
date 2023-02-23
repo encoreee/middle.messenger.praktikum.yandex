@@ -1,11 +1,13 @@
 import { LoginPage } from '../views/Login';
 import { RegistrationPage } from '../views/Registration';
 import { ChatStartPage } from './../views/ChatStartPage';
+import { UserDataPage } from './../views/UserDataPage';
 
 const ROUTES = {
   login: LoginPage,
   registration : RegistrationPage,
-  chatStartPage : ChatStartPage
+  chatStartPage : ChatStartPage,
+  userDataPage : UserDataPage
 };
 
 export function renderDom(route: keyof typeof ROUTES) {
