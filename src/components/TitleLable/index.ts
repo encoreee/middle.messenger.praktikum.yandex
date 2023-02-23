@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import template from './TitleLabel.hbs';
+import template from './titleLabel.hbs';
 import * as styles from './styles.module.pcss';
 
 interface TitleLabelProps {
