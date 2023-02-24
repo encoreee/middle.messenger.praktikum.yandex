@@ -1,4 +1,4 @@
-@import '../../styles/appStyles.pcss';
+@import url('../../styles/appStyles.pcss');
 
 .message-area__personal-area {
   display: flex;
@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.message-area__personal-area:after {
+.message-area__personal-area::after {
   content: ' ';
   position: absolute;
   border-bottom: 2px black solid;
@@ -17,12 +17,13 @@
   margin-top: auto;
   margin-bottom: auto;
 }
-.message-area__personal-area__avatar-wrapper{
+
+.message-area-personal-area__avatar-wrapper{
   display: flex;
   margin-left: 1rem;
 }
 
-.message-area__personal-area__avatar{
+.message-area-personal-area__avatar{
   height: 60px;
   width: 60px;
   border-radius: 50%;
@@ -31,12 +32,12 @@
   overflow: hidden;
 }
 
-.message-area__personal-area__label-wrapper{
+.message-area-personal-area__label-wrapper{
   display: flex;
   margin-left: 1rem;
 }
 
-.message-area__personal-area__label{
+.message-area-personal-area__label{
   margin-top: auto;
   margin-bottom: auto;
   font-family: $globalFontFamily;

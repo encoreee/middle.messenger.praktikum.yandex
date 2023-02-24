@@ -1,13 +1,13 @@
 @import url("../../styles/appStyles.pcss");
 
-.message-area__conversation-area__my-message-wrapper {
+.message-area-conversation-area__my-message-wrapper {
   display: flex;
   justify-content: flex-end;
   width: 100%;
   height: max-content; 
  }
  
- .message-area__conversation-area__my-message {
+ .message-area-conversation-area__my-message {
    margin-right: 10px;
    margin-bottom: 10px;
    padding: 10px; 
@@ -17,5 +17,28 @@
    max-height: 600px;
    width: max-content; 
    height: max-content; 
-   border-radius: 10px 10px 0px 10px;
+   border-radius: 10px 10px 0;
  }
+
+ .message-area-conversation-area__info{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.message-area-conversation-area__checked{
+  float: right;
+  margin-right: 3px;
+}
+
+.message-area-conversation-area__my-time{
+  font-family: $globalFontFamily;
+  margin-top: 4px;
+  margin-right: 3px;
+  font-size: 14px;
+  color: $userCellMessegeColor;
+  opacity: 0.4;
+  width: max-content; 
+  float: right;
+}

@@ -17,7 +17,7 @@
 }
 
 .align-area {
-  margin: auto auto;
+  margin: auto;
 }
 
 .personal-area {
@@ -28,7 +28,7 @@
 }
 
 
-.personal-area:after {
+.personal-area::after {
   content: ' ';
   position: absolute;
   border-bottom: 2px black solid;
@@ -38,6 +38,7 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .personal-area__avatar-wrapper{
   display: flex;
   margin-left: 1rem;

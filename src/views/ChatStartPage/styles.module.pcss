@@ -1,4 +1,4 @@
-@import '../../styles/appStyles.pcss';
+@import url('../../styles/appStyles.pcss');
 
 .page {
   height: 100vh;
@@ -16,7 +16,7 @@
 }
 
 .menu-area {
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 0 0 10px;
   height: 600px;
   width: 250px;
   background: $menuBackGround;
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.menu-area:after {
+.menu-area::after {
   content: ' ';
   position: absolute;
   border-left: 2px black solid;

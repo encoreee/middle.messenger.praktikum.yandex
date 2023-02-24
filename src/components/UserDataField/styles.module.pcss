@@ -8,13 +8,13 @@
   margin-top: 12px;
   margin-bottom: 12px;
   font-family: inherit;
-  border: 0px solid;
+  border: 0 solid;
   border-radius: 10px;
   position: relative;
   font-size: 16px;
 }
 
-.user-data__data-field:after{
+.user-data__data-field::after{
   content: ' ';
   position: absolute;
   border-bottom: 2px black solid;
@@ -24,12 +24,13 @@
   margin-bottom: auto;
 }
 
-.user-data__data-field_key{
+.user-data__data-field-key{
   width: fit-content;
   margin-top: auto;
   margin-bottom: auto;
 }
-.user-data__data-field_value{
+
+.user-data__data-field-value{
   width: fit-content;
   margin-top: auto;
   margin-bottom: auto;
