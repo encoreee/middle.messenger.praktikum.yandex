@@ -24,8 +24,9 @@ export class InputValidator {
   validateName(str: string) {
     let caseMatch = str.match(/^[^A-Z^А-Я]/);
     let lettersMatch = str.match(/.[^a-z^а-я^ё^-]/);
+    let zeroLength = str.length === 0;
 
-    if (caseMatch || lettersMatch) {
+    if (caseMatch || lettersMatch || zeroLength) {
       return false;
     } else return true;
   }

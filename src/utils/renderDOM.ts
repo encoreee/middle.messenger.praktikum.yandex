@@ -4,6 +4,7 @@ import { RegistrationPage } from '../views/Registration';
 import { ChatStartPage } from './../views/ChatStartPage';
 import { UserDataPage } from './../views/UserDataPage';
 import store from '../utils/store'
+import { ChangePassPage } from './../views/ChangePassPage/index';
 
 const ROUTES = {
   login: LoginPage,
@@ -11,6 +12,7 @@ const ROUTES = {
   chatStartPage: ChatStartPage,
   userDataPage: UserDataPage,
   changeDataPage: ChangeDataPage,
+  changePassPage: ChangePassPage,
 };
 
 export function renderDom(route: keyof typeof ROUTES) {

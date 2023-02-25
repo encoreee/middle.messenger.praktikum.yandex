@@ -1,43 +1,26 @@
-import Block from '../../utils/Block';
-import template from './singinForm.hbs';
-import * as styles from './styles.module.pcss';
-import { SigninData } from './../../contracts/auth';
+import { SignupData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
-import { SingupFormInput } from '../SingupFormInput';
+import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
-import { HelperIds, InputIds } from '../../utils/ElementIds';
+import { SingupFormInput } from '../SingupFormInput';
+import template from './changePassForm.hbs';
+import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
+import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
 
-interface SinginFormProps {}
+interface ChangePassFormProps {}
 
-export class SinginForm extends Block<SinginFormProps> {
-  constructor(props: SinginFormProps) {
+export class ChangePassForm extends Block<ChangePassFormProps> {
+  constructor(props: ChangePassFormProps) {
     super({ ...props });
   }
 
   init() {
-    this.children.loginInput = new SingupFormInput({
-      id: InputIds.login,
-      name: InputIds.login,
-      placeholder: 'Имя пользователя',
-      events: {
-        blur: (event) => {
-          if (event.target) {
-            ElementValidator.onBlurValidate(event.target, this);
-          }
-        },
-        focus: (event) => {
-          if (event.target) {
-            ElementValidator.onFocusValidate(event.target);
-          }
-        },
-      },
-    });
 
     this.children.passwordInput = new SingupFormInput({
       id: InputIds.password,
-      name: 'password',
+      name: InputIds.password,
       placeholder: 'Пароль',
       events: {
         blur: (event) => {
@@ -53,8 +36,26 @@ export class SinginForm extends Block<SinginFormProps> {
       },
     });
 
+    this.children.repeatepasswordInput = new SingupFormInput({
+      id: InputIds.repeatepassword,
+      name: InputIds.repeatepassword,
+      placeholder: 'Телефон',
+      events: {
+        blur: (event) => {
+          if (event.target) {
+            ElementValidator.onBlurValidate(event.target, this);
+          }
+        },
+        focus: (event) => {
+          if (event.target) {
+            ElementValidator.onFocusValidate(event.target);
+          }
+        },
+      },
+    });
+
     this.children.button = new SingupFormButton({
-      label: 'Войти',
+      label: 'Сохранить',
       events: {
         click: (event) => {
           event.preventDefault();
@@ -63,21 +64,25 @@ export class SinginForm extends Block<SinginFormProps> {
       },
     });
 
-    this.children.loginHelper = new HelperLabel({
-      id: HelperIds.loginHelper,
-      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
-    });
-  
     this.children.passwordHelper = new HelperLabel({
       id: HelperIds.passwordHelper,
-      label: 'От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
+      label: 'От 8 до 40 символов, одна заглавная буква и одна цифра',
     });
+    this.children.repeatHelper = new HelperLabel({
+      id: HelperIds.repeatepasswordHelper,
+      label: 'Пароли должны совпадать',
+    });
+
 
 
     ElementValidator.checkButtonEnable(this);
   }
 
   onSubmit() {
+    const inputs = Object.values(this.children)
+      .filter((child) => child instanceof SingupFormInput)
+      .map((child) => child as SingupFormInput);
+
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -87,7 +92,18 @@ export class SinginForm extends Block<SinginFormProps> {
 
     const data = Object.fromEntries(values);
 
-    AuthController.signin(data as SigninData);
+    inputs.forEach((element) => {
+      if (
+        !ElementValidator.validateInputOnSubmit(
+          element.element as HTMLInputElement,
+          this
+        )
+      ) {
+        return;
+      }
+    });
+
+    AuthController.signup(data as SignupData);
   }
 
   render() {

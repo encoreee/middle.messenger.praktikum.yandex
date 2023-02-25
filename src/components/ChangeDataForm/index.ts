@@ -6,24 +6,10 @@ import { SingupFormInput } from '../SingupFormInput';
 import template from './changeDataForm.hbs';
 import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
+import { HelperIds, InputIds } from '../../utils/ElementIds';
+import { HelperLabel } from '../HelperLabel';
 
 interface ChangeDataFormProps {}
-
-const InputIds: {
-  email: string;
-  login: string;
-  first_name: string;
-  second_name: string;
-  phone: string;
-  display_name: string;
-} = {
-  email: 'email',
-  login: 'login',
-  first_name: 'first_name',
-  second_name: 'second_name',
-  phone: 'phone',
-  display_name: 'display_name',
-};
 
 export class ChangeDataForm extends Block<ChangeDataFormProps> {
   constructor(props: ChangeDataFormProps) {
@@ -103,7 +89,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.lastnameInput = new SingupFormInput({
+    this.children.lastNameInput = new SingupFormInput({
       id: InputIds.second_name,
       name: 'second_name',
       placeholder: 'Фамилия',
@@ -147,6 +133,32 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
+    this.children.mailHelper = new HelperLabel({
+      id: HelperIds.emailHepler,
+      label: 'Латиница, цифры и спецсимволы , @ и точка после неё',
+    });
+    this.children.loginHelper = new HelperLabel({
+      id: HelperIds.loginHelper,
+      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
+    });
+    this.children.nameHelper = new HelperLabel({
+      id: HelperIds.first_nameHelper,
+    label: 'Первая заглавная, без пробелов, без цифр, без спец',
+      });
+    this.children.chatNameHelper = new HelperLabel({
+      id: HelperIds.chat_nameHelper,
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+  });
+    this.children.lastNameHelper = new HelperLabel({
+      id: HelperIds.second_nameHelper,
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+    });
+    this.children.phoneHelper = new HelperLabel({
+      id: HelperIds.phoneHelper,
+      label: 'От 10 до 15 символов, цифры.',
+    });
+
+
 
     ElementValidator.checkButtonEnable(this);
   }
@@ -166,7 +178,12 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     const data = Object.fromEntries(values);
 
     inputs.forEach((element) => {
-      if (!ElementValidator.validateInputOnSubmit(element.element as HTMLInputElement, this)) {
+      if (
+        !ElementValidator.validateInputOnSubmit(
+          element.element as HTMLInputElement,
+          this
+        )
+      ) {
         return;
       }
     });
@@ -174,9 +191,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     AuthController.signup(data as SignupData);
   }
 
-  
   render() {
     return this.compile(template, { ...this.props, styles });
   }
-
 }

@@ -1,13 +1,14 @@
 import Block from '../../utils/Block';
-import template from './changeDataPage.hbs';
+import template from './changePassPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
-import { ChangeDataForm } from './../../components/ChangeDataForm/index';
-import { AvatarField } from './../../components/AvatarField/index';
+import { ChangeDataForm } from '../../components/ChangeDataForm/index';
+import { AvatarField } from '../../components/AvatarField/index';
+import { ChangePassForm } from './../../components/ChangePassForm/index';
 
 
-export class ChangeDataPage extends Block {
+export class ChangePassPage extends Block {
   constructor() {
     super({});
   }
@@ -18,10 +19,10 @@ export class ChangeDataPage extends Block {
     });
 
     this.children.pageTitle = new TitleLabel({
-      label: 'Изменение данных',
+      label: 'Изменение пароля',
     });
 
-    this.children.changeDataForm = new ChangeDataForm({});
+    this.children.changeDataForm = new ChangePassForm({});
     this.children.avatar = new AvatarField({name : 'avatar'});
   }
 

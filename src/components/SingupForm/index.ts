@@ -8,7 +8,8 @@ import template from './singupForm.hbs';
 import ElementValidator from '../../utils/ElementValidator';
 
 import * as styles from './styles.module.pcss';
-import { InputIds } from '../../utils/InputIds';
+import { HelperIds, InputIds } from '../../utils/ElementIds';
+import { HelperLabel } from './../HelperLabel/index';
 
 interface SingupFormProps {}
 
@@ -171,6 +172,35 @@ export class SingupForm extends Block<SingupFormProps> {
           renderDom('chatStartPage');
         },
       },
+    });
+
+    this.children.mailHelper = new HelperLabel({
+      id: HelperIds.emailHepler,
+      label: 'Латиница, цифры и спецсимволы , @ и точка после неё',
+    });
+    this.children.loginHelper = new HelperLabel({
+      id: HelperIds.loginHelper,
+      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
+    });
+    this.children.nameHelper = new HelperLabel({
+      id: HelperIds.first_nameHelper,
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+    });
+    this.children.lastNameHelper = new HelperLabel({
+      id: HelperIds.second_nameHelper,
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+    });
+    this.children.phoneHelper = new HelperLabel({
+      id: HelperIds.phoneHelper,
+      label: 'От 10 до 15 символов, цифры.',
+    });
+    this.children.passwordHelper = new HelperLabel({
+      id: HelperIds.passwordHelper,
+      label: 'От 8 до 40 символов, одна заглавная буква и одна цифра',
+    });
+    this.children.repeatHelper = new HelperLabel({
+      id: HelperIds.repeatepasswordHelper,
+      label: 'Пароли должны совпадать',
     });
 
     ElementValidator.checkButtonEnable(this);

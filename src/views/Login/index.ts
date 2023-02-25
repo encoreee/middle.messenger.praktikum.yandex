@@ -68,6 +68,15 @@ export class LoginPage extends Block {
       },
     });
 
+    this.children.changePassLink = new LinkLabel({
+      label: 'Изменение пароля',
+      events: {
+        click: () => {
+          renderDom('changePassPage');
+        },
+      },
+    });
+
   }
 
   render() {
