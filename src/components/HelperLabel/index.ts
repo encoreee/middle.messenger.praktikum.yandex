@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import template from './HelperLabel.hbs';
+import template from './helperLabel.hbs';
 import * as styles from './styles.module.pcss';
 
 interface HelperLabelProps {
