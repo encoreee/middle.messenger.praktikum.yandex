@@ -132,6 +132,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
           this.onSubmit();
         },
       },
+      type: 'submit'
     });
     this.children.mailHelper = new HelperLabel({
       id: HelperIds.emailHepler,
@@ -157,8 +158,6 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       id: HelperIds.phoneHelper,
       label: 'От 10 до 15 символов, цифры.',
     });
-
-
 
     ElementValidator.checkButtonEnable(this);
   }

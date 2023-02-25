@@ -3,10 +3,8 @@ import template from './changePassPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
-import { ChangeDataForm } from '../../components/ChangeDataForm/index';
 import { AvatarField } from '../../components/AvatarField/index';
 import { ChangePassForm } from './../../components/ChangePassForm/index';
-
 
 export class ChangePassPage extends Block {
   constructor() {

@@ -15,4 +15,3 @@ https://roaring-buttercream-a4193f.netlify.app
 - `npm run dev` — запуск версии для разработчика,
 - `npm run build` — установка стабильной версии,
 - `npm run start` — запуск приложения.
-

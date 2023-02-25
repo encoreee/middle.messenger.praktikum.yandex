@@ -154,7 +154,7 @@ export class ElementValidator {
             HelperIds.passwordHelper
           );
 
-          let match = InputValidator.validateName(element.value);
+          let match = InputValidator.validatePass(element.value);
 
           if (!match) {
             this.setError(element);

@@ -61,6 +61,7 @@ export class SinginForm extends Block<SinginFormProps> {
           this.onSubmit();
         },
       },
+      type: 'submit'
     });
 
     this.children.loginHelper = new HelperLabel({

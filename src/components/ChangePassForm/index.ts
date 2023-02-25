@@ -39,7 +39,7 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
     this.children.repeatepasswordInput = new SingupFormInput({
       id: InputIds.repeatepassword,
       name: InputIds.repeatepassword,
-      placeholder: 'Телефон',
+      placeholder: 'Повторите пароль',
       events: {
         blur: (event) => {
           if (event.target) {
@@ -62,6 +62,7 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
           this.onSubmit();
         },
       },
+      type: 'submit'
     });
 
     this.children.passwordHelper = new HelperLabel({
@@ -72,8 +73,6 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
       id: HelperIds.repeatepasswordHelper,
       label: 'Пароли должны совпадать',
     });
-
-
 
     ElementValidator.checkButtonEnable(this);
   }

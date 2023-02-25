@@ -6,7 +6,6 @@ import { TitleLabel } from '../../components/TitleLable/index';
 import { ChangeDataForm } from './../../components/ChangeDataForm/index';
 import { AvatarField } from './../../components/AvatarField/index';
 
-
 export class ChangeDataPage extends Block {
   constructor() {
     super({});

@@ -4,7 +4,6 @@ import Block from '../../utils/Block';
 import template from './registration.hbs';
 import * as styles from './styles.module.pcss';
 
-
 export class RegistrationPage extends Block {
   constructor() {
     super({});

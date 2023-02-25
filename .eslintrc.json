@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb",  "airbnb-typescript"],
+  "extends": ["airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
@@ -7,13 +7,16 @@
     "@typescript-eslint/no-unused-vars": 2,
     "linebreak-style": ["error", "windows"],
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": [  "error", {
-      "devDependencies": false, 
-      "optionalDependencies": false, 
-      "peerDependencies": false, 
-      "packageDir": "./"
-   }],
-   "import/extensions": [ "error", "ignorePackages", { "": "never" } ]
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false,
+        "packageDir": "./"
+      }
+    ],
+    "import/extensions": ["error", "ignorePackages", { "": "never" }]
   },
   "parserOptions": {
     "ecmaVersion": "latest",
