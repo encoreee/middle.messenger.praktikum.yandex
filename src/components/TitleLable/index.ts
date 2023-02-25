@@ -8,7 +8,7 @@ interface TitleLabelProps {
 
 export class TitleLabel extends Block<TitleLabelProps> {
   constructor(props: TitleLabelProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

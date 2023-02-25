@@ -47,10 +47,10 @@ export class UsersArea extends Block<UsersAreaProps> {
   init() {
     this.children.userCells = userData.map((user) => {
       return new UserCell({
-        name : user.name,
-        message : user.message,
-        time : user.time,
-        messageCount : user.messageCount
+        name: user.name,
+        message: user.message,
+        time: user.time,
+        messageCount: user.messageCount,
       });
     });
   }

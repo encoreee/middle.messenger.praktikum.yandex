@@ -22,21 +22,20 @@ messageData.push({
   субъективное и объективное, переносит свои внутренние побуждения
   на реальные связи вещей`,
   time: '13:44',
-  isMy: false
+  isMy: false,
 });
 messageData.push({
   text: ` Элемент <big> (от англ. big — большой) увеличивает размер шрифта на единицу по сравнению с
   обычным текстом. В HTML размер шрифта измеряется в условных единицах от 1 до 7, средний размер текста, используемый
   по умолчанию, принят 3. Таким образом, добавление <big> увеличивает текст на одну условную единицу.`,
   time: '12:34',
-  isMy: false
+  isMy: false,
 });
 messageData.push({
   text: `Спасибо!`,
   time: '12:34',
-  isMy: true
+  isMy: true,
 });
-
 
 export class MessageArea extends Block<MessageAreaProps> {
   constructor(props: MessageAreaProps) {
@@ -50,7 +49,9 @@ export class MessageArea extends Block<MessageAreaProps> {
 
     this.children.messageUserArea = new MessageUserArea({});
 
-    this.children.messageConvArea = new MessageConvArea({messages : messageData});
+    this.children.messageConvArea = new MessageConvArea({
+      messages: messageData,
+    });
 
     this.children.messageInputArea = new MessageInputArea({});
   }

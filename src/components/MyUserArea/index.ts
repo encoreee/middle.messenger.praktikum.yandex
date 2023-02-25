@@ -5,7 +5,6 @@ import { MyUserAreaAvatar } from './MyUserAreaAvatar/index';
 import { renderDom } from '../../utils/renderDOM';
 
 interface MyUserAreaProps {
-  name : string
 }
 
 export class MyUserArea extends Block<MyUserAreaProps> {

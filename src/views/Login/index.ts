@@ -24,15 +24,14 @@ export class LoginPage extends Block {
 
     this.children.linkLabel = new LinkLabel({
       label: 'Регистрация',
-      events : {
+      events: {
         click: () => {
-        //  renderDom('registration');
+          //  renderDom('registration');
           renderDom('changeDataPage');
-        }
-      } 
+        },
+      },
     });
   }
-
 
   render() {
     return this.compile(template, { ...this.props, styles });

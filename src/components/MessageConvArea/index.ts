@@ -5,9 +5,8 @@ import { MyMessage } from './../MyMessage/index';
 import { Message } from '../MessageArea';
 import { UserMessage } from './../UserMessage/index';
 
-
 interface MessageConvAreaProps {
-  messages : Message []
+  messages: Message[];
 }
 
 export class MessageConvArea extends Block<MessageConvAreaProps> {
@@ -17,18 +16,17 @@ export class MessageConvArea extends Block<MessageConvAreaProps> {
 
   init() {
     this.children.messages = this.props.messages.map((message) => {
-     if(message.isMy)
-     {
-      return new MyMessage({
+      if (message.isMy) {
+        return new MyMessage({
+          text: message.text,
+          time: message.time,
+        });
+      }
+
+      return new UserMessage({
         text: message.text,
         time: message.time,
       });
-     }
-
-     return new UserMessage({
-      text: message.text,
-      time: message.time,
-    });
     });
   }
 

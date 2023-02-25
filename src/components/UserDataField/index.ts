@@ -9,7 +9,7 @@ interface UserDataFieldProps {
 
 export class UserDataField extends Block<UserDataFieldProps> {
   constructor(props: UserDataFieldProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

@@ -9,8 +9,7 @@ export class SendIcon extends Block<SendIconProps> {
     super({ ...props });
   }
 
-  init() {
-  }
+  init() {}
   render() {
     return this.compile(template, { ...this.props, styles });
   }

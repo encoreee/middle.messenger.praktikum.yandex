@@ -3,7 +3,7 @@ export enum Method {
   Post = 'Post',
   Put = 'Put',
   Patch = 'Patch',
-  Delete = 'Delete'
+  Delete = 'Delete',
 }
 
 type Options = {
@@ -23,7 +23,10 @@ export default class HTTPTransport {
     return this.request<Response>(this.endpoint + path);
   }
 
-  public post<Response = void>(path: string, data?: unknown): Promise<Response> {
+  public post<Response = void>(
+    path: string,
+    data?: unknown
+  ): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Post,
       data,
@@ -37,7 +40,10 @@ export default class HTTPTransport {
     });
   }
 
-  public patch<Response = void>(path: string, data: unknown): Promise<Response> {
+  public patch<Response = void>(
+    path: string,
+    data: unknown
+  ): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Patch,
       data,
@@ -47,19 +53,21 @@ export default class HTTPTransport {
   public delete<Response>(path: string, data?: unknown): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
       method: Method.Delete,
-      data
+      data,
     });
   }
 
-  private request<Response>(url: string, options: Options = {method: Method.Get}): Promise<Response> {
-    const {method, data} = options;
+  private request<Response>(
+    url: string,
+    options: Options = { method: Method.Get }
+  ): Promise<Response> {
+    const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
       xhr.onreadystatechange = (e) => {
-
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
@@ -69,9 +77,9 @@ export default class HTTPTransport {
         }
       };
 
-      xhr.onabort = () => reject({reason: 'abort'});
-      xhr.onerror = () => reject({reason: 'network error'});
-      xhr.ontimeout = () => reject({reason: 'timeout'});
+      xhr.onabort = () => reject({ reason: 'abort' });
+      xhr.onerror = () => reject({ reason: 'network error' });
+      xhr.ontimeout = () => reject({ reason: 'timeout' });
 
       xhr.setRequestHeader('Content-Type', 'application/json');
 

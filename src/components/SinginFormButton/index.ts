@@ -5,13 +5,13 @@ import * as styles from './styles.module.pcss';
 interface SinginFormButtonProps {
   label: string;
   events?: {
-    click: (event : Event) => void;
+    click: (event: Event) => void;
   };
 }
 
 export class SinginFormButton extends Block<SinginFormButtonProps> {
   constructor(props: SinginFormButtonProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

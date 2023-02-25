@@ -10,7 +10,7 @@ interface SinginFormInputProps {
 
 export class SinginFormInput extends Block<SinginFormInputProps> {
   constructor(props: SinginFormInputProps) {
-    super({...props });
+    super({ ...props });
   }
 
   public getName() {

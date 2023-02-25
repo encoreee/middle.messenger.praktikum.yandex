@@ -6,20 +6,20 @@ interface SingupFormInputProps {
   id: string;
   name?: string;
   placeholder?: string;
-  
+
   events?: {
-    blur: (event : Event) => void;
-    focus: (event : Event) => void;
+    blur: (event: Event) => void;
+    focus: (event: Event) => void;
   };
 }
 
 export class SingupFormInput extends Block<SingupFormInputProps> {
   constructor(props: SingupFormInputProps) {
-    super({...props });
+    super({ ...props });
     this.isValidate = false;
   }
 
-  public isValidate : boolean;
+  public isValidate: boolean;
 
   public getName() {
     return (this.element as HTMLInputElement).name;
@@ -30,7 +30,7 @@ export class SingupFormInput extends Block<SingupFormInputProps> {
   }
 
   public setError() {
-    return (this.element as HTMLInputElement)
+    return this.element as HTMLInputElement;
   }
 
   public setIdle() {
@@ -41,8 +41,8 @@ export class SingupFormInput extends Block<SingupFormInputProps> {
     return this.isValidate;
   }
 
-  public setValidate(validate : boolean) {
-    return this.isValidate = validate;
+  public setValidate(validate: boolean) {
+    return (this.isValidate = validate);
   }
 
   public getId() {

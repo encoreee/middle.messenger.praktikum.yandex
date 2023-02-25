@@ -8,7 +8,7 @@ interface NameLabelProps {
 
 export class NameLabel extends Block<NameLabelProps> {
   constructor(props: NameLabelProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

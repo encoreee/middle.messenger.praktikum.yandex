@@ -6,11 +6,10 @@ import { UserDataPage } from './../views/UserDataPage';
 
 const ROUTES = {
   login: LoginPage,
-  registration : RegistrationPage,
-  chatStartPage : ChatStartPage,
-  userDataPage : UserDataPage,
-  changeDataPage : ChangeDataPage,
-
+  registration: RegistrationPage,
+  chatStartPage: ChatStartPage,
+  userDataPage: UserDataPage,
+  changeDataPage: ChangeDataPage,
 };
 
 export function renderDom(route: keyof typeof ROUTES) {

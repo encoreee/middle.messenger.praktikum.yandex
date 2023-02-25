@@ -13,14 +13,11 @@ export class MessageInputArea extends Block<MessageInputAreaProps> {
   }
 
   init() {
-    this.children.attachIcon = new AttachIcon({
-    });
+    this.children.attachIcon = new AttachIcon({});
 
-    this.children.input = new MessageInput({
-    });
+    this.children.input = new MessageInput({});
 
-    this.children.sendIcon = new SendIcon({
-    });
+    this.children.sendIcon = new SendIcon({});
   }
   render() {
     return this.compile(template, { ...this.props, styles });

@@ -14,30 +14,28 @@ let userData: UserDataSample[] = [];
 
 userData.push({
   key: 'Имя пользователя',
-  value: 'AlexR'
+  value: 'AlexR',
 });
 
 userData.push({
   key: 'Почта',
-  value: 'alexraykov200@gmail.com'
+  value: 'alexraykov200@gmail.com',
 });
 
 userData.push({
   key: 'Имя',
-  value: 'Алекандр'
+  value: 'Алекандр',
 });
 
 userData.push({
   key: 'Фамилия',
-  value: 'Райков'
+  value: 'Райков',
 });
 
 userData.push({
   key: 'Телефон',
-  value: '+7 (981) 433-44-62'
+  value: '+7 (981) 433-44-62',
 });
-
-
 
 export class UserDataPage extends Block {
   constructor() {
@@ -55,12 +53,10 @@ export class UserDataPage extends Block {
 
     this.children.dataFields = userData.map((dataField) => {
       return new UserDataField({
-        key : dataField.key,
-        value : dataField.value,
-    
+        key: dataField.key,
+        value: dataField.value,
       });
     });
-
   }
 
   onSubmit() {}

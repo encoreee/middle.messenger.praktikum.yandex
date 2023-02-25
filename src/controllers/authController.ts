@@ -1,10 +1,7 @@
-import { ChangeData, SigninData, SignupData } from "../contracts/auth";
+import { ChangeData, SigninData, SignupData } from '../contracts/auth';
 
 export class AuthController {
-
-  constructor() {
-
-  }
+  constructor() {}
 
   async signin(data: SigninData) {
     try {

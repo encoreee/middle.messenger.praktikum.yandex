@@ -8,7 +8,7 @@ interface MainLabelProps {
 
 export class MainLabel extends Block<MainLabelProps> {
   constructor(props: MainLabelProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

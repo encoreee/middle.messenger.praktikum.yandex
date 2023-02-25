@@ -5,21 +5,17 @@ import template from './chatStartPage.hbs';
 import * as styles from './styles.module.pcss';
 import { MessageArea } from './../../components/MessageArea';
 
-
 export class ChatStartPage extends Block {
   constructor() {
     super({});
   }
 
   init() {
-    this.children.myUserArea = new MyUserArea({
-    });
+    this.children.myUserArea = new MyUserArea({});
 
-    this.children.usersArea = new UsersArea({
-    });
+    this.children.usersArea = new UsersArea({});
 
-    this.children.messageArea = new MessageArea({
-    });
+    this.children.messageArea = new MessageArea({});
   }
 
   render() {

@@ -1,7 +1,7 @@
 import { SignupData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
 import Block from '../../utils/Block';
-import  InputValidator  from '../../utils/InputValidator';
+import InputValidator from '../../utils/InputValidator';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import template from './changeDataForm.hbs';
@@ -14,13 +14,11 @@ const InputIds: {
   login: string;
   name: string;
   lastname: string;
-
 } = {
   mail: 'mail',
   login: 'login',
   name: 'name',
   lastname: 'lastname',
-
 };
 
 export class ChangeDataForm extends Block<ChangeDataFormProps> {
@@ -101,7 +99,6 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-   
     this.children.button = new SingupFormButton({
       label: 'Сохранить',
       events: {
@@ -130,7 +127,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     const data = Object.fromEntries(values);
 
     inputs.forEach((element) => {
-      if (!this.validateInputOnSubmit(element.element as HTMLInputElement)){
+      if (!this.validateInputOnSubmit(element.element as HTMLInputElement)) {
         return;
       }
     });
@@ -172,9 +169,9 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.mail
             )[0] as SingupFormInput;
 
-            let match = InputValidator.validateMail(element.value);
+          let match = InputValidator.validateMail(element.value);
 
-            if (!match) {
+          if (!match) {
             this.setError(element);
             mailInput.setValidate(false);
           } else {
@@ -191,9 +188,9 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.login
             )[0] as SingupFormInput;
 
-            let match = InputValidator.validateLogin(element.value);
+          let match = InputValidator.validateLogin(element.value);
 
-            if (!match) {
+          if (!match) {
             this.setError(element);
             loginInput.setValidate(false);
           } else {
@@ -211,9 +208,9 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
                 (child as SingupFormInput).getId() === InputIds.lastname
             )[0] as SingupFormInput;
 
-            let match = InputValidator.validateName(element.value);
+          let match = InputValidator.validateName(element.value);
 
-            if (!match) {
+          if (!match) {
             this.setError(element);
             lastname.setValidate(false);
           } else {
@@ -230,9 +227,9 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
               (child) => (child as SingupFormInput).getId() === InputIds.name
             )[0] as SingupFormInput;
 
-            let match = InputValidator.validateName(element.value);
+          let match = InputValidator.validateName(element.value);
 
-            if (!match) {
+          if (!match) {
             this.setError(element);
             name.setValidate(false);
           } else {
@@ -265,7 +262,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
           this.setIdle(element);
           break;
         }
-       
+
         default: {
           //statements;
           break;

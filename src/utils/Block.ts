@@ -25,7 +25,7 @@ class Block<P extends Record<string, any> = any> {
   constructor(propsWithChildren: P) {
     const eventBus = new EventBus();
 
-    const {props, children} = this._getChildrenAndProps(propsWithChildren);
+    const { props, children } = this._getChildrenAndProps(propsWithChildren);
 
     this.children = children;
     this.props = this._makePropsProxy(props);
@@ -37,12 +37,19 @@ class Block<P extends Record<string, any> = any> {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildrenAndProps(childrenAndProps: P): { props: P, children: Record<string, Block | Block[]> } {
+  _getChildrenAndProps(childrenAndProps: P): {
+    props: P;
+    children: Record<string, Block | Block[]>;
+  } {
     const props: Record<string, unknown> = {};
     const children: Record<string, Block | Block[]> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+      if (
+        Array.isArray(value) &&
+        value.length > 0 &&
+        value.every((v) => v instanceof Block)
+      ) {
         children[key as string] = value;
       } else if (value instanceof Block) {
         children[key as string] = value;
@@ -51,13 +58,15 @@ class Block<P extends Record<string, any> = any> {
       }
     });
 
-    return {props: props as P, children};
+    return { props: props as P, children };
   }
 
   _addEvents() {
-    const {events = {}} = this.props as P & { events: Record<string, () => void> };
+    const { events = {} } = this.props as P & {
+      events: Record<string, () => void>;
+    };
 
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName]);
     });
   }
@@ -75,22 +84,20 @@ class Block<P extends Record<string, any> = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  protected init() {
-  }
+  protected init() {}
 
   _componentDidMount() {
     this.componentDidMount();
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-    Object.values(this.children).forEach(child => {
+    Object.values(this.children).forEach((child) => {
       if (Array.isArray(child)) {
-        child.forEach(ch => ch.dispatchComponentDidMount());
+        child.forEach((ch) => ch.dispatchComponentDidMount());
       } else {
         child.dispatchComponentDidMount();
       }
@@ -134,11 +141,13 @@ class Block<P extends Record<string, any> = any> {
   }
 
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = {...context};
+    const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+        contextAndStubs[name] = component.map(
+          (child) => `<div data-id="${child.id}"></div>`
+        );
       } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
@@ -160,7 +169,7 @@ class Block<P extends Record<string, any> = any> {
       component.getContent()?.append(...Array.from(stub.childNodes));
 
       stub.replaceWith(component.getContent()!);
-    }
+    };
 
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
@@ -191,7 +200,7 @@ class Block<P extends Record<string, any> = any> {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value) {
-        const oldTarget = {...target}
+        const oldTarget = { ...target };
 
         target[prop as keyof P] = value;
 
@@ -202,7 +211,7 @@ class Block<P extends Record<string, any> = any> {
       },
       deleteProperty() {
         throw new Error('Нет доступа');
-      }
+      },
     });
   }
 }

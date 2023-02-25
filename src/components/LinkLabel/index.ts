@@ -11,7 +11,7 @@ interface LinkLabelProps {
 
 export class LinkLabel extends Block<LinkLabelProps> {
   constructor(props: LinkLabelProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

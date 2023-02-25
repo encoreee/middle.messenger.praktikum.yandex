@@ -8,7 +8,7 @@ interface NotSelectedLabelProps {
 
 export class NotSelectedLabel extends Block<NotSelectedLabelProps> {
   constructor(props: NotSelectedLabelProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {

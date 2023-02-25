@@ -9,7 +9,7 @@ export interface MessageProps {
 
 export class MyMessage extends Block<MessageProps> {
   constructor(props: MessageProps) {
-    super({...props });
+    super({ ...props });
   }
 
   render() {
