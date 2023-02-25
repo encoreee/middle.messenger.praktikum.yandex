@@ -1,9 +1,10 @@
 import Block from '../../utils/Block';
-import template from './userDataPage.hbs';
+import template from './changeDataPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
 import { ChangeDataForm } from './../../components/ChangeDataForm/index';
+import { AvatarField } from './../../components/AvatarField/index';
 
 interface UserDataSample {
   key: string;
@@ -52,6 +53,7 @@ export class ChangeDataPage extends Block {
     });
 
     this.children.changeDataForm = new ChangeDataForm({});
+    this.children.avatar = new AvatarField({name : 'avatar'});
   }
 
   onSubmit() {}

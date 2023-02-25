@@ -1,14 +1,13 @@
 import Block from '../../utils/Block';
-import template from './messageInput.hbs';
+import template from './avatarField.hbs';
 import * as styles from './styles.module.pcss';
 
-interface MessageInputProps {
-  id: string;
-  name: string;
+interface AvatarFieldProps {
+  name : string
 }
 
-export class MessageInput extends Block<MessageInputProps> {
-  constructor(props: MessageInputProps) {
+export class AvatarField extends Block<AvatarFieldProps> {
+  constructor(props: AvatarFieldProps) {
     super({ ...props });
   }
 

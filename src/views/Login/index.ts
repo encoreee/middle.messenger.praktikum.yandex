@@ -31,6 +31,43 @@ export class LoginPage extends Block {
         },
       },
     });
+
+    this.children.regLink = new LinkLabel({
+      label: 'Регистрация',
+      events: {
+        click: () => {
+          renderDom('registration');
+        },
+      },
+    });
+
+    this.children.chatLink = new LinkLabel({
+      label: 'Страница чатов',
+      events: {
+        click: () => {
+          renderDom('chatStartPage');
+        },
+      },
+    });
+
+    this.children.userDataLink = new LinkLabel({
+      label: 'Данные пользователя',
+      events: {
+        click: () => {
+          renderDom('userDataPage');
+        },
+      },
+    });
+
+    this.children.changeLink = new LinkLabel({
+      label: 'Изменение данных',
+      events: {
+        click: () => {
+          renderDom('changeDataPage');
+        },
+      },
+    });
+
   }
 
   render() {

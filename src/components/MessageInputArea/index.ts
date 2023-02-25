@@ -15,7 +15,10 @@ export class MessageInputArea extends Block<MessageInputAreaProps> {
   init() {
     this.children.attachIcon = new AttachIcon({});
 
-    this.children.input = new MessageInput({});
+    this.children.input = new MessageInput({
+      id : 'messageInput',
+      name : 'message'
+    });
 
     this.children.sendIcon = new SendIcon({});
   }

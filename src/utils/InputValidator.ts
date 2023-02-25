@@ -40,6 +40,14 @@ export class InputValidator {
       return false;
     } else return true;
   }
+
+  validatePhone(str: string) {
+    let match = str.match(/[+]?\d{10,15}/);
+
+    if (match) {
+      return true;
+    } else return false;
+  }
 }
 
 export default new InputValidator();

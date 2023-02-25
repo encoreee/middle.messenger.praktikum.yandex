@@ -33,6 +33,11 @@ userData.push({
 });
 
 userData.push({
+  key: 'Имя в чате',
+  value: 'Алекс',
+});
+
+userData.push({
   key: 'Телефон',
   value: '+7 (981) 433-44-62',
 });
