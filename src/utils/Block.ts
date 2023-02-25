@@ -71,6 +71,13 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
+  _removeEvents(eventBus: EventBus) {
+    eventBus.off(Block.EVENTS.INIT, this._init.bind(this));
+    eventBus.off(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.off(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.off(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  }
+
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -86,11 +93,30 @@ class Block<P extends Record<string, any> = any> {
 
   protected init() {}
 
+  _componentDidUnmount() {
+    this.componentDidUnmount();
+    this._removeEvents;
+
+    Object.values(this.children).forEach((child) => {
+      if (Array.isArray(child)) {
+        child.forEach((ch) => ch._componentDidUnmount());
+      } else {
+        child._componentDidUnmount();
+      }
+    });
+  }
+
+  componentDidUnmount() {}
+
   _componentDidMount() {
     this.componentDidMount();
   }
 
   componentDidMount() {}
+
+  public dispatchComponentDidUnmount() {
+    this.componentDidUnmount();
+  }
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
