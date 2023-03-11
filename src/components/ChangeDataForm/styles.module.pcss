@@ -1,0 +1,51 @@
+@import url('../../styles/appStyles.pcss');
+
+.change-data-form {
+  font-family: $globalFontFamily;
+}
+
+.change-data-form__input {
+  height: 3.5rem;
+  display: block;
+  width: 250px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  border: 0 solid;
+  border-radius: 10px;
+  text-indent: 20px;
+  font-size: 16px;
+}
+
+.change-data-form__button {
+  height: 3.5rem;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  border: 0 solid;
+  border-radius: 10px;
+  background-color: $buttonsColor;
+  color: $buttonTextColor;
+  font-size: 20px;
+}
+
+.change-data-form__input::placeholder {
+  color: $placeholderColor;
+  opacity: 0.4;
+  text-indent: 20px;
+}
+
+.change-data-form__input:focus {
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
+  outline: 0;
+  box-shadow: $inputFocusBoxShadow;
+}
+
+.change-data-form__helper-wrapper {
+  height : 30px;
+  width: 250px;
+}

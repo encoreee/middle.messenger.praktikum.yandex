@@ -1,0 +1,29 @@
+@import url('../../styles/appStyles.pcss');
+
+.singup-form__input {
+  height: 2rem;
+  display: block;
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-family: inherit;
+  border: 0 solid;
+  border-radius: 10px;
+  text-indent: 20px;
+  font-size: 16px;
+  opacity: 1;
+}
+
+.singup-form__input::placeholder {
+  color: $placeholderColor;
+  opacity: 0.4;
+  text-indent: 20px;
+}
+
+.singup-form__input:focus {
+  color: $placeholderColor;
+  background-color: $inputFocusBackGround;
+  border-color: $placeholderFocusBorderColor;
+  outline: 0;
+  box-shadow: $inputFocusBoxShadow;
+}

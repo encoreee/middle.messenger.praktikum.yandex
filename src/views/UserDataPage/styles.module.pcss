@@ -1,0 +1,70 @@
+@import url('../../styles/appStyles.pcss');
+
+.page {
+  height: 100vh;
+  display: flex;
+}
+
+.change-data-area {
+  height: 600px;
+  width: 600px;
+  margin: auto;
+  border: 2px solid;
+  border-radius: 10px;
+  background: $chatBackGround;
+  display: flex;
+  flex-direction: column;
+}
+
+.align-area {
+  margin: auto;
+}
+
+.user-data {
+  font-family: $globalFontFamily;
+}
+
+.personal-area {
+  display: flex;
+  height: 80px;
+  width: 100%;
+  position: relative;
+}
+
+.personal-area::after {
+  content: ' ';
+  position: absolute;
+  border-bottom: 2px black solid;
+  right: 5%;
+  bottom: 0;
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.personal-area__avatar-wrapper {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.personal-area__avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  margin: auto;
+  overflow: hidden;
+}
+
+.personal-area__label-wrapper {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.personal-area__label {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: $globalFontFamily;
+  font-size: 24px;
+  text-align: center;
+}

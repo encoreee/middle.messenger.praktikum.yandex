@@ -1,0 +1,20 @@
+@import url('../../styles/appStyles.pcss');
+
+.message-area__conversation-area {
+  display: flex;
+  height: 440px;
+  width: 550px;
+  position: relative;
+  flex-direction: column-reverse;
+}
+
+.message-area__conversation-area::after {
+  content: ' ';
+  position: absolute;
+  border-bottom: 2px black solid;
+  right: 5%;
+  bottom: 0;
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}

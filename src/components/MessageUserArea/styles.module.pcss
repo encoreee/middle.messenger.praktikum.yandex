@@ -1,0 +1,45 @@
+@import url('../../styles/appStyles.pcss');
+
+.message-area__personal-area {
+  display: flex;
+  height: 80px;
+  width: 550px;
+  position: relative;
+}
+
+.message-area__personal-area::after {
+  content: ' ';
+  position: absolute;
+  border-bottom: 2px black solid;
+  right: 5%;
+  bottom: 0;
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.message-area-personal-area__avatar-wrapper {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.message-area-personal-area__avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  margin: auto;
+  overflow: hidden;
+}
+
+.message-area-personal-area__label-wrapper {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.message-area-personal-area__label {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: $globalFontFamily;
+  font-size: 24px;
+}
