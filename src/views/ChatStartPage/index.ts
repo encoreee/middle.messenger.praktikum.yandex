@@ -18,9 +18,11 @@ export class ChatStartPage extends Block {
 
     this.children.messageArea = new MessageArea({});
 
+    
+
     ChatsController.fetchChats().finally(() => {
       (this.children.usersArea as Block).setProps({
-        isLoaded: true
+        isLoaded: true,
       })
     });
   }

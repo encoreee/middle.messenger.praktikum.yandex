@@ -17,10 +17,6 @@ export class RegistrationPage extends Block {
     this.children.singupForm = new SingupForm({});
   }
 
-  onSubmit() {
-
-  }
-
   render() {
     return this.compile(template, {...this.props, styles});
   }

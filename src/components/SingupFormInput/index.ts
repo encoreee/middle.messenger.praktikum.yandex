@@ -8,8 +8,8 @@ interface SingupFormInputProps {
   placeholder?: string;
 
   events?: {
-    blur: (event: Event) => void;
-    focus: (event: Event) => void;
+    blur?: (event: Event) => void;
+    focus?: (event: Event) => void;
   };
 }
 

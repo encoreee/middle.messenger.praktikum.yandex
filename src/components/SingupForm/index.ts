@@ -164,6 +164,7 @@ export class SingupForm extends Block<SingupFormProps> {
 
     this.children.button = new SingupFormButton({
       label: 'Войти',
+      type: 'Submit',
       events: {
         click: (event) => {
           event.preventDefault();

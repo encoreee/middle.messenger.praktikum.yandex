@@ -16,15 +16,15 @@ class ChatsController {
   }
 
   async fetchChats() {
-    const chats = await this.api.read();
+    const usersData = await this.api.read();
 
-    chats.map(async (chat) => {
+    usersData.map(async (chat) => {
       const token = await this.getToken(chat.id);
 
       await MessagesController.connect(chat.id, token);
     });
 
-    store.set('chats', chats);
+    store.set('usersData', usersData);
   }
 
   addUserToChat(id: number, userId: number) {
