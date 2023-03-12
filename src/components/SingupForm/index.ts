@@ -1,7 +1,6 @@
 import { SignupData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
 import Block from '../../utils/Block';
-import { renderDom } from '../../utils/renderDOM';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import template from './singupForm.hbs';
@@ -169,7 +168,7 @@ export class SingupForm extends Block<SingupFormProps> {
         click: (event) => {
           event.preventDefault();
           this.onSubmit();
-          renderDom('chatStartPage');
+     
         },
       },
     });

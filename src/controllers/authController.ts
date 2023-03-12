@@ -1,19 +1,41 @@
 import { ChangeData, SigninData, SignupData } from '../contracts/auth';
+import API from '../api/AuthAPI';
+import store from '../utils/Store';
+import router from '../utils/Router';
+import { AuthAPI } from '../api/AuthAPI';
+import { Routes } from '..';
 
 export class AuthController {
-  constructor() {}
+  private readonly api: AuthAPI;
+  constructor() {
+    this.api = API;
+  }
 
   async signin(data: SigninData) {
     try {
-      console.log(data);
+      await this.api.signin(data);
+
+      await this.fetchUser();
+
+      router.go(Routes.Messanger);
     } catch (e: any) {
-      console.error(e.message);
+      console.error(e);
     }
+  }
+
+  async fetchUser() {
+    const user = await this.api.read();
+
+    store.set('user', user);
   }
 
   async signup(data: SignupData) {
     try {
-      console.log(data);
+      await this.api.signup(data);
+
+      await this.fetchUser();
+
+      router.go(Routes.Messanger);
     } catch (e: any) {
       console.error(e.message);
     }

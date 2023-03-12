@@ -2,7 +2,6 @@ import Block from '../../utils/Block';
 import template from './myUserArea.hbs';
 import * as styles from './styles.module.pcss';
 import { MyUserAreaAvatar } from './MyUserAreaAvatar/index';
-import { renderDom } from '../../utils/renderDOM';
 
 interface MyUserAreaProps {
 }
@@ -16,7 +15,8 @@ export class MyUserArea extends Block<MyUserAreaProps> {
     this.children.avatar = new MyUserAreaAvatar({
       events: {
         click: (event) => {
-          renderDom('userDataPage');
+          
+          
         },
       },
     });

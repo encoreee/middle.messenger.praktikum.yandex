@@ -3,8 +3,7 @@ import template from './login.hbs';
 import * as styles from './styles.module.pcss';
 import { SinginForm } from './../../components/SinginForm/index';
 import { MainLabel } from './../../components/MainLabel/index';
-import { LinkLabel } from '../../components/LinkLabel';
-import { renderDom } from '../../utils/renderDOM';
+import { LinkLabelWithRouter } from '../../components/LinkLabel';
 
 export class LoginPage extends Block {
   constructor() {
@@ -22,61 +21,15 @@ export class LoginPage extends Block {
 
     this.children.singinForm = new SinginForm({});
 
-    this.children.linkLabel = new LinkLabel({
+
+   
+    this.children.linkLabel = new LinkLabelWithRouter({
+      // @ts-ignore
       label: 'Регистрация',
-      events: {
-        click: () => {
-          //  renderDom('registration');
-          renderDom('changeDataPage');
-        },
-      },
+      to: '/registration'
     });
 
-    this.children.regLink = new LinkLabel({
-      label: 'Регистрация',
-      events: {
-        click: () => {
-          renderDom('registration');
-        },
-      },
-    });
-
-    this.children.chatLink = new LinkLabel({
-      label: 'Страница чатов',
-      events: {
-        click: () => {
-          renderDom('chatStartPage');
-        },
-      },
-    });
-
-    this.children.userDataLink = new LinkLabel({
-      label: 'Данные пользователя',
-      events: {
-        click: () => {
-          renderDom('userDataPage');
-        },
-      },
-    });
-
-    this.children.changeLink = new LinkLabel({
-      label: 'Изменение данных',
-      events: {
-        click: () => {
-          renderDom('changeDataPage');
-        },
-      },
-    });
-
-    this.children.changePassLink = new LinkLabel({
-      label: 'Изменение пароля',
-      events: {
-        click: () => {
-          renderDom('changePassPage');
-        },
-      },
-    });
-
+  
   }
 
   render() {

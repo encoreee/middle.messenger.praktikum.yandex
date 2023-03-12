@@ -1,22 +1,63 @@
-import Block from "./Block";
+import { set } from './helpers';
+import { EventBus } from './EventBus';
+import Block from './Block';
+import { User } from '../contracts/auth';
+import { ChatInfo } from '../api/ChatsAPI';
+import { Message } from '../controllers/MessagesController';
 
-export interface State {
-  curPage?: Block;
+export enum StoreEvents {
+  Updated = 'updated'
 }
 
-export class Store  {
-  private state: State = {curPage : undefined};
+export interface State {
+  user: User;
+  chats: ChatInfo[];
+  messages: Record<number, Message[]>;
+  selectedChat?: number;
+}
+
+export class Store extends EventBus {
+  private state: any = {};
+
+  public set(keypath: string, data: unknown) {
+    set(this.state, keypath, data);
+
+    this.emit(StoreEvents.Updated, this.getState());
+  }
 
   public getState() {
     return this.state;
-  }
-
-  public setCurPage(page : Block) {
-    return this.state.curPage = page;
   }
 }
 
 const store = new Store();
 
-export default store;
+// @ts-ignore
+window.store = store;
 
+export function withStore<SP extends Partial<any>>(mapStateToProps: (state: State) => SP) {
+  return function wrap<P>(Component: typeof Block){
+
+    return class WithStore extends Component {
+
+      constructor(props: Omit<P, keyof SP>) {
+        let previousState = mapStateToProps(store.getState());
+
+        super({ ...(props as P), ...previousState });
+
+        store.on(StoreEvents.Updated, () => {
+          const stateProps = mapStateToProps(store.getState());
+
+          previousState = stateProps;
+
+          this.setProps({ ...stateProps });
+        });
+
+      }
+
+    }
+
+  }
+}
+
+export default store;

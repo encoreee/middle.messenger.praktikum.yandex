@@ -12,7 +12,7 @@ type Options = {
 };
 
 export default class HTTPTransport {
-  static API_URL = 'https://api';
+  static API_URL = 'https://ya-praktikum.tech/api/v2';
   protected endpoint: string;
 
   constructor(endpoint: string) {

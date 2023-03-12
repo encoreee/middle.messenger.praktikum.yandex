@@ -4,7 +4,6 @@ import * as styles from './styles.module.pcss';
 
 interface SingupFormButtonProps {
   label: string;
-  type: string;
   events: {
     click: (event: Event) => void;
   };
