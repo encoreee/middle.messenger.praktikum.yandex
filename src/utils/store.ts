@@ -1,17 +1,16 @@
 import { set } from './helpers';
 import { EventBus } from './EventBus';
-import Block from './Block';
 import { User } from '../contracts/auth';
-import { ChatInfo } from '../api/ChatsAPI';
+import { UserInfo } from '../api/ChatsAPI';
 import { Message } from '../controllers/MessagesController';
 
 export enum StoreEvents {
-  Updated = 'updated'
+  Updated = 'updated',
 }
 
 export interface State {
   user: User;
-  chats: ChatInfo[];
+  usersData: UserInfo[];
   messages: Record<number, Message[]>;
   selectedChat?: number;
 }
@@ -34,30 +33,5 @@ const store = new Store();
 
 // @ts-ignore
 window.store = store;
-
-export function withStore<SP extends Partial<any>>(mapStateToProps: (state: State) => SP) {
-  return function wrap<P>(Component: typeof Block){
-
-    return class WithStore extends Component {
-
-      constructor(props: Omit<P, keyof SP>) {
-        let previousState = mapStateToProps(store.getState());
-
-        super({ ...(props as P), ...previousState });
-
-        store.on(StoreEvents.Updated, () => {
-          const stateProps = mapStateToProps(store.getState());
-
-          previousState = stateProps;
-
-          this.setProps({ ...stateProps });
-        });
-
-      }
-
-    }
-
-  }
-}
 
 export default store;

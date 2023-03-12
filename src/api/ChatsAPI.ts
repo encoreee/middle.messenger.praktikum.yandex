@@ -1,16 +1,16 @@
 import BaseAPI from './BaseAPI';
 import { User } from '../contracts/auth';
 
-export interface ChatInfo {
+export interface UserInfo {
   id: number;
   title: string;
   avatar: string;
   unread_count: number;
   last_message: {
-    user: User,
+    user: User;
     time: string;
     content: string;
-  }
+  };
 }
 
 export class ChatsAPI extends BaseAPI {
@@ -26,13 +26,12 @@ export class ChatsAPI extends BaseAPI {
     return this.http.delete('/', { chatId: id });
   }
 
-
-  read(): Promise<ChatInfo[]> {
+  read(): Promise<UserInfo[]> {
     return this.http.get('/');
   }
 
   getUsers(id: number): Promise<Array<User & { role: string }>> {
-    return this.http.get(`/${id}/users`)
+    return this.http.get(`/${id}/users`);
   }
 
   addUsers(id: number, users: number[]): Promise<unknown> {

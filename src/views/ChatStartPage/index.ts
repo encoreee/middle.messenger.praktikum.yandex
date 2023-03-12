@@ -4,6 +4,7 @@ import Block from '../../utils/Block';
 import template from './chatStartPage.hbs';
 import * as styles from './styles.module.pcss';
 import { MessageArea } from './../../components/MessageArea';
+import ChatsController from '../../controllers/ChatsController';
 
 export class ChatStartPage extends Block {
   constructor() {
@@ -16,6 +17,12 @@ export class ChatStartPage extends Block {
     this.children.usersArea = new UsersArea({});
 
     this.children.messageArea = new MessageArea({});
+
+    ChatsController.fetchChats().finally(() => {
+      (this.children.usersArea as Block).setProps({
+        isLoaded: true
+      })
+    });
   }
 
   render() {

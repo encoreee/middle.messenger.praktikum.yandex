@@ -2,60 +2,48 @@ import Block from '../../utils/Block';
 import template from './userArea.hbs';
 import * as styles from './styles.module.pcss';
 import { UserCell } from '../UserCell';
+import { withStore } from '../../utils/withStore';
+import { UserInfo } from '../../api/ChatsAPI';
+import ChatsController from '../../controllers/ChatsController';
 
-interface UsersAreaProps {}
-
-interface User {
-  name: string;
-  message: string;
-  time: string;
-  messageCount: number;
+interface UsersAreaProps {
+  usersData: UserInfo[];
+  isLoaded: boolean;
 }
 
-let userData: User[] = [];
 
-userData.push({
-  name: 'Алекандр',
-  message: 'Какое то сообщение',
-  time: '20:23',
-  messageCount: 4,
-});
-userData.push({
-  name: 'Вика',
-  message: 'Привет, как дела?',
-  time: '11:21',
-  messageCount: 1,
-});
-userData.push({
-  name: 'Настя',
-  message: 'Расскажи ка мне...',
-  time: '23:00',
-  messageCount: 2,
-});
-userData.push({
-  name: 'Артем',
-  message: 'А ты знаешь...',
-  time: '10:25',
-  messageCount: 5,
-});
-
-export class UsersArea extends Block<UsersAreaProps> {
+class UsersAreaBase extends Block<UsersAreaProps> {
   constructor(props: UsersAreaProps) {
     super({ ...props });
   }
 
   init() {
-    this.children.userCells = userData.map((user) => {
+    this.children.userCells = this.createUserCells(this.props);
+  }
+
+  private createUserCells (props: UsersAreaProps) {
+    return props.usersData.map(data => {
       return new UserCell({
-        name: user.name,
-        message: user.message,
-        time: user.time,
-        messageCount: user.messageCount,
+        id : data.id,
+        name : data.title,
+        message : data.last_message.content,
+        time : data.last_message.time,
+        messageCount : data.unread_count,
+        events: {
+          click: () => {
+            ChatsController.selectChat(data.id);
+          }
+        }
       });
-    });
+    })
   }
 
   render() {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withChats = withStore((state) => ({ usersData: [...(state.usersData || [])] }));
+
+//@ts-ignore
+export const UsersArea = withChats(UsersAreaBase);
