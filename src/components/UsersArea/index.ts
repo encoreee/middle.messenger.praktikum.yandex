@@ -56,6 +56,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
         messageCount: data.unread_count,
         events: {
           click: () => {
+            console.log(data.id)
             ChatsController.selectChat(data.id);
           },
         },

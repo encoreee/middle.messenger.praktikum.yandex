@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 import template from './userCell.hbs';
 import * as styles from './styles.module.pcss';
+import dayjs from 'dayjs';
 
 interface UserCellProps {
   id: number;
@@ -33,10 +34,12 @@ export class UserCell extends Block<UserCellProps> {
   render() {
     let { name, time, messageCount } = this.props;
 
+    let dt = dayjs(time).format('HH:mm');
+
     return this.compile(template, {
       message: this.initMessage,
       name: name,
-      time: time,
+      time: dt,
       messageCount: messageCount,
       styles,
     });

@@ -2,21 +2,21 @@ import { LoginPage } from './views/Login';
 import Router from './utils/Router';
 import AuthController from './controllers/authController';
 import { RegistrationPage } from './views/Registration/index';
-import { ChatStartPage } from './views/ChatStartPage/index';
-
+import { ChatStartPage } from './views/ChatPage/index';
+import { UserDataPage } from './views/UserDataPage/index';
 
 export enum Routes {
   Index = '/',
   Register = '/registration',
   Messanger = '/messanger',
+  Profile = '/profile',
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-  Router
-    .use(Routes.Index, LoginPage)
+  Router.use(Routes.Index, LoginPage)
     .use(Routes.Register, RegistrationPage)
     .use(Routes.Messanger, ChatStartPage)
-
+    .use(Routes.Profile, UserDataPage);
 
   let isProtectedRoute = true;
 
@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router.start();
 
     if (!isProtectedRoute) {
-      Router.go(Routes.Messanger)
+      Router.go(Routes.Messanger);
     }
   } catch (e) {
     Router.start();
@@ -42,5 +42,4 @@ window.addEventListener('DOMContentLoaded', async () => {
       Router.go(Routes.Index);
     }
   }
-
 });

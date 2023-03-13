@@ -2,6 +2,8 @@ import Block from '../../utils/Block';
 import template from './myUserArea.hbs';
 import * as styles from './styles.module.pcss';
 import { MyUserAreaAvatar } from './MyUserAreaAvatar/index';
+import router from '../../utils/Router';
+import { Routes } from '../..';
 
 interface MyUserAreaProps {
 }
@@ -14,9 +16,8 @@ export class MyUserArea extends Block<MyUserAreaProps> {
   init() {
     this.children.avatar = new MyUserAreaAvatar({
       events: {
-        click: (event) => {
-          
-          
+        click: () => {
+          router.go(Routes.Profile);
         },
       },
     });

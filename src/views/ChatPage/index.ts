@@ -1,9 +1,9 @@
 import { MyUserArea } from '../../components/MyUserArea';
 import { UsersArea } from '../../components/UsersArea';
 import Block from '../../utils/Block';
-import template from './chatStartPage.hbs';
+import template from './chatPage.hbs';
 import * as styles from './styles.module.pcss';
-import { MessageArea } from './../../components/MessageArea';
+import { MessageArea } from '../../components/MessageArea';
 import ChatsController from '../../controllers/ChatsController';
 
 export class ChatStartPage extends Block {
@@ -18,12 +18,10 @@ export class ChatStartPage extends Block {
 
     this.children.messageArea = new MessageArea({});
 
-    
-
     ChatsController.fetchChats().finally(() => {
       (this.children.usersArea as Block).setProps({
         isLoaded: true,
-      })
+      });
     });
   }
 

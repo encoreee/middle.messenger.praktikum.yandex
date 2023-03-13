@@ -1,6 +1,7 @@
 import Block from '../../utils/Block';
 import template from './sendIcon.hbs';
 import * as styles from './styles.module.pcss';
+import send from '../../../static/send.svg';
 
 interface SendIconProps {}
 
@@ -11,6 +12,6 @@ export class SendIcon extends Block<SendIconProps> {
 
   init() {}
   render() {
-    return this.compile(template, { ...this.props, styles });
+    return this.compile(template, { send, styles });
   }
 }

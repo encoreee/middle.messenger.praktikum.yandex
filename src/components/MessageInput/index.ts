@@ -12,7 +12,18 @@ export class MessageInput extends Block<MessageInputProps> {
     super({ ...props });
   }
 
+  
+  public getValue() {
+    return (this.element as HTMLInputElement).value;
+  }
+
+  public setValue(value: string) {
+    return (this.element as HTMLInputElement).value = value;
+  }
+
+
   init() {}
+
   render() {
     return this.compile(template, { ...this.props, styles });
   }
