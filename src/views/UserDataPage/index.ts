@@ -4,64 +4,59 @@ import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from './../../components/TitleLable/index';
 import { UserDataField } from './../../components/UserDataField/index';
+import { User } from '../../contracts/auth';
+import { withStore } from '../../utils/withStore';
 
-interface UserDataSample {
-  key: string;
-  value: string;
+interface UserDataPageProps {
+  user: User;
 }
 
-let userData: UserDataSample[] = [];
+interface Mapper {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+  phone: string;
+}
 
-userData.push({
-  key: 'Имя пользователя',
-  value: 'AlexR',
-});
+const mapper: Mapper = {
+  first_name: 'Имя',
+  second_name: 'Фамилия',
+  login: 'Имя пользователя',
+  email: 'Почта',
+  password: 'Пароль',
+  phone: 'Телефон',
+};
 
-userData.push({
-  key: 'Почта',
-  value: 'alexraykov200@gmail.com',
-});
-
-userData.push({
-  key: 'Имя',
-  value: 'Алекандр',
-});
-
-userData.push({
-  key: 'Фамилия',
-  value: 'Райков',
-});
-
-userData.push({
-  key: 'Имя в чате',
-  value: 'Алекс',
-});
-
-userData.push({
-  key: 'Телефон',
-  value: '+7 (981) 433-44-62',
-});
-
-export class UserDataPage extends Block {
-  constructor() {
-    super({});
+export class UserDataPageBase extends Block<UserDataPageProps> {
+  constructor(props: UserDataPageProps) {
+    super({ ...props });
   }
 
   init() {
     this.children.name = new NameLabel({
-      name: 'Александр',
+      name: this.props.user.first_name,
     });
 
     this.children.pageTitle = new TitleLabel({
       label: 'Данные пользователя',
     });
 
-    this.children.dataFields = userData.map((dataField) => {
-      return new UserDataField({
-        key: dataField.key,
-        value: dataField.value,
-      });
+    let mapperKeys = Object.keys(mapper);
+    let fields: Block<any>[] = [];
+    Object.entries(this.props.user).forEach(([key, value]) => {
+      if (mapperKeys.includes(key)) {
+        fields.push(
+          new UserDataField({
+            key: mapper[key as keyof typeof mapper],
+            value: value,
+          })
+        );
+      }
     });
+
+    this.children.dataFields = fields;
   }
 
   onSubmit() {}
@@ -70,3 +65,12 @@ export class UserDataPage extends Block {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withUser = withStore((state) => {
+  return {
+    user: state.user || {},
+  };
+});
+
+// @ts-ignore
+export const UserDataPage = withUser(UserDataPageBase);
