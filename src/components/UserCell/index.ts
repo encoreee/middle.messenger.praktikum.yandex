@@ -2,6 +2,8 @@ import Block from '../../utils/Block';
 import template from './userCell.hbs';
 import * as styles from './styles.module.pcss';
 import dayjs from 'dayjs';
+import { UserCellAvatar } from '../UserCellAvatar';
+import { ModalAddUser } from '../ModalAddUser';
 
 interface UserCellProps {
   id: number;
@@ -23,6 +25,20 @@ export class UserCell extends Block<UserCellProps> {
   private initMessage: string;
 
   init() {
+
+    this.children.avatar = new UserCellAvatar({
+      path: '',
+      events: {
+        click: () => {
+           // @ts-ignore
+          modal.enable();
+        },
+      },
+    });
+
+   
+
+
     if (this.props.message) {
       this.initMessage = this.props.message;
     }

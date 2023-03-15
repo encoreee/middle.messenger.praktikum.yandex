@@ -1,4 +1,4 @@
-import Block from '../../../utils/Block';
+import Block from '../../utils/Block';
 import template from './closeSpan.hbs';
 import * as styles from './styles.module.pcss';
 

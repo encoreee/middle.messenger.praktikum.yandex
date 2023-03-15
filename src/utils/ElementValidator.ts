@@ -53,7 +53,8 @@ export class ElementValidator {
     if (element) {
       const input = this.findInputById(block, element.id);
 
-      let str = this.sanitaize(element.value);
+      //let str = this.sanitaize(element.value);
+      let str = element.value;
 
       switch (element.id) {
         case InputIds.email: {

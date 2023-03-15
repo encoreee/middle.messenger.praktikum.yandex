@@ -1,21 +1,23 @@
 import ChatsController from '../../controllers/ChatsController';
 import Block from '../../utils/Block';
-import InputValidator from '../../utils/InputValidator';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import { CloseSpan } from '../CloseSpan';
-import template from './modalAddChat.hbs';
+import template from './modalAddUser.hbs';
 import * as styles from './styles.module.pcss';
+import { withStore } from '../../utils/withStore';
 
-export interface ModalAddChatProps {
+export interface ModalAddUserProps {
   text?: string;
   events?: {
     click: (event: Event) => void;
   };
+  selectedChat: number | undefined;
+  userId: number;
 }
 
-export class ModalAddChat extends Block<ModalAddChatProps> {
-  constructor(props: ModalAddChatProps) {
+class ModalAddUserBase extends Block<ModalAddUserProps> {
+  constructor(props: ModalAddUserProps) {
     super({
       ...props,
       events: {
@@ -48,39 +50,32 @@ export class ModalAddChat extends Block<ModalAddChatProps> {
     const input = new SingupFormInput({
       id: 'nameInput',
       name: 'nameInput',
-      placeholder: 'Введите название',
+      placeholder: 'Введите id участника',
       events: {},
     });
 
     this.children.nameInput = input;
     this.children.button = new SingupFormButton({
-      label: 'Создать',
+      label: 'Добавить',
       type: 'Submit',
       events: {
         click: (event) => {
           event.preventDefault();
-          this.onAddNewChat(input);
+          this.onAddNewUser(input);
         },
       },
     });
   }
 
-  onAddNewChat(input: SingupFormInput) {
+  onAddNewUser(input: SingupFormInput) {
     const value = input.getValue();
-    let match = InputValidator.validateName(value);
-    if (match) {
-      ChatsController.create(value).finally(() => {
-        (this.children.usersArea as Block).setProps({
-          isLoaded: true,
-        });
-      });
+    var number: number = +value;
 
-      ChatsController.fetchChats().finally(() => {
-        (this.children.usersArea as Block).setProps({
-          isLoaded: true,
-        });
-      });
+    if (this.props.selectedChat) {
+      ChatsController.addUserToChat(this.props.selectedChat, number);
     }
+
+    ChatsController.fetchChats();
 
     if (this.element) {
       this.element.style.display = 'none';
@@ -109,3 +104,22 @@ export class ModalAddChat extends Block<ModalAddChatProps> {
     });
   }
 }
+
+const withSelectedChatId = withStore((state) => {
+  const selectedChatId = state.selectedChat;
+
+  if (!selectedChatId) {
+    return {
+      selectedChat: undefined,
+      userId: state.user.id,
+    };
+  }
+
+  return {
+    selectedChat: state.selectedChat,
+    userId: state.user.id,
+  };
+});
+
+// @ts-ignore
+export const ModalAddUser = withSelectedChatId(ModalAddUserBase);

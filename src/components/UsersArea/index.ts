@@ -7,6 +7,7 @@ import { UserInfo } from '../../api/ChatsAPI';
 import ChatsController from '../../controllers/ChatsController';
 import { SingupFormButton } from '../SingupFormButton';
 import { ModalAddChat } from '../ModalAddChat';
+import { ModalAddUser } from '../ModalAddUser';
 
 interface UsersAreaProps {
   usersData: UserInfo[];
@@ -21,18 +22,35 @@ class UsersAreaBase extends Block<UsersAreaProps> {
   init() {
     this.children.userCells = this.createUserCells(this.props);
 
-    const modal = new ModalAddChat({});
-    this.children.modalAddChat = modal;
-    modal.disable();
+    const modalChat = new ModalAddChat({});
+    this.children.modalAddChat = modalChat;
+    modalChat.disable();
 
-    this.children.button = new SingupFormButton({
+    const modalUser = new ModalAddUser({});
+    this.children.modalAddUser = modalUser;
+    // @ts-ignore
+    modalUser.disable();
+
+    this.children.buttonChat = new SingupFormButton({
       label: 'Создать новый чат',
       type: 'Submit',
       events: {
         click: (event) => {
           event.preventDefault();
-          modal.enable();
-        },
+          modalChat.enable();
+        }
+      },
+    });
+
+    this.children.buttonUser = new SingupFormButton({
+      label: 'Добавить пользователя',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+            // @ts-ignore
+          modalUser.enable();
+        }
       },
     });
   }
