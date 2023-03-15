@@ -7,6 +7,9 @@ import { ChangePassForm } from './../../components/ChangePassForm/index';
 import { AvatarImage } from '../../components/AvatarImage';
 import { withStore } from '../../utils/withStore';
 import { User } from '../../contracts/auth';
+import router from '../../utils/Router';
+import { Routes } from '../..';
+
 
 interface ChangePassPageProps {
   user: User;
@@ -28,8 +31,14 @@ class ChangePassPageBase extends Block<ChangePassPageProps> {
     });
 
     this.children.changeDataForm = new ChangePassForm({});
+
     this.children.avatar = new AvatarImage({
       path: this.props.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+        },
+      },
     });
   }
 

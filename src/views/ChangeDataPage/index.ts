@@ -7,6 +7,9 @@ import { ChangeDataForm } from './../../components/ChangeDataForm/index';
 import { AvatarImage } from '../../components/AvatarImage';
 import { User } from '../../contracts/auth';
 import { withStore } from '../../utils/withStore';
+import router from '../../utils/Router';
+import { Routes } from '../..';
+
 
 interface ChangeDataPageProps {
   user: User;
@@ -30,6 +33,11 @@ interface ChangeDataPageProps {
     this.children.changeDataForm = new ChangeDataForm({});
     this.children.avatar = new AvatarImage({
       path: this.props.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+        },
+      },
     });
   }
 

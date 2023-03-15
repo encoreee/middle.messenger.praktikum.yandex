@@ -13,6 +13,8 @@ import UserController from './../../controllers/userController';
 import {resorcesPrefix} from '../../api/Prefixis'
 import { AvatarImage } from '../../components/AvatarImage';
 import { LogoutLabel } from './../../components/LogoutLabel/index';
+import router from '../../utils/Router';
+import { Routes } from '../..';
 
 interface UserDataPageProps {
   user: User;
@@ -48,6 +50,11 @@ class UserDataPageBase extends Block<UserDataPageProps> {
 
     this.children.avatar = new AvatarImage({
       path: this.props.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Messanger);
+        },
+      },
     });
 
     this.children.pageTitle = new TitleLabel({

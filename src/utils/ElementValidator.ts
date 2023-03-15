@@ -43,82 +43,78 @@ export class ElementValidator {
     }
   }
 
+  sanitaize(str: string) {
+    return str.replace(/[^\w. ]/gi, function (c) {
+      return '&#' + c.charCodeAt(0) + ';';
+    });
+  }
+
   validateInput(element: HTMLInputElement | null, block: Block) {
     if (element) {
+      const input = this.findInputById(block, element.id);
+
+      let str = this.sanitaize(element.value);
+
       switch (element.id) {
         case InputIds.email: {
-          const mailInput = this.findInputById(block, InputIds.email);
           const mailHelper = this.findHelperById(block, HelperIds.emailHepler);
-
-          let match = InputValidator.validateMail(element.value);
+          let match = InputValidator.validateMail(str);
 
           if (!match) {
             this.setError(element);
-            mailInput.setValidate(false);
+            input.setValidate(false);
             mailHelper.show();
           } else {
             this.setIdle(element);
-            mailInput.setValidate(true);
+            input.setValidate(true);
             mailHelper.hide();
           }
 
           break;
         }
         case InputIds.login: {
-          const loginInput = this.findInputById(block, InputIds.login);
           const loginHelper = this.findHelperById(block, HelperIds.loginHelper);
-
-          let match = InputValidator.validateLogin(element.value);
+          let match = InputValidator.validateLogin(str);
 
           if (!match) {
             this.setError(element);
-            loginInput.setValidate(false);
+            input.setValidate(false);
             loginHelper.show();
           } else {
             this.setIdle(element);
-            loginInput.setValidate(true);
+            input.setValidate(true);
             loginHelper.hide();
           }
 
           break;
         }
         case InputIds.second_name: {
-          const lastname = this.findInputById(block, InputIds.second_name);
-          const second_nameHelper = this.findHelperById(
-            block,
-            HelperIds.second_nameHelper
-          );
-
-          let match = InputValidator.validateName(element.value);
+          const second_nameHelper = this.findHelperById(block, HelperIds.second_nameHelper);
+          let match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
-            lastname.setValidate(false);
+            input.setValidate(false);
             second_nameHelper.show();
           } else {
             this.setIdle(element);
-            lastname.setValidate(true);
+            input.setValidate(true);
             second_nameHelper.hide();
           }
 
           break;
         }
         case InputIds.first_name: {
-          const name = this.findInputById(block, InputIds.first_name);
-          const first_nameHelper = this.findHelperById(
-            block,
-            HelperIds.first_nameHelper
-          );
-
-          let match = InputValidator.validateName(element.value);
+          const first_nameHelper = this.findHelperById(block, HelperIds.first_nameHelper);
+          let match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
-            name.setValidate(false);
+            input.setValidate(false);
             first_nameHelper.show();
           } else {
             this.setIdle(element);
-            name.setValidate(true);
+            input.setValidate(true);
             first_nameHelper.hide();
           }
 
@@ -126,65 +122,50 @@ export class ElementValidator {
         }
 
         case InputIds.display_name: {
-          const displayName = this.findInputById(block, InputIds.display_name);
-          const displayNameHelper = this.findHelperById(
-            block,
-            HelperIds.display_nameHelper
-          );
-
-          let match = InputValidator.validateName(element.value);
+          const display_nameHelper = this.findHelperById(block, HelperIds.display_nameHelper);
+          let match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
-            displayName.setValidate(false);
-            displayNameHelper.show();
+            input.setValidate(false);
+            display_nameHelper.show();
           } else {
             this.setIdle(element);
-            displayName.setValidate(true);
-            displayNameHelper.hide();
+            input.setValidate(true);
+            display_nameHelper.hide();
           }
 
           break;
         }
 
         case InputIds.old_password: {
-          const oldPassword = this.findInputById(block, InputIds.old_password);
-          const oldPasswordHelper = this.findHelperById(
-            block,
-            HelperIds.oldPasswordHelper
-          );
-
-          let match = InputValidator.validatePass(element.value);
+          const old_passwordHelper = this.findHelperById(block, HelperIds.oldPasswordHelper);
+          let match = InputValidator.validatePass(str);
 
           if (!match) {
             this.setError(element);
-            oldPassword.setValidate(false);
-            oldPasswordHelper.show();
+            input.setValidate(false);
+            old_passwordHelper.show();
           } else {
             this.setIdle(element);
-            oldPassword.setValidate(true);
-            oldPasswordHelper.hide();
+            input.setValidate(true);
+            old_passwordHelper.hide();
           }
 
           break;
         }
 
         case InputIds.password: {
-          const password = this.findInputById(block, InputIds.password);
-          const passwordHelper = this.findHelperById(
-            block,
-            HelperIds.passwordHelper
-          );
-
-          let match = InputValidator.validatePass(element.value);
+          const passwordHelper = this.findHelperById(block, HelperIds.passwordHelper);
+          let match = InputValidator.validatePass(str);
 
           if (!match) {
             this.setError(element);
-            password.setValidate(false);
+            input.setValidate(false);
             passwordHelper.show();
           } else {
             this.setIdle(element);
-            password.setValidate(true);
+            input.setValidate(true);
             passwordHelper.hide();
           }
 
@@ -192,18 +173,16 @@ export class ElementValidator {
         }
 
         case InputIds.phone: {
-          const phone = this.findInputById(block, InputIds.phone);
           const phoneHelper = this.findHelperById(block, HelperIds.phoneHelper);
-
-          let match = InputValidator.validatePhone(element.value);
+          let match = InputValidator.validatePhone(str);
 
           if (!match) {
             this.setError(element);
-            phone.setValidate(false);
+            input.setValidate(false);
             phoneHelper.show();
           } else {
             this.setIdle(element);
-            phone.setValidate(true);
+            input.setValidate(true);
             phoneHelper.hide();
           }
 
@@ -211,27 +190,19 @@ export class ElementValidator {
         }
 
         case InputIds.repeatepassword: {
-          const repeatepassword = this.findInputById(
-            block,
-            InputIds.repeatepassword
-          );
           const password = this.findInputById(block, InputIds.password);
-          const repeatepasswordHelper = this.findHelperById(
-            block,
-            HelperIds.repeatepasswordHelper
-          );
-
+          const repeatepasswordHelper = this.findHelperById(block, HelperIds.repeatepasswordHelper);
           let pass = password.getValue();
-
-          let isNotEqual = element.value !== pass;
+          pass = this.sanitaize(pass);
+          let isNotEqual = str !== pass;
 
           if (isNotEqual) {
             this.setError(element);
-            repeatepassword.setValidate(false);
+            input.setValidate(false);
             repeatepasswordHelper.show();
           } else {
             this.setIdle(element);
-            repeatepassword.setValidate(true);
+            input.setValidate(true);
             repeatepasswordHelper.hide();
           }
           break;

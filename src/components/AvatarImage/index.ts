@@ -5,6 +5,9 @@ import { resorcesPrefix } from '../../api/Prefixis';
 
 interface AvatarImageProps {
   path: string;
+  events?: {
+    click: (event: Event) => void;
+  };
 }
 
 export class AvatarImage extends Block<AvatarImageProps> {
