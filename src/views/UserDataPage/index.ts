@@ -7,6 +7,11 @@ import { UserDataField } from './../../components/UserDataField/index';
 import { User } from '../../contracts/auth';
 import { withStore } from '../../utils/withStore';
 import { LinkLabelWithRouter } from '../../components/LinkLabel';
+import { FileInput } from './../../components/FileInput/index';
+import { SingupFormButton } from '../../components/SingupFormButton';
+import UserController from './../../controllers/userController';
+import {resorcesPrefix} from '../../api/Prefixis'
+import { AvatarImage } from '../../components/AvatarImage';
 
 interface UserDataPageProps {
   user: User;
@@ -30,7 +35,7 @@ const mapper: Mapper = {
   phone: 'Телефон',
 };
 
-export class UserDataPageBase extends Block<UserDataPageProps> {
+class UserDataPageBase extends Block<UserDataPageProps> {
   constructor(props: UserDataPageProps) {
     super({ ...props });
   }
@@ -38,6 +43,10 @@ export class UserDataPageBase extends Block<UserDataPageProps> {
   init() {
     this.children.name = new NameLabel({
       name: this.props.user.first_name,
+    });
+
+    this.children.avatar = new AvatarImage({
+      path: this.props.user.avatar,
     });
 
     this.children.pageTitle = new TitleLabel({
@@ -59,25 +68,54 @@ export class UserDataPageBase extends Block<UserDataPageProps> {
 
     this.children.dataFields = fields;
 
- 
+    this.children.fileInput = new FileInput({
+      id: 'avatar',
+      name: 'avatar',
+    });
+
+    this.children.submitAvatarButton = new SingupFormButton({
+      label: 'Загрузть',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          this.onSubmit();
+        },
+      },
+    });
+
     this.children.changeDataLink = new LinkLabelWithRouter({
       // @ts-ignore
       label: 'Изменить данные',
-      to: '/changedata'
+      to: '/changedata',
     });
 
     this.children.changePassLink = new LinkLabelWithRouter({
       // @ts-ignore
       label: 'Изменить пароль',
-      to: '/changepass'
+      to: '/changepass',
     });
-
   }
 
-  onSubmit() {}
+  onSubmit() {
+
+    const fileInput = Object.values(this.children).filter(
+      (child) => child instanceof FileInput
+    )[0] as FileInput;
+
+    const input = fileInput.element as HTMLInputElement
+
+    const file = input.files?.item(0);
+
+    const formData = new FormData();
+
+    formData.append('avatar', file as Blob);
+
+    UserController.changeAvatar(formData as FormData);
+  }
 
   render() {
-    return this.compile(template, { ...this.props, styles });
+    return this.compile(template, { ...this.props, resorcesPrefix, ...this.props.user , styles });
   }
 }
 

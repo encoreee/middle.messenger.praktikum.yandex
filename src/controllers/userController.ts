@@ -1,6 +1,6 @@
 import UserApi from '../api/UserAPI';
 import { UserAPI } from '../api/UserAPI';
-import { ChangeData, ChangePassData } from '../contracts/user';
+import { ChangeAvatar, ChangeData, ChangePassData } from '../contracts/user';
 import AuthApi from '../api/AuthAPI';
 import store from '../utils/Store';
 import router from '../utils/Router';
@@ -33,6 +33,20 @@ export class UserController {
     try {
       
       await this.userApi.changeUserPass(data);
+
+      const user = await this.authApi.read();
+
+      store.set('user', user);
+
+      router.go(Routes.Profile);
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  }
+
+  async changeAvatar(data: FormData) {
+    try {
+      await this.userApi.changeUserAvatar(data);
 
       const user = await this.authApi.read();
 

@@ -4,16 +4,23 @@ import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
 import { ChangeDataForm } from './../../components/ChangeDataForm/index';
-import { AvatarField } from './../../components/AvatarField/index';
+import { AvatarImage } from '../../components/AvatarImage';
+import { User } from '../../contracts/auth';
+import { withStore } from '../../utils/withStore';
 
-export class ChangeDataPage extends Block {
-  constructor() {
-    super({});
+interface ChangeDataPageProps {
+  user: User;
+}
+
+
+ class ChangeDataPageBase extends Block<ChangeDataPageProps> {
+  constructor(props : ChangeDataPageProps) {
+    super({...props});
   }
 
   init() {
     this.children.name = new NameLabel({
-      name: 'Александр',
+      name: this.props.user.display_name,
     });
 
     this.children.pageTitle = new TitleLabel({
@@ -21,7 +28,9 @@ export class ChangeDataPage extends Block {
     });
 
     this.children.changeDataForm = new ChangeDataForm({});
-    this.children.avatar = new AvatarField({name : 'avatar'});
+    this.children.avatar = new AvatarImage({
+      path: this.props.user.avatar,
+    });
   }
 
   onSubmit() {}
@@ -30,3 +39,14 @@ export class ChangeDataPage extends Block {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withUser = withStore((state) => {
+  return {
+    user: state.user || {},
+  };
+});
+
+// @ts-ignore
+export const ChangeDataPage = withUser(ChangeDataPageBase);
+
+

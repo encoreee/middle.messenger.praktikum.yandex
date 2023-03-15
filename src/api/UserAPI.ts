@@ -1,4 +1,4 @@
-import { ChangeData, ChangePassData } from '../contracts/user';
+import { ChangeAvatar, ChangeData, ChangePassData } from '../contracts/user';
 import BaseAPI from './BaseAPI';
 
 export class UserAPI extends BaseAPI {
@@ -8,6 +8,10 @@ export class UserAPI extends BaseAPI {
 
   changeUserData(data: ChangeData) {
     return this.http.put('/profile', data);
+  }
+
+  changeUserAvatar(data: FormData) {
+    return this.http.put('/profile/avatar', data);
   }
 
   changeUserPass(data: ChangePassData) {
