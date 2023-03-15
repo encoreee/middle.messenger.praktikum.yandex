@@ -1,6 +1,6 @@
 import UserApi from '../api/UserAPI';
 import { UserAPI } from '../api/UserAPI';
-import { ChangeAvatar, ChangeData, ChangePassData } from '../contracts/user';
+import { ChangeData, ChangePassData } from '../contracts/user';
 import AuthApi from '../api/AuthAPI';
 import store from '../utils/Store';
 import router from '../utils/Router';

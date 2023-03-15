@@ -12,6 +12,7 @@ import { SingupFormButton } from '../../components/SingupFormButton';
 import UserController from './../../controllers/userController';
 import {resorcesPrefix} from '../../api/Prefixis'
 import { AvatarImage } from '../../components/AvatarImage';
+import { LogoutLabel } from './../../components/LogoutLabel/index';
 
 interface UserDataPageProps {
   user: User;
@@ -94,6 +95,18 @@ class UserDataPageBase extends Block<UserDataPageProps> {
       // @ts-ignore
       label: 'Изменить пароль',
       to: '/changepass',
+    });
+
+    this.children.changePassLink = new LinkLabelWithRouter({
+      // @ts-ignore
+      label: 'Изменить пароль',
+      to: '/changepass',
+    });
+
+    this.children.logoutLink = new LogoutLabel({
+      // @ts-ignore
+      label: 'Выйти',
+      to: '/',
     });
   }
 

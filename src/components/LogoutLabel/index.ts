@@ -2,8 +2,9 @@ import Block from '../../utils/Block';
 import { PropsWithRouter, withRouter } from '../../utils/withRouter';
 import template from './linkLabel.hbs';
 import * as styles from './styles.module.pcss';
+import AuthController from './../../controllers/authController';
 
-interface LinkLabelProps extends PropsWithRouter{
+interface LogoutLabelBaseProps extends PropsWithRouter{
   label: string;
   to: string;
   events?: {
@@ -11,8 +12,8 @@ interface LinkLabelProps extends PropsWithRouter{
       },
 }
 
-export class LinkLabelBase extends Block<LinkLabelProps> {
-  constructor(props: LinkLabelProps) {
+class LogoutLabelBase extends Block<LogoutLabelBaseProps> {
+  constructor(props: LogoutLabelBaseProps) {
     super({ ...props,
       events: {
         click: () => this.navigate()
@@ -20,7 +21,7 @@ export class LinkLabelBase extends Block<LinkLabelProps> {
   }
 
   navigate() {
-    this.props.router.go(this.props.to);
+    AuthController.logout();
   }
 
   render() {
@@ -29,4 +30,4 @@ export class LinkLabelBase extends Block<LinkLabelProps> {
 }
 
 
-export const LinkLabelWithRouter = withRouter(LinkLabelBase);
+export const LogoutLabel = withRouter(LogoutLabelBase);
