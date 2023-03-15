@@ -5,6 +5,7 @@ export const InputIds: {
   second_name: string;
   display_name: string;
   password: string;
+  old_password: string;
   phone: string;
   repeatepassword: string;
 } = {
@@ -13,6 +14,7 @@ export const InputIds: {
   first_name: 'first_name',
   second_name: 'second_name',
   display_name: 'display_name',
+  old_password: 'oldPassword',
   password: 'password',
   phone: 'phone',
   repeatepassword: 'repeatepassword',
@@ -26,6 +28,7 @@ export const HelperIds: {
   second_nameHelper: string;
   display_nameHelper: string;
   passwordHelper: string;
+  oldPasswordHelper: string;
   phoneHelper: string;
   repeatepasswordHelper: string;
 } = {
@@ -36,6 +39,7 @@ export const HelperIds: {
   second_nameHelper: 'second_nameHelper',
   display_nameHelper: 'display_nameHelper',
   passwordHelper: 'passwordHelper',
+  oldPasswordHelper: 'oldPasswordHelper',
   phoneHelper: 'phoneHelper',
   repeatepasswordHelper: 'repeatepasswordHelper',
 };

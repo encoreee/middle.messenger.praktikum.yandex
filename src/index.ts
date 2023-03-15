@@ -2,21 +2,27 @@ import { LoginPage } from './views/Login';
 import Router from './utils/Router';
 import AuthController from './controllers/authController';
 import { RegistrationPage } from './views/Registration/index';
-import { ChatStartPage } from './views/ChatPage/index';
+import { ChatPage } from './views/ChatPage/index';
 import { UserDataPage } from './views/UserDataPage/index';
+import { ChangeDataPage } from './views/ChangeDataPage/index';
+import { ChangePassPage } from './views/ChangePassPage/index';
 
 export enum Routes {
   Index = '/',
   Register = '/registration',
   Messanger = '/messanger',
   Profile = '/profile',
+  ChangeData = '/changedata',
+  ChangePass = '/changepass',
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(Routes.Index, LoginPage)
     .use(Routes.Register, RegistrationPage)
-    .use(Routes.Messanger, ChatStartPage)
-    .use(Routes.Profile, UserDataPage);
+    .use(Routes.Messanger, ChatPage)
+    .use(Routes.Profile, UserDataPage)
+    .use(Routes.ChangeData, ChangeDataPage)
+    .use(Routes.ChangePass, ChangePassPage);
 
   let isProtectedRoute = true;
 

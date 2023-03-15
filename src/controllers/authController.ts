@@ -1,4 +1,4 @@
-import { ChangeData, SigninData, SignupData } from '../contracts/auth';
+import { SigninData, SignupData } from '../contracts/auth';
 import API from '../api/AuthAPI';
 import store from '../utils/Store';
 import router from '../utils/Router';
@@ -25,7 +25,7 @@ export class AuthController {
 
   async fetchUser() {
     const user = await this.api.read();
-    
+
     store.set('user', user);
   }
 
@@ -36,14 +36,6 @@ export class AuthController {
       await this.fetchUser();
 
       router.go(Routes.Messanger);
-    } catch (e: any) {
-      console.error(e.message);
-    }
-  }
-
-  async changeDate(data: ChangeData) {
-    try {
-      console.log(data);
     } catch (e: any) {
       console.error(e.message);
     }

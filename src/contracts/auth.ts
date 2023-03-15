@@ -12,13 +12,6 @@ export interface SignupData {
   phone: string;
 }
 
-export interface ChangeData {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-}
-
 export interface User {
   id: number;
   first_name: string;

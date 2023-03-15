@@ -6,6 +6,7 @@ import { TitleLabel } from './../../components/TitleLable/index';
 import { UserDataField } from './../../components/UserDataField/index';
 import { User } from '../../contracts/auth';
 import { withStore } from '../../utils/withStore';
+import { LinkLabelWithRouter } from '../../components/LinkLabel';
 
 interface UserDataPageProps {
   user: User;
@@ -57,6 +58,20 @@ export class UserDataPageBase extends Block<UserDataPageProps> {
     });
 
     this.children.dataFields = fields;
+
+ 
+    this.children.changeDataLink = new LinkLabelWithRouter({
+      // @ts-ignore
+      label: 'Изменить данные',
+      to: '/changedata'
+    });
+
+    this.children.changePassLink = new LinkLabelWithRouter({
+      // @ts-ignore
+      label: 'Изменить пароль',
+      to: '/changepass'
+    });
+
   }
 
   onSubmit() {}

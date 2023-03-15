@@ -20,7 +20,7 @@ export class AuthAPI extends BaseAPI {
   }
 
   logout() {
-    //return this.http.post('/logout');
+    return this.http.post('/logout');
   }
 
   create = undefined;

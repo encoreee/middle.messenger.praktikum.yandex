@@ -1,5 +1,3 @@
-import { SignupData } from '../../contracts/auth';
-import AuthController from '../../controllers/authController';
 import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
@@ -8,6 +6,8 @@ import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
+import  UserController  from './../../controllers/userController';
+import { ChangeData } from './../../contracts/user';
 
 interface ChangeDataFormProps {}
 
@@ -147,7 +147,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     label: 'Первая заглавная, без пробелов, без цифр, без спец',
       });
     this.children.chatNameHelper = new HelperLabel({
-      id: HelperIds.chat_nameHelper,
+      id: HelperIds.display_nameHelper,
       label: 'Первая заглавная, без пробелов, без цифр, без спец',
   });
     this.children.lastNameHelper = new HelperLabel({
@@ -187,7 +187,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       }
     });
 
-    AuthController.signup(data as SignupData);
+    UserController.changeDate(data as ChangeData);
   }
 
   render() {

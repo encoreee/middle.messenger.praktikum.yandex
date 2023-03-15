@@ -2,7 +2,7 @@ import { set } from './helpers';
 import { EventBus } from './EventBus';
 import { User } from '../contracts/auth';
 import { UserInfo } from '../api/ChatsAPI';
-import { Message } from '../controllers/MessagesController';
+import { Message } from '../contracts/message';
 
 export enum StoreEvents {
   Updated = 'updated',

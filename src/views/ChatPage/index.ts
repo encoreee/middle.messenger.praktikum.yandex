@@ -6,7 +6,7 @@ import * as styles from './styles.module.pcss';
 import { MessageArea } from '../../components/MessageArea';
 import ChatsController from '../../controllers/ChatsController';
 
-export class ChatStartPage extends Block {
+export class ChatPage extends Block {
   constructor() {
     super({});
   }

@@ -147,6 +147,28 @@ export class ElementValidator {
           break;
         }
 
+        case InputIds.old_password: {
+          const oldPassword = this.findInputById(block, InputIds.old_password);
+          const oldPasswordHelper = this.findHelperById(
+            block,
+            HelperIds.oldPasswordHelper
+          );
+
+          let match = InputValidator.validatePass(element.value);
+
+          if (!match) {
+            this.setError(element);
+            oldPassword.setValidate(false);
+            oldPasswordHelper.show();
+          } else {
+            this.setIdle(element);
+            oldPassword.setValidate(true);
+            oldPasswordHelper.hide();
+          }
+
+          break;
+        }
+
         case InputIds.password: {
           const password = this.findInputById(block, InputIds.password);
           const passwordHelper = this.findHelperById(
