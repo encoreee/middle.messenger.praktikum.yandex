@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import API, { ChatsAPI } from '../api/ChatsAPI';
-import store from '../utils/Store';
+import { storage } from '../utils/Store';
 import MessagesController from './MessagesController';
 
 class ChatsController {
@@ -25,7 +25,7 @@ class ChatsController {
       await MessagesController.connect(chat.id, token);
     });
 
-    store.set('usersData', usersData);
+    storage.set('usersData', usersData);
   }
 
   addUserToChat(id: number, userId: number) {
@@ -43,7 +43,7 @@ class ChatsController {
   }
 
   selectChat(id: number) {
-    store.set('selectedChat', id);
+    storage.set('selectedChat', id);
   }
 }
 

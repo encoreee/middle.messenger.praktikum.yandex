@@ -2,7 +2,7 @@
 import UserApi, { UserAPI } from '../api/UserAPI';
 import { ChangeData, ChangePassData } from '../contracts/user';
 import AuthApi, { AuthAPI } from '../api/AuthAPI';
-import store from '../utils/Store';
+import { storage } from '../utils/Store';
 import router from '../utils/Router';
 import { Routes } from '..';
 
@@ -22,7 +22,7 @@ export class UserController {
 
       const user = await this.authApi.read();
 
-      store.set('user', user);
+      storage.set('user', user);
 
       router.go(Routes.Profile);
     } catch (e: any) {
@@ -36,7 +36,7 @@ export class UserController {
 
       const user = await this.authApi.read();
 
-      store.set('user', user);
+      storage.set('user', user);
 
       router.go(Routes.Profile);
     } catch (e: any) {
@@ -50,7 +50,7 @@ export class UserController {
 
       const user = await this.authApi.read();
 
-      store.set('user', user);
+      storage.set('user', user);
 
       router.go(Routes.Profile);
     } catch (e: any) {

@@ -1,6 +1,8 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
 import { Message } from '../contracts/message';
-import store from '../utils/Store';
+import { storage } from '../utils/Store';
 import WSTransport from '../utils/WSTransport';
 
 export enum WSTransportEvents {
@@ -18,7 +20,7 @@ class MessagesController {
       return;
     }
 
-    const userId = store.getState().user.id;
+    const userId = storage.getState().user.id;
 
     const wsTransport = new WSTransport(
       `wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`,
@@ -68,11 +70,11 @@ class MessagesController {
       messagesToAdd.push(messages);
     }
 
-    const currentMessages = (store.getState().messages || {})[id] || [];
+    const currentMessages = (storage.getState().messages || {})[id] || [];
 
     messagesToAdd = [...currentMessages, ...messagesToAdd];
 
-    store.set(`messages.${id}`, messagesToAdd);
+    storage.set(`messages.${id}`, messagesToAdd);
   }
 
   private onClose(id: number) {
@@ -80,7 +82,9 @@ class MessagesController {
   }
 
   private subscribe(transport: WSTransport, id: number) {
-    transport.on(WSTransportEvents.MessageEvent, (message) => this.onMessage(id, message));
+    transport.on(WSTransportEvents.MessageEvent, (message) =>
+      this.onMessage(id, message),
+    );
     transport.on(WSTransportEvents.Close, () => this.onClose(id));
   }
 }

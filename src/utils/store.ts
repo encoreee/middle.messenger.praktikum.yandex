@@ -1,21 +1,8 @@
 import { set } from './helpers';
 import { EventBus } from './EventBus';
-import { User } from '../contracts/auth';
-import { UserInfo } from '../api/ChatsAPI';
-import { Message } from '../contracts/message';
+import { StoreEvents } from './StoreTypes';
 
-export enum StoreEvents {
-  Updated = 'updated',
-}
-
-export interface State {
-  user: User;
-  usersData: UserInfo[];
-  messages: Record<number, Message[]>;
-  selectedChat?: number;
-}
-
-export class Store extends EventBus {
+class Store extends EventBus {
   private state: any = {};
 
   public set(keypath: string, data: unknown) {
@@ -29,6 +16,4 @@ export class Store extends EventBus {
   }
 }
 
-const storage = new Store();
-
-export default storage;
+export const storage = new Store();
