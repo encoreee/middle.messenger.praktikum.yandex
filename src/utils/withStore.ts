@@ -1,9 +1,9 @@
-import Block from './Block';
+import BlockConstructable from './Block';
 
 import store, { State, StoreEvents } from '../utils/Store'
 
-export function withStore<SP extends Partial<any>>(mapStateToProps: (state: State) => SP) {
-    return function wrap<P>(Component: typeof Block){
+export function withStore<SP extends Partial<Record<string, any>>>(mapStateToProps: (state: State) => SP) {
+    return function wrap<P>(Component: typeof BlockConstructable<Record<string, any>>){
   
       return class WithStore extends Component {
   

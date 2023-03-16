@@ -54,7 +54,7 @@ const withUser = withStore((state) => {
   };
 });
 
-// @ts-ignore
+
 export const ChangeDataPage = withUser(ChangeDataPageBase);
 
 

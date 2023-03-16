@@ -71,5 +71,5 @@ const withSelectedChatMessages = withStore(state => {
   };
 });
 
-// @ts-ignore
+
 export const MessageArea = withSelectedChatMessages(MessageAreaBase);

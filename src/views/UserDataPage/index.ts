@@ -93,25 +93,21 @@ class UserDataPageBase extends Block<UserDataPageProps> {
     });
 
     this.children.changeDataLink = new LinkLabelWithRouter({
-      // @ts-ignore
       label: 'Изменить данные',
       to: '/changedata',
     });
 
     this.children.changePassLink = new LinkLabelWithRouter({
-      // @ts-ignore
       label: 'Изменить пароль',
       to: '/changepass',
     });
 
     this.children.changePassLink = new LinkLabelWithRouter({
-      // @ts-ignore
       label: 'Изменить пароль',
       to: '/changepass',
     });
 
     this.children.logoutLink = new LogoutLabel({
-      // @ts-ignore
       label: 'Выйти',
       to: '/',
     });
@@ -145,5 +141,4 @@ const withUser = withStore((state) => {
   };
 });
 
-// @ts-ignore
 export const UserDataPage = withUser(UserDataPageBase);

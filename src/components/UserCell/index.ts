@@ -3,7 +3,6 @@ import template from './userCell.hbs';
 import * as styles from './styles.module.pcss';
 import dayjs from 'dayjs';
 import { UserCellAvatar } from '../UserCellAvatar';
-import { ModalAddUser } from '../ModalAddUser';
 
 interface UserCellProps {
   id: number;
@@ -11,7 +10,7 @@ interface UserCellProps {
   message?: string;
   time: string;
   messageCount: number;
-  events: {
+  events?: {
     click: () => void;
   };
 }
@@ -28,12 +27,6 @@ export class UserCell extends Block<UserCellProps> {
 
     this.children.avatar = new UserCellAvatar({
       path: '',
-      events: {
-        click: () => {
-           // @ts-ignore
-          modal.enable();
-        },
-      },
     });
 
    

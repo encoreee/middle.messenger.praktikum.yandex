@@ -40,7 +40,6 @@ const withUser = withStore((state) => {
   };
 });
 
-// @ts-ignore
 export const MyUserArea = withUser(MyUserAreaBase);
 
 

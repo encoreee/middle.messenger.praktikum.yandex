@@ -3,7 +3,7 @@ import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import { CloseSpan } from '../CloseSpan';
-import template from './modalAddUser.hbs';
+import template from './modalAddChat.hbs';
 import * as styles from './styles.module.pcss';
 import { withStore } from '../../utils/withStore';
 
@@ -12,11 +12,11 @@ export interface ModalAddUserProps {
   events?: {
     click: (event: Event) => void;
   };
-  selectedChat: number | undefined;
+  selectedChat?: number;
   userId: number;
 }
 
-class ModalAddUserBase extends Block<ModalAddUserProps> {
+export class ModalAddUser extends Block<ModalAddUserProps> {
   constructor(props: ModalAddUserProps) {
     super({
       ...props,
@@ -26,12 +26,12 @@ class ModalAddUserBase extends Block<ModalAddUserProps> {
     });
   }
 
-  enable() {
+  public enable() {
     if (this.element) {
       this.element.style.display = 'flex';
     }
   }
-  disable() {
+  public disable() {
     if (this.element) {
       this.element.style.display = 'none';
     }
@@ -104,22 +104,3 @@ class ModalAddUserBase extends Block<ModalAddUserProps> {
     });
   }
 }
-
-const withSelectedChatId = withStore((state) => {
-  const selectedChatId = state.selectedChat;
-
-  if (!selectedChatId) {
-    return {
-      selectedChat: undefined,
-      userId: state.user.id,
-    };
-  }
-
-  return {
-    selectedChat: state.selectedChat,
-    userId: state.user.id,
-  };
-});
-
-// @ts-ignore
-export const ModalAddUser = withSelectedChatId(ModalAddUserBase);

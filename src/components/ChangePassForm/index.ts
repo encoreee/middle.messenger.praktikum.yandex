@@ -150,5 +150,5 @@ const withUser = withStore((state) => {
   };
 });
 
-// @ts-ignore
+
 export const ChangePassForm = withUser(ChangePassFormBase);

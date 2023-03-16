@@ -11,8 +11,8 @@ import router from '../../utils/Router';
 import { Routes } from '../..';
 
 
-interface ChangePassPageProps {
-  user: User;
+interface ChangePassPageProps extends Record<string, any> {
+  user: User 
 }
 
 
@@ -55,6 +55,5 @@ const withUser = withStore((state) => {
   };
 });
 
-// @ts-ignore
 export const ChangePassPage = withUser(ChangePassPageBase);
 

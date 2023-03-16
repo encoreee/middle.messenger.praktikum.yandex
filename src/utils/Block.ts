@@ -1,6 +1,10 @@
 import { nanoid } from 'nanoid';
 import { EventBus } from './EventBus';
 
+export interface BlockConstructable<P extends Record<string, any>> {
+  new(props: P): Block<P>
+}
+
 // Нельзя создавать экземпляр данного класса
 class Block<P extends Record<string, any> = any> {
   static EVENTS = {

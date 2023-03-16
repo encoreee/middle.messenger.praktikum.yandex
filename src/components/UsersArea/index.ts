@@ -12,6 +12,8 @@ import { ModalAddUser } from '../ModalAddUser';
 interface UsersAreaProps {
   usersData: UserInfo[];
   isLoaded: boolean;
+  selectedChat: number | undefined;
+  userId: number;
 }
 
 class UsersAreaBase extends Block<UsersAreaProps> {
@@ -20,15 +22,18 @@ class UsersAreaBase extends Block<UsersAreaProps> {
   }
 
   init() {
-    this.children.userCells = this.createUserCells(this.props);
+    this.constractArea(this.props)
+  }
+
+  private constractArea(props : UsersAreaProps){
+    this.children.userCells = this.createUserCells(props);
 
     const modalChat = new ModalAddChat({});
     this.children.modalAddChat = modalChat;
     modalChat.disable();
 
-    const modalUser = new ModalAddUser({});
+    const modalUser = new ModalAddUser({ ...props });
     this.children.modalAddUser = modalUser;
-    // @ts-ignore
     modalUser.disable();
 
     this.children.buttonChat = new SingupFormButton({
@@ -38,7 +43,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
         click: (event) => {
           event.preventDefault();
           modalChat.enable();
-        }
+        },
       },
     });
 
@@ -48,9 +53,8 @@ class UsersAreaBase extends Block<UsersAreaProps> {
       events: {
         click: (event) => {
           event.preventDefault();
-            // @ts-ignore
           modalUser.enable();
-        }
+        },
       },
     });
   }
@@ -59,8 +63,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     oldProps: UsersAreaProps,
     newProps: UsersAreaProps
   ): boolean {
-    this.children.userCells = this.createUserCells(newProps);
-
+    this.constractArea(newProps)
     return true;
   }
 
@@ -86,9 +89,22 @@ class UsersAreaBase extends Block<UsersAreaProps> {
   }
 }
 
-const withChats = withStore((state) => ({
-  usersData: [...(state.usersData || [])],
-}));
+const withChats = withStore((state) => {
+  const selectedChatId = state.selectedChat;
 
-//@ts-ignore
+  if (!selectedChatId) {
+    return {
+      usersData: [...(state.usersData || [])],
+      selectedChat: undefined,
+      userId: state.user.id,
+    };
+  }
+
+  return {
+    usersData: [...(state.usersData || [])],
+    selectedChat: state.selectedChat,
+    userId: state.user.id,
+  };
+});
+
 export const UsersArea = withChats(UsersAreaBase);

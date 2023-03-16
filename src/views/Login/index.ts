@@ -24,7 +24,6 @@ export class LoginPage extends Block {
 
    
     this.children.linkLabel = new LinkLabelWithRouter({
-      // @ts-ignore
       label: 'Регистрация',
       to: '/registration'
     });

@@ -15,7 +15,7 @@ export interface ModalAddChatProps {
 }
 
 export class ModalAddChat extends Block<ModalAddChatProps> {
-  constructor(props: ModalAddChatProps) {
+constructor(props: ModalAddChatProps) {
     super({
       ...props,
       events: {
