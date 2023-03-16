@@ -16,16 +16,26 @@ interface UsersAreaProps {
   userId: number;
 }
 
+export const Buttons: {
+  buttonChat: string;
+  buttonUser: string;
+} = {
+  buttonChat: 'buttonChat',
+  buttonUser: 'buttonUser',
+};
+
 class UsersAreaBase extends Block<UsersAreaProps> {
   constructor(props: UsersAreaProps) {
     super({ ...props });
   }
 
   init() {
-    this.constractArea(this.props)
+    this.constractArea(this.props);
+
+   
   }
 
-  private constractArea(props : UsersAreaProps){
+  private constractArea(props: UsersAreaProps) {
     this.children.userCells = this.createUserCells(props);
 
     const modalChat = new ModalAddChat({});
@@ -37,6 +47,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     modalUser.disable();
 
     this.children.buttonChat = new SingupFormButton({
+      id: Buttons.buttonChat,
       label: 'Создать новый чат',
       type: 'Submit',
       events: {
@@ -48,6 +59,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     });
 
     this.children.buttonUser = new SingupFormButton({
+      id: Buttons.buttonUser,
       label: 'Добавить пользователя',
       type: 'Submit',
       events: {
@@ -57,13 +69,27 @@ class UsersAreaBase extends Block<UsersAreaProps> {
         },
       },
     });
+
+    const buttons = Object.values(this.children).filter(
+      (child) => child instanceof SingupFormButton
+    ) as SingupFormButton[];
+
+    const button = buttons.filter((b) => b.getId() === Buttons.buttonUser)[0];
+
+    if (props.selectedChat) {
+      button.setDisable(false)
+    } else {
+      button.setDisable(true)
+    }
+
+
   }
 
   protected componentDidUpdate(
     oldProps: UsersAreaProps,
     newProps: UsersAreaProps
   ): boolean {
-    this.constractArea(newProps)
+    this.constractArea(newProps);
     return true;
   }
 
