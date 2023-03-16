@@ -2,7 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
 import { Message } from '../contracts/message';
-import { storage } from '../utils/Store';
+import { Storage } from '../utils/Store';
 import WSTransport from '../utils/WSTransport';
 
 export enum WSTransportEvents {
@@ -20,7 +20,7 @@ class MessagesController {
       return;
     }
 
-    const userId = storage.getState().user.id;
+    const userId = Storage.getState().user.id;
 
     const wsTransport = new WSTransport(
       `wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`,
@@ -70,11 +70,11 @@ class MessagesController {
       messagesToAdd.push(messages);
     }
 
-    const currentMessages = (storage.getState().messages || {})[id] || [];
+    const currentMessages = (Storage.getState().messages || {})[id] || [];
 
     messagesToAdd = [...currentMessages, ...messagesToAdd];
 
-    storage.set(`messages.${id}`, messagesToAdd);
+    Storage.set(`messages.${id}`, messagesToAdd);
   }
 
   private onClose(id: number) {

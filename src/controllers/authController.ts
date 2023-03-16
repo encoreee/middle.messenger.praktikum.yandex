@@ -4,7 +4,7 @@ import { SigninData, SignupData } from '../contracts/auth';
 import API, { AuthAPI } from '../api/AuthAPI';
 import router from '../utils/Router';
 import { Routes } from '..';
-import { storage } from './../utils/Store';
+import { Storage } from './../utils/Store';
 
 export class AuthController {
   private readonly api: AuthAPI;
@@ -38,7 +38,7 @@ export class AuthController {
   async fetchUser() {
     const user = await this.api.read();
 
-    storage.set('user', user);
+    Storage.set('user', user);
   }
 
   async signup(data: SignupData) {
