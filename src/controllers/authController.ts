@@ -1,9 +1,10 @@
+/* eslint-disable import/no-useless-path-segments */
 /* eslint-disable import/no-cycle */
 import { SigninData, SignupData } from '../contracts/auth';
 import API, { AuthAPI } from '../api/AuthAPI';
 import router from '../utils/Router';
 import { Routes } from '..';
-import { storage } from '../utils/Store';
+import { storage } from './../utils/Store';
 
 export class AuthController {
   private readonly api: AuthAPI;
