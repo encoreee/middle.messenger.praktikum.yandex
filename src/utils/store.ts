@@ -31,7 +31,4 @@ export class Store extends EventBus {
 
 const storage = new Store();
 
-// @ts-ignore
-window.store = storage;
-
 export default storage;
