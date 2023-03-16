@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import API, { ChatsAPI } from '../api/ChatsAPI';
-import { Storage } from '../utils/Store';
+import { Storage } from '../utils/Storage';
 import MessagesController from './MessagesController';
 
 class ChatsController {

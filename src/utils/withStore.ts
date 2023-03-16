@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import { Storage } from './Store';
+import { Storage } from './Storage';
 import BlockConstructable from './Block';
 import { State, StoreEvents } from './StoreTypes';
 

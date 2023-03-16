@@ -2,7 +2,7 @@
 import UserApi, { UserAPI } from '../api/UserAPI';
 import { ChangeData, ChangePassData } from '../contracts/user';
 import AuthApi, { AuthAPI } from '../api/AuthAPI';
-import { Storage } from '../utils/Store';
+import { Storage } from '../utils/Storage';
 import router from '../utils/Router';
 import { Routes } from '..';
 

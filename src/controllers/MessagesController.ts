@@ -2,7 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
 import { Message } from '../contracts/message';
-import { Storage } from '../utils/Store';
+import { Storage } from '../utils/Storage';
 import WSTransport from '../utils/WSTransport';
 
 export enum WSTransportEvents {

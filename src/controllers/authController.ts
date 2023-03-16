@@ -4,7 +4,7 @@ import { SigninData, SignupData } from '../contracts/auth';
 import API, { AuthAPI } from '../api/AuthAPI';
 import router from '../utils/Router';
 import { Routes } from '..';
-import { Storage } from './../utils/Store';
+import { Storage } from '../utils/Storage';
 
 export class AuthController {
   private readonly api: AuthAPI;
