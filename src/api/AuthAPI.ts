@@ -10,7 +10,6 @@ export class AuthAPI extends BaseAPI {
     return this.http.post('/signin', data);
   }
 
-
   signup(data: SignupData) {
     return this.http.post('/signup', data);
   }
@@ -24,7 +23,9 @@ export class AuthAPI extends BaseAPI {
   }
 
   create = undefined;
+
   update = undefined;
+
   delete = undefined;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import API, { ChatsAPI } from '../api/ChatsAPI';
 import store from '../utils/Store';
 import MessagesController from './MessagesController';

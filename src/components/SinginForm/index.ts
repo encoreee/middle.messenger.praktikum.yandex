@@ -1,7 +1,9 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-named-as-default */
 import Block from '../../utils/Block';
 import template from './singinForm.hbs';
 import * as styles from './styles.module.pcss';
-import { SigninData } from './../../contracts/auth';
+import { SigninData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
 import { SingupFormInput } from '../SingupFormInput';
 import { SingupFormButton } from '../SingupFormButton';
@@ -61,19 +63,18 @@ export class SinginForm extends Block<SinginFormProps> {
           this.onSubmit();
         },
       },
-      type: 'submit'
+      type: 'submit',
     });
 
     this.children.loginHelper = new HelperLabel({
       id: HelperIds.loginHelper,
       label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
     });
-  
+
     this.children.passwordHelper = new HelperLabel({
       id: HelperIds.passwordHelper,
       label: 'От 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
     });
-
 
     ElementValidator.checkButtonEnable(this);
   }

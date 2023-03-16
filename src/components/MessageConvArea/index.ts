@@ -1,10 +1,10 @@
+import dayjs from 'dayjs';
 import Block from '../../utils/Block';
 import template from './messageConvArea.hbs';
 import * as styles from './styles.module.pcss';
-import { MyMessage } from './../MyMessage/index';
-import { UserMessage } from './../UserMessage/index';
+import { MyMessage } from '../MyMessage/index';
+import { UserMessage } from '../UserMessage/index';
 import { Message } from '../../contracts/message';
-import dayjs from 'dayjs';
 
 interface MessageConvAreaProps {
   messages: Message[];
@@ -17,30 +17,30 @@ export class MessageConvArea extends Block<MessageConvAreaProps> {
   }
 
   init() {
-    this.children.messages = this.createMessages(this.props);
+    this.children.messages = MessageConvArea.createMessages(this.props);
   }
 
   protected componentDidUpdate(
     oldProps: MessageConvAreaProps,
-    newProps: MessageConvAreaProps
+    newProps: MessageConvAreaProps,
   ): boolean {
-    this.children.messages = this.createMessages(newProps);
+    this.children.messages = MessageConvArea.createMessages(newProps);
 
     return true;
   }
 
-  private createMessages(props: MessageConvAreaProps) {
+  private static createMessages(props: MessageConvAreaProps) {
     return props.messages.map((data) => {
-      let dt = dayjs(data.time).format('HH:mm');
-      let content = {
+      const dt = dayjs(data.time).format('HH:mm');
+      const content = {
         message: data.content,
-        time: dt,}
-      
+        time: dt,
+      };
+
       if (props.userId === data.user_id) {
         return new MyMessage(content);
-      } else {
-        return new UserMessage(content);
       }
+      return new UserMessage(content);
     });
   }
 

@@ -1,18 +1,20 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './userDataPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
-import { TitleLabel } from './../../components/TitleLable/index';
-import { UserDataField } from './../../components/UserDataField/index';
+import { TitleLabel } from '../../components/TitleLable/index';
+import { UserDataField } from '../../components/UserDataField/index';
 import { User } from '../../contracts/auth';
 import { withStore } from '../../utils/withStore';
 import { LinkLabelWithRouter } from '../../components/LinkLabel';
-import { FileInput } from './../../components/FileInput/index';
+import { FileInput } from '../../components/FileInput/index';
 import { SingupFormButton } from '../../components/SingupFormButton';
-import UserController from './../../controllers/userController';
-import {resorcesPrefix} from '../../api/Prefixis'
+import UserController from '../../controllers/userController';
+import { resorcesPrefix } from '../../api/Prefixis';
 import { AvatarImage } from '../../components/AvatarImage';
-import { LogoutLabel } from './../../components/LogoutLabel/index';
+import { LogoutLabel } from '../../components/LogoutLabel/index';
 import router from '../../utils/Router';
 import { Routes } from '../..';
 
@@ -61,15 +63,15 @@ class UserDataPageBase extends Block<UserDataPageProps> {
       label: 'Данные пользователя',
     });
 
-    let mapperKeys = Object.keys(mapper);
-    let fields: Block<any>[] = [];
+    const mapperKeys = Object.keys(mapper);
+    const fields: Block<any>[] = [];
     Object.entries(this.props.user).forEach(([key, value]) => {
       if (mapperKeys.includes(key)) {
         fields.push(
           new UserDataField({
             key: mapper[key as keyof typeof mapper],
-            value: value,
-          })
+            value,
+          }),
         );
       }
     });
@@ -114,12 +116,11 @@ class UserDataPageBase extends Block<UserDataPageProps> {
   }
 
   onSubmit() {
-
     const fileInput = Object.values(this.children).filter(
-      (child) => child instanceof FileInput
+      (child) => child instanceof FileInput,
     )[0] as FileInput;
 
-    const input = fileInput.element as HTMLInputElement
+    const input = fileInput.element as HTMLInputElement;
 
     const file = input.files?.item(0);
 
@@ -131,14 +132,14 @@ class UserDataPageBase extends Block<UserDataPageProps> {
   }
 
   render() {
-    return this.compile(template, { ...this.props, resorcesPrefix, ...this.props.user , styles });
+    return this.compile(template, {
+      ...this.props, resorcesPrefix, ...this.props.user, styles,
+    });
   }
 }
 
-const withUser = withStore((state) => {
-  return {
-    user: state.user || {},
-  };
-});
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
 
 export const UserDataPage = withUser(UserDataPageBase);

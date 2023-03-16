@@ -10,7 +10,6 @@ export class AttachIcon extends Block<AttachIconProps> {
     super({ ...props });
   }
 
-  init() {}
   render() {
     return this.compile(template, { attach, styles });
   }

@@ -1,11 +1,13 @@
+/* eslint-disable class-methods-use-this */
 import { nanoid } from 'nanoid';
 import { EventBus } from './EventBus';
 
 export interface BlockConstructable<P extends Record<string, any>> {
-  new(props: P): Block<P>
+  new (props: P): Block<P>;
 }
 
 // Нельзя создавать экземпляр данного класса
+
 class Block<P extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
@@ -15,10 +17,14 @@ class Block<P extends Record<string, any> = any> {
   } as const;
 
   public id = nanoid(6);
+
   protected props: P;
+
   public children: Record<string, Block | Block[]>;
+
   private eventBus: () => EventBus;
-  private _element: HTMLElement | null = null;
+
+  private elementPrivate: HTMLElement | null = null;
 
   /** JSDoc
    * @param {string} tagName
@@ -29,19 +35,19 @@ class Block<P extends Record<string, any> = any> {
   constructor(propsWithChildren: P) {
     const eventBus = new EventBus();
 
-    const { props, children } = this._getChildrenAndProps(propsWithChildren);
+    const { props, children } = this.getChildrenAndProps(propsWithChildren);
 
     this.children = children;
-    this.props = this._makePropsProxy(props);
+    this.props = this.makePropsProxy(props);
 
     this.eventBus = () => eventBus;
 
-    this._registerEvents(eventBus);
+    this.registerEvents(eventBus);
 
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _getChildrenAndProps(childrenAndProps: P): {
+  getChildrenAndProps(childrenAndProps: P): {
     props: P;
     children: Record<string, Block | Block[]>;
   } {
@@ -65,31 +71,43 @@ class Block<P extends Record<string, any> = any> {
     return { props: props as P, children };
   }
 
-  _addEvents() {
+  addEvents() {
     const { events = {} } = this.props as P & {
       events: Record<string, () => void>;
     };
 
     Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+      this.elementPrivate?.addEventListener(eventName, events[eventName]);
     });
   }
 
-  _removeEvents(eventBus: EventBus) {
-    eventBus.off(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.off(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.off(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.off(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  removeEvents(eventBus: EventBus) {
+    eventBus.off(Block.EVENTS.INIT, this.initPrivate.bind(this));
+    eventBus.off(
+      Block.EVENTS.FLOW_CDM,
+      this.componentDidMountPrivate.bind(this),
+    );
+    eventBus.off(
+      Block.EVENTS.FLOW_CDU,
+      this.componentDidUpdatePrivate.bind(this),
+    );
+    eventBus.off(Block.EVENTS.FLOW_RENDER, this.renderPrivate.bind(this));
   }
 
-  _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  registerEvents(eventBus: EventBus) {
+    eventBus.on(Block.EVENTS.INIT, this.initPrivate.bind(this));
+    eventBus.on(
+      Block.EVENTS.FLOW_CDM,
+      this.componentDidMountPrivate.bind(this),
+    );
+    eventBus.on(
+      Block.EVENTS.FLOW_CDU,
+      this.componentDidUpdatePrivate.bind(this),
+    );
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this.renderPrivate.bind(this));
   }
 
-  private _init() {
+  private initPrivate() {
     this.init();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -97,22 +115,21 @@ class Block<P extends Record<string, any> = any> {
 
   protected init() {}
 
-  _componentDidUnmount() {
+  componentDidUnmountPrivate() {
     this.componentDidUnmount();
-    this._removeEvents;
 
     Object.values(this.children).forEach((child) => {
       if (Array.isArray(child)) {
-        child.forEach((ch) => ch._componentDidUnmount());
+        child.forEach((ch) => ch.componentDidUnmountPrivate());
       } else {
-        child._componentDidUnmount();
+        child.componentDidUnmountPrivate();
       }
     });
   }
 
-  componentDidUnmount() {}
+  public componentDidUnmount() {}
 
-  _componentDidMount() {
+  componentDidMountPrivate() {
     this.componentDidMount();
   }
 
@@ -134,12 +151,13 @@ class Block<P extends Record<string, any> = any> {
     });
   }
 
-  private _componentDidUpdate(oldProps: P, newProps: P) {
+  private componentDidUpdatePrivate(oldProps: P, newProps: P) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -153,21 +171,21 @@ class Block<P extends Record<string, any> = any> {
   };
 
   get element() {
-    return this._element;
+    return this.elementPrivate;
   }
 
-  private _render() {
+  private renderPrivate() {
     const fragment = this.render();
 
     const newElement = fragment.firstElementChild as HTMLElement;
 
-    if (this._element && newElement) {
-      this._element.replaceWith(newElement);
+    if (this.elementPrivate && newElement) {
+      this.elementPrivate.replaceWith(newElement);
     }
 
-    this._element = newElement;
+    this.elementPrivate = newElement;
 
-    this._addEvents();
+    this.addEvents();
   }
 
   protected compile(template: (context: any) => string, context: any) {
@@ -176,7 +194,7 @@ class Block<P extends Record<string, any> = any> {
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
         contextAndStubs[name] = component.map(
-          (child) => `<div data-id="${child.id}"></div>`
+          (child) => `<div data-id="${child.id}"></div>`,
         );
       } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
@@ -201,6 +219,7 @@ class Block<P extends Record<string, any> = any> {
       stub.replaceWith(component.getContent()!);
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
         component.forEach(replaceStub);
@@ -220,7 +239,7 @@ class Block<P extends Record<string, any> = any> {
     return this.element;
   }
 
-  _makePropsProxy(props: P) {
+  makePropsProxy(props: P) {
     // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
     const self = this;
 
@@ -232,6 +251,7 @@ class Block<P extends Record<string, any> = any> {
       set(target, prop: string, value) {
         const oldTarget = { ...target };
 
+        // eslint-disable-next-line no-param-reassign
         target[prop as keyof P] = value;
 
         // Запускаем обновление компоненты

@@ -3,20 +3,22 @@ import { PropsWithRouter, withRouter } from '../../utils/withRouter';
 import template from './linkLabel.hbs';
 import * as styles from './styles.module.pcss';
 
-interface LinkLabelProps extends PropsWithRouter{
+interface LinkLabelProps extends PropsWithRouter {
   label: string;
   to: string;
   events?: {
-        click: () => void
-      },
+    click: () => void
+  },
 }
 
 export class LinkLabelBase extends Block<LinkLabelProps> {
   constructor(props: LinkLabelProps) {
-    super({ ...props,
+    super({
+      ...props,
       events: {
-        click: () => this.navigate()
-      }, });
+        click: () => this.navigate(),
+      },
+    });
   }
 
   navigate() {
@@ -27,6 +29,5 @@ export class LinkLabelBase extends Block<LinkLabelProps> {
     return this.compile(template, { ...this.props, styles });
   }
 }
-
 
 export const LinkLabelWithRouter = withRouter(LinkLabelBase);

@@ -1,13 +1,14 @@
+/* eslint-disable import/no-cycle */
 import { SigninData, SignupData } from '../contracts/auth';
-import API from '../api/AuthAPI';
+import API, { AuthAPI } from '../api/AuthAPI';
 import store from '../utils/Store';
 import router from '../utils/Router';
-import { AuthAPI } from '../api/AuthAPI';
+
 import { Routes } from '..';
-import { LoginPage } from './../views/Login/index';
 
 export class AuthController {
   private readonly api: AuthAPI;
+
   constructor() {
     this.api = API;
   }
@@ -20,7 +21,7 @@ export class AuthController {
 
       router.go(Routes.Messanger);
     } catch (e: any) {
-      console.error(e);
+      throw new Error(e);
     }
   }
 
@@ -30,7 +31,7 @@ export class AuthController {
 
       router.go(Routes.Index);
     } catch (e: any) {
-      console.error(e);
+      throw new Error(e);
     }
   }
 
@@ -48,7 +49,7 @@ export class AuthController {
 
       router.go(Routes.Messanger);
     } catch (e: any) {
-      console.error(e.message);
+      throw new Error(e);
     }
   }
 }

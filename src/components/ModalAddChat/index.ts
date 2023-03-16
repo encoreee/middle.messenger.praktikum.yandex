@@ -15,7 +15,7 @@ export interface ModalAddChatProps {
 }
 
 export class ModalAddChat extends Block<ModalAddChatProps> {
-constructor(props: ModalAddChatProps) {
+  constructor(props: ModalAddChatProps) {
     super({
       ...props,
       events: {
@@ -29,6 +29,7 @@ constructor(props: ModalAddChatProps) {
       this.element.style.display = 'flex';
     }
   }
+
   disable() {
     if (this.element) {
       this.element.style.display = 'none';
@@ -67,7 +68,7 @@ constructor(props: ModalAddChatProps) {
 
   onAddNewChat(input: SingupFormInput) {
     const value = input.getValue();
-    let match = InputValidator.validateName(value);
+    const match = InputValidator.validateName(value);
     if (match) {
       ChatsController.create(value).finally(() => {
         (this.children.usersArea as Block).setProps({
@@ -95,7 +96,7 @@ constructor(props: ModalAddChatProps) {
 
   private onTarget(event: Event) {
     if (event.target as HTMLElement) {
-      let element = event.target as HTMLElement;
+      const element = event.target as HTMLElement;
       if (element.className.includes('modal')) {
         this.element!.style.display = 'none';
       }

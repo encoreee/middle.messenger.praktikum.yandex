@@ -1,8 +1,9 @@
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './login.hbs';
 import * as styles from './styles.module.pcss';
-import { SinginForm } from './../../components/SinginForm/index';
-import { MainLabel } from './../../components/MainLabel/index';
+import { SinginForm } from '../../components/SinginForm/index';
+import { MainLabel } from '../../components/MainLabel/index';
 import { LinkLabelWithRouter } from '../../components/LinkLabel';
 
 export class LoginPage extends Block {
@@ -21,14 +22,10 @@ export class LoginPage extends Block {
 
     this.children.singinForm = new SinginForm({});
 
-
-   
     this.children.linkLabel = new LinkLabelWithRouter({
       label: 'Регистрация',
-      to: '/registration'
+      to: '/registration',
     });
-
-  
   }
 
   render() {

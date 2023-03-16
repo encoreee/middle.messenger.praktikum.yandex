@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { MainLabel } from '../../components/MainLabel';
 import { SingupForm } from '../../components/SingupForm';
 import Block from '../../utils/Block';
@@ -18,6 +19,6 @@ export class RegistrationPage extends Block {
   }
 
   render() {
-    return this.compile(template, {...this.props, styles});
+    return this.compile(template, { ...this.props, styles });
   }
 }

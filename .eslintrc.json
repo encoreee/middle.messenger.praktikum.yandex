@@ -2,6 +2,7 @@
   "extends": ["airbnb", "airbnb-typescript"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["**/*.hbs", "**/*.pcss", "**/*.html"],
   "rules": {
     "max-len": [2, 120],
     "@typescript-eslint/no-unused-vars": 2,
@@ -16,11 +17,19 @@
         "packageDir": "./"
       }
     ],
-    "import/extensions": ["error", "ignorePackages", { "": "never" }]
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { "ts": "never", "": "never" }
+    ],
+    "import/no-cycle": [2, { "maxDepth": 5 }],
+    "operator-linebreak": ["error", "after"]
   },
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": ["./tsconfig.json"],
+    "extraFileExtensions": [".hbs", ".pcss", ".html"]
   },
 
   "env": {

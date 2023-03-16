@@ -1,13 +1,13 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable class-methods-use-this */
 import { SingupFormButton } from '../components/SingupFormButton';
 import { SingupFormInput } from '../components/SingupFormInput';
 import Block from './Block';
 import { HelperIds, InputIds } from './ElementIds';
 import InputValidator from './InputValidator';
-import { HelperLabel } from './../components/HelperLabel/index';
+import { HelperLabel } from '../components/HelperLabel/index';
 
 export class ElementValidator {
-  constructor() {}
-
   validateInputOnSubmit(element: HTMLInputElement | null, block: Block) {
     if (element) {
       switch (element.id) {
@@ -34,32 +34,33 @@ export class ElementValidator {
             .filter((child) => child instanceof SingupFormInput)
             .filter(
               (child) =>
-                (child as SingupFormInput).getId() === InputIds.password
+                (child as SingupFormInput).getId() === InputIds.password,
             )[0] as SingupFormInput;
 
           return element.value === password.getValue();
         }
+        default:
+          return false;
       }
     }
+    return false;
   }
 
   sanitaize(str: string) {
-    return str.replace(/[^\w. ]/gi, function (c) {
-      return '&#' + c.charCodeAt(0) + ';';
-    });
+    return str.replace(/[^\w. ]/gi, (c) => `&#${c.charCodeAt(0)};`);
   }
 
   validateInput(element: HTMLInputElement | null, block: Block) {
     if (element) {
       const input = this.findInputById(block, element.id);
 
-      //let str = this.sanitaize(element.value);
-      let str = element.value;
+      // let str = this.sanitaize(element.value);
+      const str = element.value;
 
       switch (element.id) {
         case InputIds.email: {
           const mailHelper = this.findHelperById(block, HelperIds.emailHepler);
-          let match = InputValidator.validateMail(str);
+          const match = InputValidator.validateMail(str);
 
           if (!match) {
             this.setError(element);
@@ -75,7 +76,7 @@ export class ElementValidator {
         }
         case InputIds.login: {
           const loginHelper = this.findHelperById(block, HelperIds.loginHelper);
-          let match = InputValidator.validateLogin(str);
+          const match = InputValidator.validateLogin(str);
 
           if (!match) {
             this.setError(element);
@@ -90,75 +91,90 @@ export class ElementValidator {
           break;
         }
         case InputIds.second_name: {
-          const second_nameHelper = this.findHelperById(block, HelperIds.second_nameHelper);
-          let match = InputValidator.validateName(str);
+          const secondNameHelper = this.findHelperById(
+            block,
+            HelperIds.second_nameHelper,
+          );
+          const match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
             input.setValidate(false);
-            second_nameHelper.show();
+            secondNameHelper.show();
           } else {
             this.setIdle(element);
             input.setValidate(true);
-            second_nameHelper.hide();
+            secondNameHelper.hide();
           }
 
           break;
         }
         case InputIds.first_name: {
-          const first_nameHelper = this.findHelperById(block, HelperIds.first_nameHelper);
-          let match = InputValidator.validateName(str);
+          const firstNameHelper = this.findHelperById(
+            block,
+            HelperIds.first_nameHelper,
+          );
+          const match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
             input.setValidate(false);
-            first_nameHelper.show();
+            firstNameHelper.show();
           } else {
             this.setIdle(element);
             input.setValidate(true);
-            first_nameHelper.hide();
+            firstNameHelper.hide();
           }
 
           break;
         }
 
         case InputIds.display_name: {
-          const display_nameHelper = this.findHelperById(block, HelperIds.display_nameHelper);
-          let match = InputValidator.validateName(str);
+          const displayNameHelper = this.findHelperById(
+            block,
+            HelperIds.display_nameHelper,
+          );
+          const match = InputValidator.validateName(str);
 
           if (!match) {
             this.setError(element);
             input.setValidate(false);
-            display_nameHelper.show();
+            displayNameHelper.show();
           } else {
             this.setIdle(element);
             input.setValidate(true);
-            display_nameHelper.hide();
+            displayNameHelper.hide();
           }
 
           break;
         }
 
         case InputIds.old_password: {
-          const old_passwordHelper = this.findHelperById(block, HelperIds.oldPasswordHelper);
-          let match = InputValidator.validatePass(str);
+          const oldPasswordHelper = this.findHelperById(
+            block,
+            HelperIds.oldPasswordHelper,
+          );
+          const match = InputValidator.validatePass(str);
 
           if (!match) {
             this.setError(element);
             input.setValidate(false);
-            old_passwordHelper.show();
+            oldPasswordHelper.show();
           } else {
             this.setIdle(element);
             input.setValidate(true);
-            old_passwordHelper.hide();
+            oldPasswordHelper.hide();
           }
 
           break;
         }
 
         case InputIds.password: {
-          const passwordHelper = this.findHelperById(block, HelperIds.passwordHelper);
-          let match = InputValidator.validatePass(str);
+          const passwordHelper = this.findHelperById(
+            block,
+            HelperIds.passwordHelper,
+          );
+          const match = InputValidator.validatePass(str);
 
           if (!match) {
             this.setError(element);
@@ -175,7 +191,7 @@ export class ElementValidator {
 
         case InputIds.phone: {
           const phoneHelper = this.findHelperById(block, HelperIds.phoneHelper);
-          let match = InputValidator.validatePhone(str);
+          const match = InputValidator.validatePhone(str);
 
           if (!match) {
             this.setError(element);
@@ -192,10 +208,13 @@ export class ElementValidator {
 
         case InputIds.repeatepassword: {
           const password = this.findInputById(block, InputIds.password);
-          const repeatepasswordHelper = this.findHelperById(block, HelperIds.repeatepasswordHelper);
+          const repeatepasswordHelper = this.findHelperById(
+            block,
+            HelperIds.repeatepasswordHelper,
+          );
           let pass = password.getValue();
           pass = this.sanitaize(pass);
-          let isNotEqual = str !== pass;
+          const isNotEqual = str !== pass;
 
           if (isNotEqual) {
             this.setError(element);
@@ -208,6 +227,9 @@ export class ElementValidator {
           }
           break;
         }
+
+        default:
+          break;
       }
     }
   }
@@ -233,7 +255,7 @@ export class ElementValidator {
         }
 
         default: {
-          //statements;
+          // statements;
           break;
         }
       }
@@ -246,7 +268,7 @@ export class ElementValidator {
       .filter((child) => (child as SingupFormInput).getValidate() === false);
 
     const button = Object.values(block.children).filter(
-      (child) => child instanceof SingupFormButton
+      (child) => child instanceof SingupFormButton,
     )[0] as SingupFormButton;
 
     if (invalidInputs.length > 0) {
@@ -265,16 +287,18 @@ export class ElementValidator {
   }
 
   setError(element: EventTarget) {
-    if (element instanceof HTMLElement) {
-      element.style.backgroundColor = 'LightPink';
-      element.style.opacity = '0.6';
+    const elementToMod = element;
+    if (elementToMod instanceof HTMLElement) {
+      elementToMod.style.backgroundColor = 'LightPink';
+      elementToMod.style.opacity = '0.6';
     }
   }
 
   setIdle(element: EventTarget) {
-    if (element instanceof HTMLElement) {
-      element.style.backgroundColor = 'white';
-      element.style.opacity = '1';
+    const elementToMod = element;
+    if (elementToMod instanceof HTMLElement) {
+      elementToMod.style.backgroundColor = 'white';
+      elementToMod.style.opacity = '1';
     }
   }
 
@@ -282,7 +306,7 @@ export class ElementValidator {
     return Object.values(block.children)
       .filter((child) => child instanceof SingupFormInput)
       .filter(
-        (child) => (child as SingupFormInput).getId() === id
+        (child) => (child as SingupFormInput).getId() === id,
       )[0] as SingupFormInput;
   }
 
@@ -290,7 +314,7 @@ export class ElementValidator {
     return Object.values(block.children)
       .filter((child) => child instanceof HelperLabel)
       .filter(
-        (child) => (child as HelperLabel).getId() === id
+        (child) => (child as HelperLabel).getId() === id,
       )[0] as HelperLabel;
   }
 }

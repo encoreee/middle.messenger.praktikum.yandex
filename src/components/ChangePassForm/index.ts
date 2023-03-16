@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-named-as-default */
 import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
@@ -6,7 +8,7 @@ import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
-import UserController from './../../controllers/userController';
+import UserController from '../../controllers/userController';
 import { ChangePassData } from '../../contracts/user';
 import { withStore } from '../../utils/withStore';
 import { User } from '../../contracts/auth';
@@ -109,10 +111,6 @@ export class ChangePassFormBase extends Block<ChangePassFormProps> {
   }
 
   onSubmit() {
-    const inputs = Object.values(this.children)
-      .filter((child) => child instanceof SingupFormInput)
-      .map((child) => child as SingupFormInput);
-
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -122,16 +120,6 @@ export class ChangePassFormBase extends Block<ChangePassFormProps> {
 
     const data = Object.fromEntries(values);
 
-    inputs.forEach((element) => {
-      if (
-        !ElementValidator.validateInputOnSubmit(
-          element.element as HTMLInputElement,
-          this
-        )
-      ) {
-        return;
-      }
-    });
     const passData = data as PasswordInputData;
     UserController.changePass({
       oldPassword: passData.oldPassword,
@@ -144,11 +132,8 @@ export class ChangePassFormBase extends Block<ChangePassFormProps> {
   }
 }
 
-const withUser = withStore((state) => {
-  return {
-    user: state.user || {},
-  };
-});
-
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
 
 export const ChangePassForm = withUser(ChangePassFormBase);

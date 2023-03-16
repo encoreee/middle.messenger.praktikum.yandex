@@ -13,6 +13,7 @@ type Options = {
 
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
+
   protected endpoint: string;
 
   constructor(endpoint: string) {
@@ -20,21 +21,21 @@ export default class HTTPTransport {
   }
 
   public get<Response>(path = '/'): Promise<Response> {
-    return this.request<Response>(this.endpoint + path);
+    return HTTPTransport.request<Response>(this.endpoint + path);
   }
 
   public post<Response = void>(
     path: string,
-    data?: unknown
+    data?: unknown,
   ): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
+    return HTTPTransport.request<Response>(this.endpoint + path, {
       method: Method.Post,
       data,
     });
   }
 
   public put<Response = void>(path: string, data: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
+    return HTTPTransport.request<Response>(this.endpoint + path, {
       method: Method.Put,
       data,
     });
@@ -42,24 +43,24 @@ export default class HTTPTransport {
 
   public patch<Response = void>(
     path: string,
-    data: unknown
+    data: unknown,
   ): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
+    return HTTPTransport.request<Response>(this.endpoint + path, {
       method: Method.Patch,
       data,
     });
   }
 
   public delete<Response>(path: string, data?: unknown): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, {
+    return HTTPTransport.request<Response>(this.endpoint + path, {
       method: Method.Delete,
       data,
     });
   }
 
-  private request<Response>(
+  private static request<Response>(
     url: string,
-    options: Options = { method: Method.Get }
+    options: Options = { method: Method.Get },
   ): Promise<Response> {
     const { method, data } = options;
 
@@ -67,7 +68,7 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
-      xhr.onreadystatechange = (e) => {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status < 400) {
             resolve(xhr.response);
@@ -77,9 +78,9 @@ export default class HTTPTransport {
         }
       };
 
-      xhr.onabort = () => reject({ reason: 'abort' });
-      xhr.onerror = () => reject({ reason: 'network error' });
-      xhr.ontimeout = () => reject({ reason: 'timeout' });
+      xhr.onabort = () => reject(new Error('Abort'));
+      xhr.onerror = () => reject(new Error('Network error'));
+      xhr.ontimeout = () => reject(new Error('Timeout'));
 
       xhr.withCredentials = true;
       xhr.responseType = 'json';

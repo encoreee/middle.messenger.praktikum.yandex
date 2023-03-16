@@ -1,4 +1,4 @@
-import { ChangeAvatar, ChangeData, ChangePassData } from '../contracts/user';
+import { ChangeData, ChangePassData } from '../contracts/user';
 import BaseAPI from './BaseAPI';
 
 export class UserAPI extends BaseAPI {
@@ -19,8 +19,11 @@ export class UserAPI extends BaseAPI {
   }
 
   read = undefined;
+
   create = undefined;
+
   update = undefined;
+
   delete = undefined;
 }
 

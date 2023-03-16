@@ -9,8 +9,6 @@ export class MessageUserArea extends Block<MessageUserAreaProps> {
     super({ ...props });
   }
 
-  init() {}
-
   render() {
     return this.compile(template, { ...this.props, styles });
   }

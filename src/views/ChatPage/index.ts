@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { MyUserArea } from '../../components/MyUserArea';
 import { UsersArea } from '../../components/UsersArea';
 import Block from '../../utils/Block';

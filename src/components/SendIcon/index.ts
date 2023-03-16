@@ -10,7 +10,6 @@ export class SendIcon extends Block<SendIconProps> {
     super({ ...props });
   }
 
-  init() {}
   render() {
     return this.compile(template, { send, styles });
   }

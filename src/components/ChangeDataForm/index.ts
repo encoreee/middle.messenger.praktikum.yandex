@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
@@ -6,8 +8,8 @@ import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
-import  UserController  from './../../controllers/userController';
-import { ChangeData } from './../../contracts/user';
+import UserController from '../../controllers/userController';
+import { ChangeData } from '../../contracts/user';
 
 interface ChangeDataFormProps {}
 
@@ -132,7 +134,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
           this.onSubmit();
         },
       },
-      type: 'submit'
+      type: 'submit',
     });
     this.children.mailHelper = new HelperLabel({
       id: HelperIds.emailHepler,
@@ -140,16 +142,17 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     });
     this.children.loginHelper = new HelperLabel({
       id: HelperIds.loginHelper,
-      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
+      label:
+        'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
     });
     this.children.nameHelper = new HelperLabel({
       id: HelperIds.first_nameHelper,
-    label: 'Первая заглавная, без пробелов, без цифр, без спец',
-      });
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+    });
     this.children.chatNameHelper = new HelperLabel({
       id: HelperIds.display_nameHelper,
       label: 'Первая заглавная, без пробелов, без цифр, без спец',
-  });
+    });
     this.children.lastNameHelper = new HelperLabel({
       id: HelperIds.second_nameHelper,
       label: 'Первая заглавная, без пробелов, без цифр, без спец',
@@ -163,10 +166,6 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
   }
 
   onSubmit() {
-    const inputs = Object.values(this.children)
-      .filter((child) => child instanceof SingupFormInput)
-      .map((child) => child as SingupFormInput);
-
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -175,17 +174,6 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       ]);
 
     const data = Object.fromEntries(values);
-
-    inputs.forEach((element) => {
-      if (
-        !ElementValidator.validateInputOnSubmit(
-          element.element as HTMLInputElement,
-          this
-        )
-      ) {
-        return;
-      }
-    });
 
     UserController.changeDate(data as ChangeData);
   }

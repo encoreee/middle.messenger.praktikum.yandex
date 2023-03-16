@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import { LoginPage } from './views/Login';
 import Router from './utils/Router';
 import AuthController from './controllers/authController';
@@ -30,6 +32,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     case Routes.Index:
     case Routes.Register:
       isProtectedRoute = false;
+      break;
+    default:
       break;
   }
 

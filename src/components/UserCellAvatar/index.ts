@@ -15,7 +15,6 @@ export class UserCellAvatar extends Block<UserCellAvatarProps> {
     super({ ...props });
   }
 
-  init() {}
   render() {
     return this.compile(template, { ...this.props, resorcesPrefix, styles });
   }

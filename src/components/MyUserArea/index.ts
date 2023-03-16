@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './myUserArea.hbs';
 import * as styles from './styles.module.pcss';
@@ -17,7 +18,6 @@ export class MyUserAreaBase extends Block<MyUserAreaProps> {
   }
 
   init() {
-
     this.children.avatar = new AvatarImage({
       path: this.props.user.avatar,
       events: {
@@ -33,13 +33,8 @@ export class MyUserAreaBase extends Block<MyUserAreaProps> {
   }
 }
 
-
-const withUser = withStore((state) => {
-  return {
-    user: state.user || {},
-  };
-});
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
 
 export const MyUserArea = withUser(MyUserAreaBase);
-
-

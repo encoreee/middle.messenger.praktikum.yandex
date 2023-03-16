@@ -1,7 +1,7 @@
+import dayjs from 'dayjs';
 import Block from '../../utils/Block';
 import template from './userCell.hbs';
 import * as styles from './styles.module.pcss';
-import dayjs from 'dayjs';
 import { UserCellAvatar } from '../UserCellAvatar';
 
 interface UserCellProps {
@@ -19,37 +19,32 @@ export class UserCell extends Block<UserCellProps> {
   constructor(props: UserCellProps) {
     super({ ...props });
     this.initMessage = '';
-    
   }
+
   private initMessage: string;
 
   init() {
-
     this.children.avatar = new UserCellAvatar({
       path: '',
     });
 
-   
-
-
     if (this.props.message) {
       this.initMessage = this.props.message;
-    }
-    else{
+    } else {
       this.initMessage = 'Нет сообщений';
     }
   }
 
   render() {
-    let { name, time, messageCount } = this.props;
+    const { name, time, messageCount } = this.props;
 
-    let dt = dayjs(time).format('HH:mm');
+    const dt = dayjs(time).format('HH:mm');
 
     return this.compile(template, {
       message: this.initMessage,
-      name: name,
+      name,
       time: dt,
-      messageCount: messageCount,
+      messageCount,
       styles,
     });
   }

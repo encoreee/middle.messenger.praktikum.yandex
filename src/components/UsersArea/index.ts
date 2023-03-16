@@ -31,12 +31,10 @@ class UsersAreaBase extends Block<UsersAreaProps> {
 
   init() {
     this.constractArea(this.props);
-
-   
   }
 
   private constractArea(props: UsersAreaProps) {
-    this.children.userCells = this.createUserCells(props);
+    this.children.userCells = UsersAreaBase.createUserCells(props);
 
     const modalChat = new ModalAddChat({});
     this.children.modalAddChat = modalChat;
@@ -71,31 +69,29 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     });
 
     const buttons = Object.values(this.children).filter(
-      (child) => child instanceof SingupFormButton
+      (child) => child instanceof SingupFormButton,
     ) as SingupFormButton[];
 
     const button = buttons.filter((b) => b.getId() === Buttons.buttonUser)[0];
 
     if (props.selectedChat) {
-      button.setDisable(false)
+      button.setDisable(false);
     } else {
-      button.setDisable(true)
+      button.setDisable(true);
     }
-
-
   }
 
   protected componentDidUpdate(
     oldProps: UsersAreaProps,
-    newProps: UsersAreaProps
+    newProps: UsersAreaProps,
   ): boolean {
     this.constractArea(newProps);
     return true;
   }
 
-  private createUserCells(props: UsersAreaProps) {
-    return props.usersData.map((data) => {
-      return new UserCell({
+  private static createUserCells(props: UsersAreaProps) {
+    return props.usersData.map(
+      (data) => new UserCell({
         id: data.id,
         name: data.title,
         message: data.last_message?.content,
@@ -106,8 +102,8 @@ class UsersAreaBase extends Block<UsersAreaProps> {
             ChatsController.selectChat(data.id);
           },
         },
-      });
-    });
+      }),
+    );
   }
 
   render() {

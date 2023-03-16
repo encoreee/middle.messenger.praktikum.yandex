@@ -15,7 +15,6 @@ export class AvatarImage extends Block<AvatarImageProps> {
     super({ ...props });
   }
 
-  init() {}
   render() {
     return this.compile(template, { ...this.props, resorcesPrefix, styles });
   }

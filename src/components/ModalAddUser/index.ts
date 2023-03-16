@@ -5,7 +5,6 @@ import { SingupFormInput } from '../SingupFormInput';
 import { CloseSpan } from '../CloseSpan';
 import template from './modalAddChat.hbs';
 import * as styles from './styles.module.pcss';
-import { withStore } from '../../utils/withStore';
 
 export interface ModalAddUserProps {
   text?: string;
@@ -31,6 +30,7 @@ export class ModalAddUser extends Block<ModalAddUserProps> {
       this.element.style.display = 'flex';
     }
   }
+
   public disable() {
     if (this.element) {
       this.element.style.display = 'none';
@@ -69,7 +69,7 @@ export class ModalAddUser extends Block<ModalAddUserProps> {
 
   onAddNewUser(input: SingupFormInput) {
     const value = input.getValue();
-    var number: number = +value;
+    const number: number = +value;
 
     if (this.props.selectedChat) {
       ChatsController.addUserToChat(this.props.selectedChat, number);
@@ -90,7 +90,7 @@ export class ModalAddUser extends Block<ModalAddUserProps> {
 
   private onTarget(event: Event) {
     if (event.target as HTMLElement) {
-      let element = event.target as HTMLElement;
+      const element = event.target as HTMLElement;
       if (element.className.includes('modal')) {
         this.element!.style.display = 'none';
       }

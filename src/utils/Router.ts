@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Block from './Block';
 import { Route } from './Route';
 
@@ -5,21 +6,15 @@ export interface BlockConstructable<P = any> {
   new (props: P): Block<Record<string, any>>;
 }
 
-
 export class Router {
-  private static __instance: Router;
   private routes: Route[] = [];
+
   private currentRoute: Route | null = null;
+
   private history = window.history;
 
   constructor(private readonly rootQuery: string) {
-    if (Router.__instance) {
-      return Router.__instance;
-    }
-
     this.routes = [];
-
-    Router.__instance = this;
   }
 
   public use(pathname: string, block: BlockConstructable) {
@@ -32,7 +27,7 @@ export class Router {
   public go(pathname: string) {
     this.history.pushState({}, '', pathname);
 
-    this._onRoute(pathname);
+    this.onRoute(pathname);
   }
 
   public back() {
@@ -47,13 +42,13 @@ export class Router {
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
 
-      this._onRoute(target.location.pathname);
+      this.onRoute(target.location.pathname);
     };
 
-    this._onRoute(window.location.pathname);
+    this.onRoute(window.location.pathname);
   }
 
-  private _onRoute(pathname: string) {
+  private onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
     if (!route) {

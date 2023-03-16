@@ -42,7 +42,7 @@ export class SingupFormInput extends Block<SingupFormInputProps> {
   }
 
   public setValidate(validate: boolean) {
-    return (this.isValidate = validate);
+    this.isValidate = validate;
   }
 
   public getId() {

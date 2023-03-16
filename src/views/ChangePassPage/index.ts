@@ -1,24 +1,24 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable class-methods-use-this */
 import Block from '../../utils/Block';
 import template from './changePassPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
-import { ChangePassForm } from './../../components/ChangePassForm/index';
+import { ChangePassForm } from '../../components/ChangePassForm/index';
 import { AvatarImage } from '../../components/AvatarImage';
 import { withStore } from '../../utils/withStore';
 import { User } from '../../contracts/auth';
 import router from '../../utils/Router';
 import { Routes } from '../..';
 
-
 interface ChangePassPageProps extends Record<string, any> {
-  user: User 
+  user: User
 }
 
-
 class ChangePassPageBase extends Block<ChangePassPageProps> {
-  constructor(props : ChangePassPageProps ) {
-    super({...props});
+  constructor(props : ChangePassPageProps) {
+    super({ ...props });
   }
 
   init() {
@@ -49,11 +49,8 @@ class ChangePassPageBase extends Block<ChangePassPageProps> {
   }
 }
 
-const withUser = withStore((state) => {
-  return {
-    user: state.user || {},
-  };
-});
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
 
 export const ChangePassPage = withUser(ChangePassPageBase);
-

@@ -1,23 +1,28 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import { PropsWithRouter, withRouter } from '../../utils/withRouter';
 import template from './linkLabel.hbs';
 import * as styles from './styles.module.pcss';
-import AuthController from './../../controllers/authController';
+import AuthController from '../../controllers/authController';
 
-interface LogoutLabelBaseProps extends PropsWithRouter{
+interface LogoutLabelBaseProps extends PropsWithRouter {
   label: string;
   to: string;
   events?: {
-        click: () => void
-      },
+    click: () => void
+  },
 }
 
 class LogoutLabelBase extends Block<LogoutLabelBaseProps> {
   constructor(props: LogoutLabelBaseProps) {
-    super({ ...props,
+    super({
+      ...props,
       events: {
-        click: () => this.navigate()
-      }, });
+        click: () => this.navigate(),
+      },
+    });
   }
 
   navigate() {
@@ -28,6 +33,5 @@ class LogoutLabelBase extends Block<LogoutLabelBaseProps> {
     return this.compile(template, { ...this.props, styles });
   }
 }
-
 
 export const LogoutLabel = withRouter(LogoutLabelBase);

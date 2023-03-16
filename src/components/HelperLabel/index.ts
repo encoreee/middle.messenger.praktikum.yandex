@@ -15,7 +15,6 @@ export class HelperLabel extends Block<HelperLabelProps> {
   show() {
     if (this.element instanceof HTMLElement) {
       this.element.style.display = 'block';
-      
     }
   }
 
