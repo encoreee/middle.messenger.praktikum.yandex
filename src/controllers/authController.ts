@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { SigninData, SignupData } from '../contracts/auth';
 import API, { AuthAPI } from '../api/AuthAPI';
-import store from '../utils/Store';
+import storage from '../utils/Store';
 import router from '../utils/Router';
 
 import { Routes } from '..';
@@ -38,7 +38,7 @@ export class AuthController {
   async fetchUser() {
     const user = await this.api.read();
 
-    store.set('user', user);
+    storage.set('user', user);
   }
 
   async signup(data: SignupData) {

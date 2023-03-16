@@ -29,9 +29,9 @@ export class Store extends EventBus {
   }
 }
 
-const store = new Store();
+const storage = new Store();
 
 // @ts-ignore
-window.store = store;
+window.store = storage;
 
-export default store;
+export default storage;
