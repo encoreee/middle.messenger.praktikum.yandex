@@ -12,7 +12,7 @@ import { ChangePassPage } from './views/ChangePassPage/index';
 export enum Routes {
   Index = '/',
   Register = '/registration',
-  Messanger = '/messanger',
+  Messenger = '/messenger',
   Profile = '/profile',
   ChangeData = '/changedata',
   ChangePass = '/changepass',
@@ -21,7 +21,7 @@ export enum Routes {
 window.addEventListener('DOMContentLoaded', async () => {
   Router.use(Routes.Index, LoginPage)
     .use(Routes.Register, RegistrationPage)
-    .use(Routes.Messanger, ChatPage)
+    .use(Routes.Messenger, ChatPage)
     .use(Routes.Profile, UserDataPage)
     .use(Routes.ChangeData, ChangeDataPage)
     .use(Routes.ChangePass, ChangePassPage);
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     case Routes.Index:
       isProtectedRoute = true;
       break;
-    case Routes.Messanger:
+    case Routes.Messenger:
       isProtectedRoute = true;
       break;
     case Routes.Profile:
@@ -58,10 +58,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (isProtectedRoute) {
       if (window.location.pathname === Routes.Index) {
-        Router.go(Routes.Messanger);
+        Router.go(Routes.Messenger);
       } else {
         Router.go(window.location.pathname);
       }
+    } else {
+      Router.go(Routes.Index);
     }
   } catch (e) {
     Router.start();

@@ -54,7 +54,7 @@ class UserDataPageBase extends Block<UserDataPageProps> {
       path: this.props.user.avatar,
       events: {
         click: () => {
-          router.go(Routes.Messanger);
+          router.go(Routes.Messenger);
         },
       },
     });
@@ -123,7 +123,7 @@ class UserDataPageBase extends Block<UserDataPageProps> {
       path: newProps.user.avatar,
       events: {
         click: () => {
-          router.go(Routes.Messanger);
+          router.go(Routes.Messenger);
         },
       },
     });
