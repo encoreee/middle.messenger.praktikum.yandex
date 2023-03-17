@@ -115,6 +115,21 @@ class UserDataPageBase extends Block<UserDataPageProps> {
     });
   }
 
+  protected componentDidUpdate(
+    oldProps: UserDataPageProps,
+    newProps: UserDataPageProps,
+  ): boolean {
+    this.children.avatar = new AvatarImage({
+      path: newProps.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Messanger);
+        },
+      },
+    });
+    return true;
+  }
+
   onSubmit() {
     const fileInput = Object.values(this.children).filter(
       (child) => child instanceof FileInput,
@@ -133,7 +148,10 @@ class UserDataPageBase extends Block<UserDataPageProps> {
 
   render() {
     return this.compile(template, {
-      ...this.props, resorcesPrefix, ...this.props.user, styles,
+      ...this.props,
+      resorcesPrefix,
+      ...this.props.user,
+      styles,
     });
   }
 }

@@ -10,8 +10,12 @@ import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
 import UserController from '../../controllers/userController';
 import { ChangeData } from '../../contracts/user';
+import { User } from '../../contracts/auth';
+import InputValidator from '../../utils/InputValidator';
 
-interface ChangeDataFormProps {}
+interface ChangeDataFormProps {
+  user: User;
+}
 
 export class ChangeDataForm extends Block<ChangeDataFormProps> {
   constructor(props: ChangeDataFormProps) {
@@ -19,10 +23,11 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
   }
 
   init() {
-    this.children.mailInput = new SingupFormInput({
+    const mailInput = new SingupFormInput({
       id: InputIds.email,
       name: 'email',
       placeholder: 'Почта',
+      value: this.props.user.email,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -36,11 +41,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
+    if (InputValidator.validateMail(this.props.user.email)) {
+      mailInput.setValidate(true);
+    }
+    this.children.mailInput = mailInput;
 
-    this.children.loginInput = new SingupFormInput({
+    const loginInput = new SingupFormInput({
       id: InputIds.login,
       name: InputIds.login,
       placeholder: 'Имя пользователя',
+      value: this.props.user.login,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -55,10 +65,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.nameInput = new SingupFormInput({
+    if (InputValidator.validateLogin(this.props.user.login)) {
+      loginInput.setValidate(true);
+    }
+    this.children.loginInput = loginInput;
+
+    const nameInput = new SingupFormInput({
       id: InputIds.first_name,
       name: InputIds.first_name,
       placeholder: 'Имя',
+      value: this.props.user.first_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -73,10 +89,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.chatNameInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.first_name)) {
+      nameInput.setValidate(true);
+    }
+    this.children.nameInput = nameInput;
+
+    const chatNameInput = new SingupFormInput({
       id: InputIds.display_name,
       name: InputIds.display_name,
       placeholder: 'Имя в чате',
+      value: this.props.user.display_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -91,10 +113,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.lastNameInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.display_name)) {
+      chatNameInput.setValidate(true);
+    }
+    this.children.chatNameInput = chatNameInput;
+
+    const lastNameInput = new SingupFormInput({
       id: InputIds.second_name,
       name: 'second_name',
       placeholder: 'Фамилия',
+      value: this.props.user.second_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -108,10 +136,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
-    this.children.phoneInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.second_name)) {
+      lastNameInput.setValidate(true);
+    }
+    this.children.lastNameInput = lastNameInput;
+
+    const phoneInput = new SingupFormInput({
       id: InputIds.phone,
       name: InputIds.phone,
       placeholder: 'Телефон',
+      value: this.props.user.phone,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -125,6 +159,10 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
+    if (InputValidator.validatePhone(this.props.user.phone)) {
+      phoneInput.setValidate(true);
+    }
+    this.children.phoneInput = phoneInput;
 
     this.children.button = new SingupFormButton({
       label: 'Сохранить',
@@ -163,6 +201,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     });
 
     ElementValidator.checkButtonEnable(this);
+  }
+
+  protected componentDidUpdate(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    oldProps: ChangeDataFormProps,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    newProps: ChangeDataFormProps,
+  ): boolean {
+    ElementValidator.checkButtonEnable(this);
+    return true;
   }
 
   onSubmit() {

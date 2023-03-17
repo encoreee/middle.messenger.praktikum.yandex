@@ -26,7 +26,7 @@ export class UserController {
 
       router.go(Routes.Profile);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 
@@ -40,7 +40,7 @@ export class UserController {
 
       router.go(Routes.Profile);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 
@@ -54,7 +54,7 @@ export class UserController {
 
       router.go(Routes.Profile);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 }

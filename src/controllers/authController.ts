@@ -21,7 +21,7 @@ export class AuthController {
 
       router.go(Routes.Messanger);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 
@@ -31,7 +31,7 @@ export class AuthController {
 
       router.go(Routes.Index);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 
@@ -49,7 +49,7 @@ export class AuthController {
 
       router.go(Routes.Messanger);
     } catch (e: any) {
-      throw new Error(e);
+      console.error(e);
     }
   }
 }

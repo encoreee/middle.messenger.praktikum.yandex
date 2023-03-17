@@ -17,7 +17,7 @@ interface ChangeDataPageProps {
 }
 
 class ChangeDataPageBase extends Block<ChangeDataPageProps> {
-  constructor(props : ChangeDataPageProps) {
+  constructor(props: ChangeDataPageProps) {
     super({ ...props });
   }
 
@@ -30,7 +30,7 @@ class ChangeDataPageBase extends Block<ChangeDataPageProps> {
       label: 'Изменение данных',
     });
 
-    this.children.changeDataForm = new ChangeDataForm({});
+    this.children.changeDataForm = new ChangeDataForm({ ...this.props });
     this.children.avatar = new AvatarImage({
       path: this.props.user.avatar,
       events: {

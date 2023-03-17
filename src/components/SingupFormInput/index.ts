@@ -6,6 +6,7 @@ interface SingupFormInputProps {
   id: string;
   name?: string;
   placeholder?: string;
+  value?: string;
 
   events?: {
     blur?: (event: Event) => void;
@@ -27,6 +28,11 @@ export class SingupFormInput extends Block<SingupFormInputProps> {
 
   public getValue() {
     return (this.element as HTMLInputElement).value;
+  }
+
+  public setValue(value: string) {
+    const element = this.element as HTMLInputElement;
+    element.value = value;
   }
 
   public setError() {

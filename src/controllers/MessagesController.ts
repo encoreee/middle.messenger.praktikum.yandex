@@ -1,6 +1,7 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable class-methods-use-this */
+import dayjs from 'dayjs';
 import { Message } from '../contracts/message';
 import { Storage } from '../utils/Storage';
 import WSTransport from '../utils/WSTransport';
@@ -74,7 +75,21 @@ class MessagesController {
 
     messagesToAdd = [...currentMessages, ...messagesToAdd];
 
-    Storage.set(`messages.${id}`, messagesToAdd);
+    const sortMes = messagesToAdd.sort((m1, m2) => {
+      const dt1 = dayjs(m1.time);
+      const dt2 = dayjs(m2.time);
+      if (dt1 < dt2) {
+        return 1;
+      }
+
+      if (dt1 > dt2) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    Storage.set(`messages.${id}`, sortMes);
   }
 
   private onClose(id: number) {
