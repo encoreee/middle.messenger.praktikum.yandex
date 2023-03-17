@@ -8,7 +8,7 @@ https://www.figma.com/file/faIftGkp9Cj8MGy7lu3x3m/ItemMessenger?node-id=0%3A1&t=
 
 ## Deploy
 
-https://roaring-buttercream-a4193f.netlify.app
+https://deploy-preview-5--roaring-buttercream-a4193f.netlify.app/messanger
 
 ## Установка
 
