@@ -26,12 +26,26 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.ChangeData, ChangeDataPage)
     .use(Routes.ChangePass, ChangePassPage);
 
-  let isProtectedRoute = true;
+  let isProtectedRoute = false;
 
   switch (window.location.pathname) {
     case Routes.Index:
+      isProtectedRoute = true;
+      break;
+    case Routes.Messanger:
+      isProtectedRoute = true;
+      break;
+    case Routes.Profile:
+      isProtectedRoute = true;
+      break;
+    case Routes.ChangeData:
+      isProtectedRoute = true;
+      break;
+    case Routes.ChangePass:
+      isProtectedRoute = true;
+      break;
     case Routes.Register:
-      isProtectedRoute = false;
+      isProtectedRoute = true;
       break;
     default:
       break;
@@ -42,13 +56,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     Router.start();
 
-    if (!isProtectedRoute) {
-      Router.go(Routes.Messanger);
+    if (isProtectedRoute) {
+      if (window.location.pathname === Routes.Index) {
+        Router.go(Routes.Messanger);
+      } else {
+        Router.go(window.location.pathname);
+      }
     }
   } catch (e) {
     Router.start();
 
-    if (isProtectedRoute) {
+    if (!isProtectedRoute) {
       Router.go(Routes.Index);
     }
   }
