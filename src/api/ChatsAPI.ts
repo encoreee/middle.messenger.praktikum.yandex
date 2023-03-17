@@ -5,6 +5,7 @@ export interface UserInfo {
   id: number;
   title: string;
   avatar: string;
+  avatarPers: string;
   unread_count: number;
   last_message: {
     user: User;

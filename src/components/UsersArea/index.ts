@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import Block from '../../utils/Block';
 import template from './usersArea.hbs';
 import * as styles from './styles.module.pcss';
@@ -8,11 +9,13 @@ import ChatsController from '../../controllers/ChatsController';
 import { SingupFormButton } from '../SingupFormButton';
 import { ModalAddChat } from '../ModalAddChat';
 import { ModalAddUser } from '../ModalAddUser';
+import { User } from '../../contracts/auth';
 
 interface UsersAreaProps {
   usersData: UserInfo[];
   isLoaded: boolean;
   selectedChat: number | undefined;
+  chatUsers: User[] | undefined;
   userId: number;
 }
 
@@ -33,7 +36,15 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     this.constractArea(this.props);
   }
 
-  private constractArea(props: UsersAreaProps) {
+  protected componentDidUpdate(
+    oldProps: UsersAreaProps,
+    newProps: UsersAreaProps,
+  ): boolean {
+    this.constractArea(newProps);
+    return true;
+  }
+
+  private async constractArea(props: UsersAreaProps) {
     this.children.userCells = UsersAreaBase.createUserCells(props);
 
     const modalChat = new ModalAddChat({});
@@ -81,28 +92,22 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     }
   }
 
-  protected componentDidUpdate(
-    oldProps: UsersAreaProps,
-    newProps: UsersAreaProps,
-  ): boolean {
-    this.constractArea(newProps);
-    return true;
-  }
-
   private static createUserCells(props: UsersAreaProps) {
     return props.usersData.map(
-      (data) => new UserCell({
-        id: data.id,
-        name: data.title,
-        message: data.last_message?.content,
-        time: data.last_message?.time,
-        messageCount: data.unread_count,
-        events: {
-          click: () => {
-            ChatsController.selectChat(data.id);
+      (data) =>
+        new UserCell({
+          id: data.id,
+          name: data.title,
+          message: data.last_message?.content,
+          time: data.last_message?.time,
+          messageCount: data.unread_count,
+          path: data.avatarPers,
+          events: {
+            click: () => {
+              ChatsController.selectChat(data.id);
+            },
           },
-        },
-      }),
+        }),
     );
   }
 
@@ -118,6 +123,7 @@ const withChats = withStore((state) => {
     return {
       usersData: [...(state.usersData || [])],
       selectedChat: undefined,
+      chatUsers: undefined,
       userId: state.user.id,
     };
   }
@@ -125,6 +131,7 @@ const withChats = withStore((state) => {
   return {
     usersData: [...(state.usersData || [])],
     selectedChat: state.selectedChat,
+    chatUsers: state.chatUsers,
     userId: state.user.id,
   };
 });

@@ -1,6 +1,15 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable class-methods-use-this */
 class InputValidator {
+  validateMessage(str: string) {
+    const ifRightLength = str.length < 1 || str.length > 1000;
+
+    if (ifRightLength) {
+      return false;
+    }
+    return true;
+  }
+
   validateLogin(str: string) {
     const ifRightLength = str.length < 3 || str.length > 20;
     const lettersMatch = str.match(/[^0-9^A-Z^А-Я^a-z^а-я^ё^Ё^-^_]/);

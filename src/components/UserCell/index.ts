@@ -10,6 +10,7 @@ interface UserCellProps {
   message?: string;
   time: string;
   messageCount: number;
+  path?: string;
   events?: {
     click: () => void;
   };
@@ -25,7 +26,7 @@ export class UserCell extends Block<UserCellProps> {
 
   init() {
     this.children.avatar = new UserCellAvatar({
-      path: '',
+      path: this.props.path,
     });
 
     if (this.props.message) {

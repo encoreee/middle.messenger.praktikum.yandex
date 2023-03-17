@@ -9,6 +9,7 @@ export enum StoreEvents {
 export interface State {
   user: User;
   usersData: UserInfo[];
+  chatUsers: User[];
   messages: Record<number, Message[]>;
   selectedChat?: number;
 }

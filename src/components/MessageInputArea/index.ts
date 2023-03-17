@@ -5,6 +5,7 @@ import { AttachIcon } from '../AttachIcon/index';
 import { SendIcon } from '../SendIcon/index';
 import { MessageInput } from '../MessageInput';
 import MessagesController from '../../controllers/MessagesController';
+import InputValidator from '../../utils/InputValidator';
 
 interface MessageInputAreaProps {
   selectedChat: number | undefined;
@@ -13,17 +14,6 @@ interface MessageInputAreaProps {
 export class MessageInputArea extends Block<MessageInputAreaProps> {
   constructor(props: MessageInputAreaProps) {
     super({ ...props });
-  }
-
-  private selectedChat: number | undefined;
-
-  protected componentDidUpdate(
-    oldProps: MessageInputAreaProps,
-    newProps: MessageInputAreaProps,
-  ): boolean {
-    this.selectedChat = newProps.selectedChat;
-
-    return true;
   }
 
   init() {
@@ -40,10 +30,15 @@ export class MessageInputArea extends Block<MessageInputAreaProps> {
           const input = this.children.input as MessageInput;
           const message = input.getValue();
 
-          input.setValue('');
+          const valid = InputValidator.validateMessage(message);
 
-          if (this.props.selectedChat) {
-            MessagesController.sendMessage(this.props.selectedChat, message);
+          if (valid) {
+            input.setValue('');
+            if (this.props.selectedChat) {
+              MessagesController.sendMessage(this.props.selectedChat, message);
+            }
+          } else {
+            console.error('Сообщение не валидное');
           }
         },
       },
