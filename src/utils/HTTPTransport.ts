@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable implicit-arrow-linebreak */
 export enum Method {
   Get = 'Get',
   Post = 'Post',
@@ -11,6 +13,11 @@ type Options = {
   data?: any;
 };
 
+type HTTPMethod<Response = void> = (
+  path: string,
+  data?: unknown,
+) => Promise<Response>;
+
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
 
@@ -20,43 +27,23 @@ export default class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  public get<Response>(path = '/'): Promise<Response> {
-    return HTTPTransport.request<Response>(this.endpoint + path);
-  }
+  public get: HTTPMethod = (path = '/') =>
+    HTTPTransport.request(this.endpoint + path, { method: Method.Get });
 
-  public post<Response = void>(
-    path: string,
-    data?: unknown,
-  ): Promise<Response> {
-    return HTTPTransport.request<Response>(this.endpoint + path, {
-      method: Method.Post,
-      data,
-    });
-  }
+  public post: HTTPMethod = (path: string, data?: unknown) =>
+    HTTPTransport.request(this.endpoint + path, { method: Method.Post, data });
 
-  public put<Response = void>(path: string, data: unknown): Promise<Response> {
-    return HTTPTransport.request<Response>(this.endpoint + path, {
-      method: Method.Put,
-      data,
-    });
-  }
+  public put: HTTPMethod = (path: string, data?: unknown) =>
+    HTTPTransport.request(this.endpoint + path, { method: Method.Put, data });
 
-  public patch<Response = void>(
-    path: string,
-    data: unknown,
-  ): Promise<Response> {
-    return HTTPTransport.request<Response>(this.endpoint + path, {
-      method: Method.Patch,
-      data,
-    });
-  }
+  public patch: HTTPMethod = (path: string, data?: unknown) =>
+    HTTPTransport.request(this.endpoint + path, { method: Method.Patch, data });
 
-  public delete<Response>(path: string, data?: unknown): Promise<Response> {
-    return HTTPTransport.request<Response>(this.endpoint + path, {
+  public delete: HTTPMethod = (path: string, data?: unknown) =>
+    HTTPTransport.request(this.endpoint + path, {
       method: Method.Delete,
       data,
     });
-  }
 
   private static request<Response>(
     url: string,
