@@ -1,5 +1,5 @@
-import { SignupData } from '../../contracts/auth';
-import AuthController from '../../controllers/authController';
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-named-as-default */
 import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
@@ -8,15 +8,44 @@ import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
+import UserController from '../../controllers/userController';
+import { ChangePassData } from '../../contracts/user';
+import { withStore } from '../../utils/withStore';
+import { User } from '../../contracts/auth';
 
-interface ChangePassFormProps {}
+interface ChangePassFormProps {
+  user: User;
+}
 
-export class ChangePassForm extends Block<ChangePassFormProps> {
+interface PasswordInputData {
+  oldPassword: string;
+  password: string;
+  repeatepassword: string;
+}
+
+export class ChangePassFormBase extends Block<ChangePassFormProps> {
   constructor(props: ChangePassFormProps) {
     super({ ...props });
   }
 
   init() {
+    this.children.oldPasswordInput = new SingupFormInput({
+      id: InputIds.old_password,
+      name: InputIds.old_password,
+      placeholder: 'Старый пароль',
+      events: {
+        blur: (event) => {
+          if (event.target) {
+            ElementValidator.onBlurValidate(event.target, this);
+          }
+        },
+        focus: (event) => {
+          if (event.target) {
+            ElementValidator.onFocusValidate(event.target);
+          }
+        },
+      },
+    });
 
     this.children.passwordInput = new SingupFormInput({
       id: InputIds.password,
@@ -62,9 +91,13 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
           this.onSubmit();
         },
       },
-      type: 'submit'
+      type: 'submit',
     });
 
+    this.children.oldPasswordHelper = new HelperLabel({
+      id: HelperIds.oldPasswordHelper,
+      label: 'От 8 до 40 символов, одна заглавная буква и одна цифра',
+    });
     this.children.passwordHelper = new HelperLabel({
       id: HelperIds.passwordHelper,
       label: 'От 8 до 40 символов, одна заглавная буква и одна цифра',
@@ -78,10 +111,6 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
   }
 
   onSubmit() {
-    const inputs = Object.values(this.children)
-      .filter((child) => child instanceof SingupFormInput)
-      .map((child) => child as SingupFormInput);
-
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -91,21 +120,20 @@ export class ChangePassForm extends Block<ChangePassFormProps> {
 
     const data = Object.fromEntries(values);
 
-    inputs.forEach((element) => {
-      if (
-        !ElementValidator.validateInputOnSubmit(
-          element.element as HTMLInputElement,
-          this
-        )
-      ) {
-        return;
-      }
-    });
-
-    AuthController.signup(data as SignupData);
+    const passData = data as PasswordInputData;
+    UserController.changePass({
+      oldPassword: passData.oldPassword,
+      newPassword: passData.password,
+    } as ChangePassData);
   }
 
   render() {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
+
+export const ChangePassForm = withUser(ChangePassFormBase);

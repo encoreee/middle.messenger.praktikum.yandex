@@ -2,11 +2,7 @@
   <div class="{{styles.change-data-area}}">
     <div class="{{styles.personal-area}}">
       <div class="{{styles.personal-area__avatar-wrapper}}">
-        <img
-          class="{{styles.personal-area__avatar}}"
-          src="../../static/foto.jpg"
-          alt="ava"
-        />
+        {{{avatar}}}
       </div>
       <div class="{{styles.personal-area__label-wrapper}}">
         {{{name}}}
@@ -21,6 +17,21 @@
           {{#each dataFields}}
             {{{this}}}
           {{/each}}
+          <div class="{{styles.link-spacer}}">
+          </div>
+          <div class="{{styles.avatar-input-area}}">
+            {{{fileInput}}}
+            {{{submitAvatarButton}}}
+          </div>
+          <div class="{{styles.link-spacer}}">
+          </div>
+          {{{changeDataLink}}}
+          <div class="{{styles.link-spacer}}">
+          </div>
+          {{{changePassLink}}}
+          <div class="{{styles.link-spacer}}">
+          </div>
+          {{{logoutLink}}}
         </div>
       </div>
     </div>

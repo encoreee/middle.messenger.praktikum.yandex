@@ -3,6 +3,7 @@ import template from './singupFormButton.hbs';
 import * as styles from './styles.module.pcss';
 
 interface SingupFormButtonProps {
+  id?: string;
   label: string;
   type: string;
   events: {
@@ -19,6 +20,10 @@ export class SingupFormButton extends Block<SingupFormButtonProps> {
     if (this.element instanceof HTMLButtonElement) {
       this.element.disabled = disable;
     }
+  }
+
+  public getId() {
+    return this.props.id;
   }
 
   render() {

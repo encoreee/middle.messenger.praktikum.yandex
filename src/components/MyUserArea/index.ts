@@ -1,22 +1,28 @@
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './myUserArea.hbs';
 import * as styles from './styles.module.pcss';
-import { MyUserAreaAvatar } from './MyUserAreaAvatar/index';
-import { renderDom } from '../../utils/renderDOM';
+import router from '../../utils/Router';
+import { Routes } from '../..';
+import { AvatarImage } from '../AvatarImage';
+import { withStore } from '../../utils/withStore';
+import { User } from '../../contracts/auth';
 
 interface MyUserAreaProps {
+  user : User
 }
 
-export class MyUserArea extends Block<MyUserAreaProps> {
+export class MyUserAreaBase extends Block<MyUserAreaProps> {
   constructor(props: MyUserAreaProps) {
     super({ ...props });
   }
 
   init() {
-    this.children.avatar = new MyUserAreaAvatar({
+    this.children.avatar = new AvatarImage({
+      path: this.props.user.avatar,
       events: {
-        click: (event) => {
-          renderDom('userDataPage');
+        click: () => {
+          router.go(Routes.Profile);
         },
       },
     });
@@ -26,3 +32,9 @@ export class MyUserArea extends Block<MyUserAreaProps> {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
+
+export const MyUserArea = withUser(MyUserAreaBase);

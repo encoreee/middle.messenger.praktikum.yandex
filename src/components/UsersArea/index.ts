@@ -1,61 +1,139 @@
+/* eslint-disable implicit-arrow-linebreak */
 import Block from '../../utils/Block';
-import template from './userArea.hbs';
+import template from './usersArea.hbs';
 import * as styles from './styles.module.pcss';
 import { UserCell } from '../UserCell';
+import { withStore } from '../../utils/withStore';
+import { UserInfo } from '../../api/ChatsAPI';
+import ChatsController from '../../controllers/ChatsController';
+import { SingupFormButton } from '../SingupFormButton';
+import { ModalAddChat } from '../ModalAddChat';
+import { ModalAddUser } from '../ModalAddUser';
+import { User } from '../../contracts/auth';
 
-interface UsersAreaProps {}
-
-interface User {
-  name: string;
-  message: string;
-  time: string;
-  messageCount: number;
+interface UsersAreaProps {
+  usersData: UserInfo[];
+  isLoaded: boolean;
+  selectedChat: number | undefined;
+  chatUsers: User[] | undefined;
+  userId: number;
 }
 
-let userData: User[] = [];
+export const Buttons: {
+  buttonChat: string;
+  buttonUser: string;
+} = {
+  buttonChat: 'buttonChat',
+  buttonUser: 'buttonUser',
+};
 
-userData.push({
-  name: 'Алекандр',
-  message: 'Какое то сообщение',
-  time: '20:23',
-  messageCount: 4,
-});
-userData.push({
-  name: 'Вика',
-  message: 'Привет, как дела?',
-  time: '11:21',
-  messageCount: 1,
-});
-userData.push({
-  name: 'Настя',
-  message: 'Расскажи ка мне...',
-  time: '23:00',
-  messageCount: 2,
-});
-userData.push({
-  name: 'Артем',
-  message: 'А ты знаешь...',
-  time: '10:25',
-  messageCount: 5,
-});
-
-export class UsersArea extends Block<UsersAreaProps> {
+class UsersAreaBase extends Block<UsersAreaProps> {
   constructor(props: UsersAreaProps) {
     super({ ...props });
   }
 
   init() {
-    this.children.userCells = userData.map((user) => {
-      return new UserCell({
-        name: user.name,
-        message: user.message,
-        time: user.time,
-        messageCount: user.messageCount,
-      });
+    this.constractArea(this.props);
+  }
+
+  protected componentDidUpdate(
+    oldProps: UsersAreaProps,
+    newProps: UsersAreaProps,
+  ): boolean {
+    this.constractArea(newProps);
+    return true;
+  }
+
+  private async constractArea(props: UsersAreaProps) {
+    this.children.userCells = UsersAreaBase.createUserCells(props);
+
+    const modalChat = new ModalAddChat({});
+    this.children.modalAddChat = modalChat;
+    modalChat.disable();
+
+    const modalUser = new ModalAddUser({ ...props });
+    this.children.modalAddUser = modalUser;
+    modalUser.disable();
+
+    this.children.buttonChat = new SingupFormButton({
+      id: Buttons.buttonChat,
+      label: 'Создать новый чат',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          modalChat.enable();
+        },
+      },
     });
+
+    this.children.buttonUser = new SingupFormButton({
+      id: Buttons.buttonUser,
+      label: 'Добавить пользователя',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          modalUser.enable();
+        },
+      },
+    });
+
+    const buttons = Object.values(this.children).filter(
+      (child) => child instanceof SingupFormButton,
+    ) as SingupFormButton[];
+
+    const button = buttons.filter((b) => b.getId() === Buttons.buttonUser)[0];
+
+    if (props.selectedChat) {
+      button.setDisable(false);
+    } else {
+      button.setDisable(true);
+    }
+  }
+
+  private static createUserCells(props: UsersAreaProps) {
+    return props.usersData.map(
+      (data) =>
+        new UserCell({
+          id: data.id,
+          name: data.title,
+          message: data.last_message?.content,
+          time: data.last_message?.time,
+          messageCount: data.unread_count,
+          path: data.avatarPers,
+          events: {
+            click: () => {
+              ChatsController.selectChat(data.id);
+            },
+          },
+        }),
+    );
   }
 
   render() {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withChats = withStore((state) => {
+  const selectedChatId = state.selectedChat;
+
+  if (!selectedChatId) {
+    return {
+      usersData: [...(state.usersData || [])],
+      selectedChat: undefined,
+      chatUsers: undefined,
+      userId: state.user.id,
+    };
+  }
+
+  return {
+    usersData: [...(state.usersData || [])],
+    selectedChat: state.selectedChat,
+    chatUsers: state.chatUsers,
+    userId: state.user.id,
+  };
+});
+
+export const UsersArea = withChats(UsersAreaBase);

@@ -1,5 +1,5 @@
-import { SignupData } from '../../contracts/auth';
-import AuthController from '../../controllers/authController';
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
@@ -8,8 +8,14 @@ import * as styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
+import UserController from '../../controllers/userController';
+import { ChangeData } from '../../contracts/user';
+import { User } from '../../contracts/auth';
+import InputValidator from '../../utils/InputValidator';
 
-interface ChangeDataFormProps {}
+interface ChangeDataFormProps {
+  user: User;
+}
 
 export class ChangeDataForm extends Block<ChangeDataFormProps> {
   constructor(props: ChangeDataFormProps) {
@@ -17,10 +23,11 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
   }
 
   init() {
-    this.children.mailInput = new SingupFormInput({
+    const mailInput = new SingupFormInput({
       id: InputIds.email,
       name: 'email',
       placeholder: 'Почта',
+      value: this.props.user.email,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -34,11 +41,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
+    if (InputValidator.validateMail(this.props.user.email)) {
+      mailInput.setValidate(true);
+    }
+    this.children.mailInput = mailInput;
 
-    this.children.loginInput = new SingupFormInput({
+    const loginInput = new SingupFormInput({
       id: InputIds.login,
       name: InputIds.login,
       placeholder: 'Имя пользователя',
+      value: this.props.user.login,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -53,10 +65,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.nameInput = new SingupFormInput({
+    if (InputValidator.validateLogin(this.props.user.login)) {
+      loginInput.setValidate(true);
+    }
+    this.children.loginInput = loginInput;
+
+    const nameInput = new SingupFormInput({
       id: InputIds.first_name,
       name: InputIds.first_name,
       placeholder: 'Имя',
+      value: this.props.user.first_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -71,10 +89,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.chatNameInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.first_name)) {
+      nameInput.setValidate(true);
+    }
+    this.children.nameInput = nameInput;
+
+    const chatNameInput = new SingupFormInput({
       id: InputIds.display_name,
       name: InputIds.display_name,
       placeholder: 'Имя в чате',
+      value: this.props.user.display_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -89,10 +113,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
       },
     });
 
-    this.children.lastNameInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.display_name)) {
+      chatNameInput.setValidate(true);
+    }
+    this.children.chatNameInput = chatNameInput;
+
+    const lastNameInput = new SingupFormInput({
       id: InputIds.second_name,
       name: 'second_name',
       placeholder: 'Фамилия',
+      value: this.props.user.second_name,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -106,10 +136,16 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
-    this.children.phoneInput = new SingupFormInput({
+    if (InputValidator.validateName(this.props.user.second_name)) {
+      lastNameInput.setValidate(true);
+    }
+    this.children.lastNameInput = lastNameInput;
+
+    const phoneInput = new SingupFormInput({
       id: InputIds.phone,
       name: InputIds.phone,
       placeholder: 'Телефон',
+      value: this.props.user.phone,
       events: {
         blur: (event) => {
           if (event.target) {
@@ -123,6 +159,10 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
         },
       },
     });
+    if (InputValidator.validatePhone(this.props.user.phone)) {
+      phoneInput.setValidate(true);
+    }
+    this.children.phoneInput = phoneInput;
 
     this.children.button = new SingupFormButton({
       label: 'Сохранить',
@@ -132,7 +172,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
           this.onSubmit();
         },
       },
-      type: 'submit'
+      type: 'submit',
     });
     this.children.mailHelper = new HelperLabel({
       id: HelperIds.emailHepler,
@@ -140,16 +180,17 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     });
     this.children.loginHelper = new HelperLabel({
       id: HelperIds.loginHelper,
-      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
+      label:
+        'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
     });
     this.children.nameHelper = new HelperLabel({
       id: HelperIds.first_nameHelper,
-    label: 'Первая заглавная, без пробелов, без цифр, без спец',
-      });
-    this.children.chatNameHelper = new HelperLabel({
-      id: HelperIds.chat_nameHelper,
       label: 'Первая заглавная, без пробелов, без цифр, без спец',
-  });
+    });
+    this.children.chatNameHelper = new HelperLabel({
+      id: HelperIds.display_nameHelper,
+      label: 'Первая заглавная, без пробелов, без цифр, без спец',
+    });
     this.children.lastNameHelper = new HelperLabel({
       id: HelperIds.second_nameHelper,
       label: 'Первая заглавная, без пробелов, без цифр, без спец',
@@ -162,11 +203,17 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     ElementValidator.checkButtonEnable(this);
   }
 
-  onSubmit() {
-    const inputs = Object.values(this.children)
-      .filter((child) => child instanceof SingupFormInput)
-      .map((child) => child as SingupFormInput);
+  protected componentDidUpdate(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    oldProps: ChangeDataFormProps,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    newProps: ChangeDataFormProps,
+  ): boolean {
+    ElementValidator.checkButtonEnable(this);
+    return true;
+  }
 
+  onSubmit() {
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -176,18 +223,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
 
     const data = Object.fromEntries(values);
 
-    inputs.forEach((element) => {
-      if (
-        !ElementValidator.validateInputOnSubmit(
-          element.element as HTMLInputElement,
-          this
-        )
-      ) {
-        return;
-      }
-    });
-
-    AuthController.signup(data as SignupData);
+    UserController.changeDate(data as ChangeData);
   }
 
   render() {

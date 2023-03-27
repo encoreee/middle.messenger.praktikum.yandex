@@ -2,7 +2,7 @@
 
 .users-area__user-cell {
   height: 4rem;
-  width: 100%;
+  width: 95%;
   margin-top: 12px;
   margin-bottom: 12px;
   font-family: inherit;
@@ -11,7 +11,7 @@
   border-radius: 5px;
   font-size: 16px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -19,20 +19,14 @@
   background-color: $userCellBackGroundSelected;
 }
 
-.users-area-user-cell__avatar {
-  height: 45px;
-  width: 45px;
-  margin-right: 10px;
-  margin-left: 10px;
-  border-radius: 50%;
-  background-color: $userCellAvatarBackGround;
-  text-align: center;
-  font-size: 15px;
+.users-area-user-cell__data-wrapper {
+  margin: 0 auto 0 1rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .users-area-user-cell__data {
   font-family: $globalFontFamily;
-  margin: 3px;
 }
 
 .users-area-user-cell-data__name-label {

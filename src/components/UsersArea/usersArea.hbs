@@ -1,0 +1,15 @@
+<div class="{{styles.users-area__wrapper}}">
+  <div class="{{styles.users-area}}">
+    {{#each userCells}}
+      {{{this}}}
+    {{/each}}
+  </div>
+  <div class="{{styles.spacer}}"></div>
+  <div>
+    {{{buttonChat}}}
+    <div class="{{styles.spacer}}"></div>
+    {{{buttonUser}}}
+    {{{modalAddChat}}}
+    {{{modalAddUser}}}
+  </div>
+</div>

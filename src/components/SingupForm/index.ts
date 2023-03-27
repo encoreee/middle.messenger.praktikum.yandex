@@ -1,7 +1,8 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable import/no-named-as-default */
 import { SignupData } from '../../contracts/auth';
 import AuthController from '../../controllers/authController';
 import Block from '../../utils/Block';
-import { renderDom } from '../../utils/renderDOM';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import template from './singupForm.hbs';
@@ -9,7 +10,7 @@ import ElementValidator from '../../utils/ElementValidator';
 
 import * as styles from './styles.module.pcss';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
-import { HelperLabel } from './../HelperLabel/index';
+import { HelperLabel } from '../HelperLabel/index';
 
 interface SingupFormProps {}
 
@@ -165,11 +166,11 @@ export class SingupForm extends Block<SingupFormProps> {
 
     this.children.button = new SingupFormButton({
       label: 'Войти',
+      type: 'Submit',
       events: {
         click: (event) => {
           event.preventDefault();
           this.onSubmit();
-          renderDom('chatStartPage');
         },
       },
     });
@@ -180,7 +181,8 @@ export class SingupForm extends Block<SingupFormProps> {
     });
     this.children.loginHelper = new HelperLabel({
       id: HelperIds.loginHelper,
-      label: 'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
+      label:
+        'От 3 до 20 символов, латиница, цифры, но не из них, без пробелов, без спец',
     });
     this.children.nameHelper = new HelperLabel({
       id: HelperIds.first_nameHelper,
@@ -207,10 +209,6 @@ export class SingupForm extends Block<SingupFormProps> {
   }
 
   onSubmit() {
-    const inputs = Object.values(this.children)
-      .filter((child) => child instanceof SingupFormInput)
-      .map((child) => child as SingupFormInput);
-
     const values = Object.values(this.children)
       .filter((child) => child instanceof SingupFormInput)
       .map((child) => [
@@ -219,17 +217,6 @@ export class SingupForm extends Block<SingupFormProps> {
       ]);
 
     const data = Object.fromEntries(values);
-
-    inputs.forEach((element) => {
-      if (
-        !ElementValidator.validateInputOnSubmit(
-          element.element as HTMLInputElement,
-          this
-        )
-      ) {
-        return;
-      }
-    });
 
     AuthController.signup(data as SignupData);
   }

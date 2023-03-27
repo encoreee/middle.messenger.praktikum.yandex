@@ -1,19 +1,29 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable class-methods-use-this */
 import Block from '../../utils/Block';
 import template from './changePassPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
-import { AvatarField } from '../../components/AvatarField/index';
-import { ChangePassForm } from './../../components/ChangePassForm/index';
+import { ChangePassForm } from '../../components/ChangePassForm/index';
+import { AvatarImage } from '../../components/AvatarImage';
+import { withStore } from '../../utils/withStore';
+import { User } from '../../contracts/auth';
+import router from '../../utils/Router';
+import { Routes } from '../..';
 
-export class ChangePassPage extends Block {
-  constructor() {
-    super({});
+interface ChangePassPageProps extends Record<string, any> {
+  user: User
+}
+
+class ChangePassPageBase extends Block<ChangePassPageProps> {
+  constructor(props : ChangePassPageProps) {
+    super({ ...props });
   }
 
   init() {
     this.children.name = new NameLabel({
-      name: 'Александр',
+      name: this.props.user.display_name,
     });
 
     this.children.pageTitle = new TitleLabel({
@@ -21,7 +31,15 @@ export class ChangePassPage extends Block {
     });
 
     this.children.changeDataForm = new ChangePassForm({});
-    this.children.avatar = new AvatarField({name : 'avatar'});
+
+    this.children.avatar = new AvatarImage({
+      path: this.props.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Profile);
+        },
+      },
+    });
   }
 
   onSubmit() {}
@@ -30,3 +48,9 @@ export class ChangePassPage extends Block {
     return this.compile(template, { ...this.props, styles });
   }
 }
+
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
+
+export const ChangePassPage = withUser(ChangePassPageBase);

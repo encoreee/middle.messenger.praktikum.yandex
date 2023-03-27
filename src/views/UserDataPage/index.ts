@@ -1,72 +1,163 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './userDataPage.hbs';
 import * as styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
-import { TitleLabel } from './../../components/TitleLable/index';
-import { UserDataField } from './../../components/UserDataField/index';
+import { TitleLabel } from '../../components/TitleLable/index';
+import { UserDataField } from '../../components/UserDataField/index';
+import { User } from '../../contracts/auth';
+import { withStore } from '../../utils/withStore';
+import { LinkLabelWithRouter } from '../../components/LinkLabel';
+import { FileInput } from '../../components/FileInput/index';
+import { SingupFormButton } from '../../components/SingupFormButton';
+import UserController from '../../controllers/userController';
+import { resorcesPrefix } from '../../api/Prefixis';
+import { AvatarImage } from '../../components/AvatarImage';
+import { LogoutLabel } from '../../components/LogoutLabel/index';
+import router from '../../utils/Router';
+import { Routes } from '../..';
 
-interface UserDataSample {
-  key: string;
-  value: string;
+interface UserDataPageProps {
+  user: User;
 }
 
-let userData: UserDataSample[] = [];
+interface Mapper {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+  phone: string;
+}
 
-userData.push({
-  key: 'Имя пользователя',
-  value: 'AlexR',
-});
+const mapper: Mapper = {
+  first_name: 'Имя',
+  second_name: 'Фамилия',
+  login: 'Имя пользователя',
+  email: 'Почта',
+  password: 'Пароль',
+  phone: 'Телефон',
+};
 
-userData.push({
-  key: 'Почта',
-  value: 'alexraykov200@gmail.com',
-});
-
-userData.push({
-  key: 'Имя',
-  value: 'Алекандр',
-});
-
-userData.push({
-  key: 'Фамилия',
-  value: 'Райков',
-});
-
-userData.push({
-  key: 'Имя в чате',
-  value: 'Алекс',
-});
-
-userData.push({
-  key: 'Телефон',
-  value: '+7 (981) 433-44-62',
-});
-
-export class UserDataPage extends Block {
-  constructor() {
-    super({});
+class UserDataPageBase extends Block<UserDataPageProps> {
+  constructor(props: UserDataPageProps) {
+    super({ ...props });
   }
 
   init() {
     this.children.name = new NameLabel({
-      name: 'Александр',
+      name: this.props.user.first_name,
+    });
+
+    this.children.avatar = new AvatarImage({
+      path: this.props.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Messenger);
+        },
+      },
     });
 
     this.children.pageTitle = new TitleLabel({
       label: 'Данные пользователя',
     });
 
-    this.children.dataFields = userData.map((dataField) => {
-      return new UserDataField({
-        key: dataField.key,
-        value: dataField.value,
-      });
+    const mapperKeys = Object.keys(mapper);
+    const fields: Block<any>[] = [];
+    Object.entries(this.props.user).forEach(([key, value]) => {
+      if (mapperKeys.includes(key)) {
+        fields.push(
+          new UserDataField({
+            key: mapper[key as keyof typeof mapper],
+            value,
+          }),
+        );
+      }
+    });
+
+    this.children.dataFields = fields;
+
+    this.children.fileInput = new FileInput({
+      id: 'avatar',
+      name: 'avatar',
+    });
+
+    this.children.submitAvatarButton = new SingupFormButton({
+      label: 'Загрузть',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          this.onSubmit();
+        },
+      },
+    });
+
+    this.children.changeDataLink = new LinkLabelWithRouter({
+      label: 'Изменить данные',
+      to: '/changedata',
+    });
+
+    this.children.changePassLink = new LinkLabelWithRouter({
+      label: 'Изменить пароль',
+      to: '/changepass',
+    });
+
+    this.children.changePassLink = new LinkLabelWithRouter({
+      label: 'Изменить пароль',
+      to: '/changepass',
+    });
+
+    this.children.logoutLink = new LogoutLabel({
+      label: 'Выйти',
+      to: '/',
     });
   }
 
-  onSubmit() {}
+  protected componentDidUpdate(
+    oldProps: UserDataPageProps,
+    newProps: UserDataPageProps,
+  ): boolean {
+    this.children.avatar = new AvatarImage({
+      path: newProps.user.avatar,
+      events: {
+        click: () => {
+          router.go(Routes.Messenger);
+        },
+      },
+    });
+    return true;
+  }
+
+  onSubmit() {
+    const fileInput = Object.values(this.children).filter(
+      (child) => child instanceof FileInput,
+    )[0] as FileInput;
+
+    const input = fileInput.element as HTMLInputElement;
+
+    const file = input.files?.item(0);
+
+    const formData = new FormData();
+
+    formData.append('avatar', file as Blob);
+
+    UserController.changeAvatar(formData as FormData);
+  }
 
   render() {
-    return this.compile(template, { ...this.props, styles });
+    return this.compile(template, {
+      ...this.props,
+      resorcesPrefix,
+      ...this.props.user,
+      styles,
+    });
   }
 }
+
+const withUser = withStore((state) => ({
+  user: state.user || {},
+}));
+
+export const UserDataPage = withUser(UserDataPageBase);

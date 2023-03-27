@@ -1,6 +1,9 @@
 <div class="{{styles.message-area}}">
-  {{{notSelectedLabel}}}
-  {{{messageUserArea}}}
-  {{{messageConvArea}}}
-  {{{messageInputArea}}}
+  {{#if selectedChat}}
+    {{{messageUserArea}}}
+    {{{messageConvArea}}}
+    {{{messageInputArea}}}
+  {{else}}
+    {{{notSelectedLabel}}}
+  {{/if}}
 </div>
