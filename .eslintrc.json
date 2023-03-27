@@ -23,7 +23,8 @@
       { "ts": "never", "": "never" }
     ],
     "import/no-cycle": [2, { "maxDepth": 5 }],
-    "operator-linebreak": ["error", "after"]
+    "operator-linebreak": ["error", "after"],
+    "max-classes-per-file": ["error", { "ignoreExpressions": true }]
   },
   "parserOptions": {
     "ecmaVersion": "latest",
