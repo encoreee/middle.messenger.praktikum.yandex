@@ -32,14 +32,15 @@ class MessageAreaBase extends Block<MessageAreaProps> {
       userId: this.props.userId,
     });
 
-    this.children.messageInputArea = new MessageInputArea({ selectedChat: this.props.selectedChat });
+    this.children.messageInputArea = new MessageInputArea({
+      selectedChat: this.props.selectedChat,
+    });
   }
 
-  protected componentDidUpdate(
-    oldProps: MessageAreaProps,
-    newProps: MessageAreaProps,
-  ): boolean {
-    this.children.messageInputArea = new MessageInputArea({ selectedChat: this.props.selectedChat });
+  protected componentDidUpdate(): boolean {
+    this.children.messageInputArea = new MessageInputArea({
+      selectedChat: this.props.selectedChat,
+    });
     this.children.messageConvArea = new MessageConvArea({
       messages: this.props.messages,
       userId: this.props.userId,

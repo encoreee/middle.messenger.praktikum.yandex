@@ -115,10 +115,7 @@ class UserDataPageBase extends Block<UserDataPageProps> {
     });
   }
 
-  protected componentDidUpdate(
-    oldProps: UserDataPageProps,
-    newProps: UserDataPageProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: UserDataPageProps): boolean {
     this.children.avatar = new AvatarImage({
       path: newProps.user.avatar,
       events: {

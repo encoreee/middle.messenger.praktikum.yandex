@@ -203,12 +203,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     ElementValidator.checkButtonEnable(this);
   }
 
-  protected componentDidUpdate(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    oldProps: ChangeDataFormProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    newProps: ChangeDataFormProps,
-  ): boolean {
+  protected componentDidUpdate(): boolean {
     ElementValidator.checkButtonEnable(this);
     return true;
   }

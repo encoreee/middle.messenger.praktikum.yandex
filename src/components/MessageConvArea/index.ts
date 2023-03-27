@@ -20,10 +20,7 @@ export class MessageConvArea extends Block<MessageConvAreaProps> {
     this.children.messages = MessageConvArea.createMessages(this.props);
   }
 
-  protected componentDidUpdate(
-    oldProps: MessageConvAreaProps,
-    newProps: MessageConvAreaProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: MessageConvAreaProps): boolean {
     this.children.messages = MessageConvArea.createMessages(newProps);
 
     return true;

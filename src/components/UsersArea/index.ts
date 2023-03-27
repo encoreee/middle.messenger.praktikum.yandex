@@ -36,10 +36,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     this.constractArea(this.props);
   }
 
-  protected componentDidUpdate(
-    oldProps: UsersAreaProps,
-    newProps: UsersAreaProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: UsersAreaProps): boolean {
     this.constractArea(newProps);
     return true;
   }

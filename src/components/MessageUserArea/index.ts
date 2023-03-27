@@ -23,10 +23,7 @@ class MessageUserAreaBase extends Block<MessageUserAreaProps> {
     });
   }
 
-  protected componentDidUpdate(
-    oldProps: MessageUserAreaProps,
-    newProps: MessageUserAreaProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: MessageUserAreaProps): boolean {
     this.children.avatar = new AvatarImage({
       path: newProps.userData?.avatarPers,
     });

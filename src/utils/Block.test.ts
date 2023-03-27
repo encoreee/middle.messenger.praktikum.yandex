@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import proxyquire from 'proxyquire';
 import { expect } from 'chai';
@@ -23,7 +24,7 @@ describe('Block', () => {
   class ComponentMock extends Block {}
 
   it('should fire init event on initialization', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // @ts-ignore
     const mock = new ComponentMock({});
     expect(eventBusMock.emit.calledWith('init')).to.eq(true);
   });
