@@ -2,7 +2,7 @@
 /* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './userDataPage.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
 import { UserDataField } from '../../components/UserDataField/index';

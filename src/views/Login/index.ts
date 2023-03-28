@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './login.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { SinginForm } from '../../components/SinginForm/index';
 import { MainLabel } from '../../components/MainLabel/index';
 import { LinkLabelWithRouter } from '../../components/LinkLabel';

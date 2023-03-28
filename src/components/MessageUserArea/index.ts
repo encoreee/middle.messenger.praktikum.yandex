@@ -4,7 +4,7 @@ import Block from '../../utils/Block';
 import { withStore } from '../../utils/withStore';
 import { AvatarImage } from '../AvatarImage/index';
 import template from './messageUserArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 interface MessageUserAreaProps {
   selectedChat: number | undefined;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Block from '../../utils/Block';
 import template from './messageArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { NotSelectedLabel } from '../NotSelectedLabel';
 import { MessageUserArea } from '../MessageUserArea/index';
 import { MessageConvArea } from '../MessageConvArea';

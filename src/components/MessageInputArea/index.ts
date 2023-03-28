@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './messageInputArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { AttachIcon } from '../AttachIcon/index';
 import { SendIcon } from '../SendIcon/index';
 import { MessageInput } from '../MessageInput';

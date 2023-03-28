@@ -1,11 +1,11 @@
 import Block from '../../utils/Block';
 import template from './myMessage.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import checked from '../../../static/checked.svg';
 
 export interface MessageProps {
-  message : string
-  time : string
+  message: string;
+  time: string;
 }
 
 export class MyMessage extends Block<MessageProps> {

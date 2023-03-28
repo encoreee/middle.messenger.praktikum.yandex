@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import Block from '../../utils/Block';
 import template from './usersArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { UserCell } from '../UserCell';
 import { withStore } from '../../utils/withStore';
 import { UserInfo } from '../../api/ChatsAPI';

@@ -3,7 +3,7 @@ import { MainLabel } from '../../components/MainLabel';
 import { SingupForm } from '../../components/SingupForm';
 import Block from '../../utils/Block';
 import template from './registration.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 export class RegistrationPage extends Block {
   constructor() {

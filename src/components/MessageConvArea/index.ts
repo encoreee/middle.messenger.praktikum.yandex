@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import Block from '../../utils/Block';
 import template from './messageConvArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { MyMessage } from '../MyMessage/index';
 import { UserMessage } from '../UserMessage/index';
 import { Message } from '../../contracts/message';

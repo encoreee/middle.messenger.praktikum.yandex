@@ -8,7 +8,7 @@ import { SingupFormInput } from '../SingupFormInput';
 import template from './singupForm.hbs';
 import ElementValidator from '../../utils/ElementValidator';
 
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel/index';
 

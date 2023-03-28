@@ -21,26 +21,39 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Messenger',
-      template: 'index.ejs',
-      inject: false,
+      filename: 'index.html',
+      template: 'src/index.html',
     }),
   ],
 
   module: {
     rules: [
       {
-        test: /\.css|pcss$/,
+        test: /\.pcss/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  ['postcss-import', 'postcss-simple-vars', 'autoprefixer'],
+                ],
+              },
+            },
+          },
         ],
       },
 
       {
-        test: /\.tsx?$/,
+        test: /\.ts/,
         use: [
           {
             loader: 'ts-loader',
@@ -56,7 +69,7 @@ module.exports = {
         test: /\.hbs/,
         use: [
           {
-            loader: 'handlebars-loader',
+            loader: 'handlebars-template-loader',
           },
         ],
       },

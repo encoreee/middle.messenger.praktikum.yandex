@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './attachIcon.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import attach from '../../../static/attach.svg';
 
 interface AttachIconProps {}

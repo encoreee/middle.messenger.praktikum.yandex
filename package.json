@@ -36,6 +36,7 @@
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
     "handlebars-loader": "1.7.3",
+    "handlebars-template-loader": "^1.0.0",
     "html-webpack-plugin": "^5.5.0",
     "jsdom": "21.1.1",
     "mocha": "10.2.0",
@@ -52,6 +53,7 @@
     "stylelint-config-standard": "30.0.1",
     "ts-loader": "9.4.2",
     "typescript": "4.9.5",
+    "typescript-plugin-css-modules": "^5.0.0",
     "webpack": "5.76.3",
     "webpack-cli": "5.0.1",
     "xhr2": "0.2.1"
