@@ -19,8 +19,8 @@ COPY --from=builder /app/package.json /app/yarn.lock ./
 RUN yarn install --production
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/server.js ./
+COPY --from=builder /app/app.js ./
 
 EXPOSE 3000
 
-CMD ["node", "./server.js"]
+CMD ["node", "./app.js"]
