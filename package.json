@@ -4,8 +4,6 @@
   "license": "MIT",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel src/index.html --no-cache",
-    "buildParcel": "parcel build src/index.html --no-cache",
     "start": "npm run build && node app.js",
     "test": "echo \"Error: no test sprcified\" && exit 1",
     "build": "webpack"
@@ -25,7 +23,6 @@
     "sinon": "15.0.3"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
     "@types/mocha": "10.0.1",
     "@types/nanoid": "3.0.0",
     "@types/node": "18.14.0",
@@ -40,7 +37,6 @@
     "html-webpack-plugin": "^5.5.0",
     "jsdom": "21.1.1",
     "mocha": "10.2.0",
-    "parcel": "2.8.3",
     "postcss": "^8.4.21",
     "postcss-font-magician": "3.0.0",
     "postcss-import": "15.1.0",
