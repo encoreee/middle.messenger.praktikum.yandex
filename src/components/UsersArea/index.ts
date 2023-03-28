@@ -10,6 +10,7 @@ import { SingupFormButton } from '../SingupFormButton';
 import { ModalAddChat } from '../ModalAddChat';
 import { ModalAddUser } from '../ModalAddUser';
 import { User } from '../../contracts/auth';
+import { ModalDeleteChat } from '../ModalDeleteChat';
 
 interface UsersAreaProps {
   usersData: UserInfo[];
@@ -22,9 +23,11 @@ interface UsersAreaProps {
 export const Buttons: {
   buttonChat: string;
   buttonUser: string;
+  buttonDeleteChat: string;
 } = {
   buttonChat: 'buttonChat',
   buttonUser: 'buttonUser',
+  buttonDeleteChat: 'buttonDeleteChat',
 };
 
 class UsersAreaBase extends Block<UsersAreaProps> {
@@ -52,6 +55,9 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     this.children.modalAddUser = modalUser;
     modalUser.disable();
 
+    const modalDeleteChat = new ModalDeleteChat({ ...props });
+    this.children.modalDeleteChat = modalDeleteChat;
+
     this.children.buttonChat = new SingupFormButton({
       id: Buttons.buttonChat,
       label: 'Создать новый чат',
@@ -72,6 +78,19 @@ class UsersAreaBase extends Block<UsersAreaProps> {
         click: (event) => {
           event.preventDefault();
           modalUser.enable();
+        },
+      },
+    });
+
+    this.children.buttonDeleteChat = new SingupFormButton({
+      id: Buttons.buttonDeleteChat,
+      label: 'Удалить чат',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          //@ts-ignore
+          modalDeleteChat.enable();
         },
       },
     });

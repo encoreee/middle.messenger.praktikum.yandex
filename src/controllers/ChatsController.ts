@@ -50,10 +50,8 @@ class ChatsController {
     this.api.addUsers(id, [userId]);
   }
 
-  async delete(id: number) {
-    await this.api.delete(id);
-
-    this.fetchChats();
+  delete(id: number) {
+    this.api.delete(id);
   }
 
   getToken(id: number) {
