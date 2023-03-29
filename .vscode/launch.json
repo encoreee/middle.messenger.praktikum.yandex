@@ -27,7 +27,6 @@
         "'./src/**/*.test.ts'"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "openDebug": "openOnDebugBreak",
       "sourceMaps": true,
       "outFiles": ["${workspaceFolder}/**/*.js"]
     },
@@ -47,8 +46,7 @@
         "${workspaceFolder}/src/**/*.test.ts"
       ],
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "protocol": "inspector"
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
