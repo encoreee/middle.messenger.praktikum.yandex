@@ -13,7 +13,6 @@ export class ChatPage extends Block {
   }
 
   init() {
-    console.log(styles);
     this.children.myUserArea = new MyUserArea({});
 
     this.children.usersArea = new UsersArea({});

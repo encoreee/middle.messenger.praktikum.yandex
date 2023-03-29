@@ -53,7 +53,6 @@ export class ModalDeleteChatBase extends Block<ModalDeleteChatProps> {
   }
 
   onDeleteChat(id?: number) {
-    console.log(id);
     if (id) {
       ChatsController.delete(id);
 
@@ -84,7 +83,6 @@ export class ModalDeleteChatBase extends Block<ModalDeleteChatProps> {
 
 const withSelectedChatMessages = withStore((state) => {
   const selectedChatId = state.selectedChat;
-  console.log(selectedChatId);
   if (!selectedChatId) {
     return {
       selectedChat: undefined,
