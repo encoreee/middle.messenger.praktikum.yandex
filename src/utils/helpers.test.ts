@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { set } from './helpers';
+import { merge, set } from './helpers';
 
 describe('set function', () => {
   const keypath = 'test';
@@ -24,7 +24,7 @@ describe('set function', () => {
     expect(result).to.equal(obj);
   });
 
-  it('should return original object if it\'s is not an object', () => {
+  it("should return original object if it's is not an object", () => {
     const notAnObject = 'string';
 
     const result = set(notAnObject, keypath, value);
@@ -39,5 +39,35 @@ describe('set function', () => {
     const f = () => set(obj, keypathNotAString, value);
 
     expect(f).to.throw(Error);
+  });
+});
+
+describe('merge function', () => {
+  let objLeft: Record<string, unknown>;
+
+  beforeEach(() => {
+    objLeft = { a: 'a' };
+  });
+
+  it('should merge objects', () => {
+    let objRight: Record<string, unknown>;
+    objRight = { b: 'b' };
+
+    merge(objLeft, objRight);
+
+    expect(objLeft).to.haveOwnProperty('a', 'a');
+    expect(objLeft).to.haveOwnProperty('b', 'b');
+  });
+
+  it('should contain property once', () => {
+    let objRight: Record<string, unknown>;
+    objRight = { a: 'a' };
+
+    merge(objLeft, objRight);
+
+    const entries = Object.entries(objLeft);
+
+    expect(objLeft).to.haveOwnProperty('a', 'a');
+    expect(entries.length).to.eq(1);
   });
 });

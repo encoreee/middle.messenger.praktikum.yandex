@@ -8,6 +8,7 @@ import { ChatPage } from './views/ChatPage/index';
 import { UserDataPage } from './views/UserDataPage/index';
 import { ChangeDataPage } from './views/ChangeDataPage/index';
 import { ChangePassPage } from './views/ChangePassPage/index';
+import { trimChar } from './utils/helpers';
 
 export enum Routes {
   Index = '/',
@@ -28,7 +29,13 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   let isProtectedRoute = false;
 
-  switch (window.location.pathname) {
+  let route = window.location.pathname;
+  if (route !== '/') {
+    route = trimChar(route, '/');
+    route = '/'.concat(route);
+  }
+
+  switch (route) {
     case Routes.Index:
       isProtectedRoute = true;
       break;
@@ -57,10 +64,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router.start();
 
     if (isProtectedRoute) {
-      if (window.location.pathname === Routes.Index) {
+      if (route === Routes.Index || route === Routes.Messenger) {
         Router.go(Routes.Messenger);
       } else {
-        Router.go(window.location.pathname);
+        Router.go(route);
       }
     } else {
       Router.go(Routes.Index);
@@ -70,6 +77,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (!isProtectedRoute) {
       Router.go(Routes.Index);
+    } else {
+      Router.go(Routes.Messenger);
     }
   }
 });
