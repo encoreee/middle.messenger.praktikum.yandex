@@ -22,10 +22,12 @@ export class ModalDeleteChatBase extends Block<ModalDeleteChatProps> {
       },
     });
   }
+
   protected componentDidUpdate(): boolean {
     this.disable();
     return true;
   }
+
   enable() {
     if (this.element) {
       this.element.style.display = 'flex';

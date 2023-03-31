@@ -5,6 +5,9 @@ import styles from './styles.module.pcss';
 interface MessageInputProps {
   id: string;
   name: string;
+  events: {
+    keypress: (event: KeyboardEvent) => void;
+  };
 }
 
 export class MessageInput extends Block<MessageInputProps> {

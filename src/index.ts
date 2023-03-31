@@ -8,7 +8,6 @@ import { ChatPage } from './views/ChatPage/index';
 import { UserDataPage } from './views/UserDataPage/index';
 import { ChangeDataPage } from './views/ChangeDataPage/index';
 import { ChangePassPage } from './views/ChangePassPage/index';
-import { trimChar } from './utils/helpers';
 
 export enum Routes {
   Index = '/',
@@ -29,11 +28,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   let isProtectedRoute = false;
 
-  let route = window.location.pathname;
-  if (route !== '/') {
-    route = trimChar(route, '/');
-    route = '/'.concat(route);
-  }
+  const route = window.location.pathname;
 
   switch (route) {
     case Routes.Index:
