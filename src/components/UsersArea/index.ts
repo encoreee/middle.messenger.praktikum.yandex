@@ -89,7 +89,6 @@ class UsersAreaBase extends Block<UsersAreaProps> {
       events: {
         click: (event) => {
           event.preventDefault();
-          //@ts-ignore
           modalDeleteChat.enable();
         },
       },

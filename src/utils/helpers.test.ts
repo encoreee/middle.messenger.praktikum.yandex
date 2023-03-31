@@ -50,8 +50,7 @@ describe('merge function', () => {
   });
 
   it('should merge objects', () => {
-    let objRight: Record<string, unknown>;
-    objRight = { b: 'b' };
+    const objRight: Record<string, unknown> = { b: 'b' };
 
     merge(objLeft, objRight);
 
@@ -60,8 +59,7 @@ describe('merge function', () => {
   });
 
   it('should contain property once', () => {
-    let objRight: Record<string, unknown>;
-    objRight = { a: 'a' };
+    const objRight: Record<string, unknown> = { a: 'a' };
 
     merge(objLeft, objRight);
 
