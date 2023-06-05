@@ -28,7 +28,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   let isProtectedRoute = false;
 
-  switch (window.location.pathname) {
+  const route = window.location.pathname;
+
+  switch (route) {
     case Routes.Index:
       isProtectedRoute = true;
       break;
@@ -57,10 +59,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     Router.start();
 
     if (isProtectedRoute) {
-      if (window.location.pathname === Routes.Index) {
+      if (route === Routes.Index || route === Routes.Messenger) {
         Router.go(Routes.Messenger);
       } else {
-        Router.go(window.location.pathname);
+        Router.go(route);
       }
     } else {
       Router.go(Routes.Index);
@@ -70,6 +72,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     if (!isProtectedRoute) {
       Router.go(Routes.Index);
+    } else {
+      Router.go(Routes.Messenger);
     }
   }
 });

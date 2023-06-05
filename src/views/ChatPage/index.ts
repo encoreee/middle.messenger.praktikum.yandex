@@ -3,7 +3,7 @@ import { MyUserArea } from '../../components/MyUserArea';
 import { UsersArea } from '../../components/UsersArea';
 import Block from '../../utils/Block';
 import template from './chatPage.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { MessageArea } from '../../components/MessageArea';
 import ChatsController from '../../controllers/ChatsController';
 

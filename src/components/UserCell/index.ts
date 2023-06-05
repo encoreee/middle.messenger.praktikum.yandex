@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import Block from '../../utils/Block';
 import template from './userCell.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { UserCellAvatar } from '../UserCellAvatar';
 
 interface UserCellProps {

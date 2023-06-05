@@ -1,14 +1,14 @@
 import Block from '../../utils/Block';
 import { PropsWithRouter, withRouter } from '../../utils/withRouter';
 import template from './linkLabel.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 interface LinkLabelProps extends PropsWithRouter {
   label: string;
   to: string;
   events?: {
-    click: () => void
-  },
+    click: () => void;
+  };
 }
 
 export class LinkLabelBase extends Block<LinkLabelProps> {

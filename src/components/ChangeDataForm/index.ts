@@ -4,7 +4,7 @@ import Block from '../../utils/Block';
 import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import template from './changeDataForm.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import ElementValidator from '../../utils/ElementValidator';
 import { HelperIds, InputIds } from '../../utils/ElementIds';
 import { HelperLabel } from '../HelperLabel';
@@ -203,12 +203,7 @@ export class ChangeDataForm extends Block<ChangeDataFormProps> {
     ElementValidator.checkButtonEnable(this);
   }
 
-  protected componentDidUpdate(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    oldProps: ChangeDataFormProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    newProps: ChangeDataFormProps,
-  ): boolean {
+  protected componentDidUpdate(): boolean {
     ElementValidator.checkButtonEnable(this);
     return true;
   }

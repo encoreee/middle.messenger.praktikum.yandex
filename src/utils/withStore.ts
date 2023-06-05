@@ -5,7 +5,7 @@ import { State, StoreEvents } from './StoreTypes';
 
 export function withStore<SP extends Partial<Record<string, any>>>(
   mapStateToProps: (state: State) => SP,
-) {
+): any {
   return function wrap<P>(
     Component: typeof BlockConstructable<Record<string, any>>,
   ) {

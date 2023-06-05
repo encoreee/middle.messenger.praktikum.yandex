@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable class-methods-use-this */
+// @ts-ignore
 import { nanoid } from 'nanoid';
 import { EventBus } from './EventBus';
 
@@ -157,8 +159,12 @@ class Block<P extends Record<string, any> = any> {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected componentDidUpdate(oldProps: P, newProps: P) : boolean | Promise<boolean> {
+  protected componentDidUpdate(
+    // @ts-ignore
+    oldProps: P,
+    // @ts-ignore
+    newProps: P,
+  ): boolean | Promise<boolean> {
     return true;
   }
 
@@ -184,7 +190,7 @@ class Block<P extends Record<string, any> = any> {
     }
 
     this.elementPrivate = newElement;
-
+    console.log();
     this.addEvents();
   }
 

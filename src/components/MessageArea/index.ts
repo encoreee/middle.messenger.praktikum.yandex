@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Block from '../../utils/Block';
 import template from './messageArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { NotSelectedLabel } from '../NotSelectedLabel';
 import { MessageUserArea } from '../MessageUserArea/index';
 import { MessageConvArea } from '../MessageConvArea';
@@ -32,14 +32,15 @@ class MessageAreaBase extends Block<MessageAreaProps> {
       userId: this.props.userId,
     });
 
-    this.children.messageInputArea = new MessageInputArea({ selectedChat: this.props.selectedChat });
+    this.children.messageInputArea = new MessageInputArea({
+      selectedChat: this.props.selectedChat,
+    });
   }
 
-  protected componentDidUpdate(
-    oldProps: MessageAreaProps,
-    newProps: MessageAreaProps,
-  ): boolean {
-    this.children.messageInputArea = new MessageInputArea({ selectedChat: this.props.selectedChat });
+  protected componentDidUpdate(): boolean {
+    this.children.messageInputArea = new MessageInputArea({
+      selectedChat: this.props.selectedChat,
+    });
     this.children.messageConvArea = new MessageConvArea({
       messages: this.props.messages,
       userId: this.props.userId,

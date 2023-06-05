@@ -48,3 +48,14 @@ export function set(
 
   return merge(object as Indexed, result);
 }
+
+function escapeRegExp(strToEscape: string) {
+  // Escape special characters for use in a regular expression
+  return strToEscape.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+}
+
+export function trimChar(origString: string, charToTrim: string) {
+  charToTrim = escapeRegExp(charToTrim);
+  var regEx = new RegExp('^[' + charToTrim + ']+|[' + charToTrim + ']+$', 'g');
+  return origString.replace(regEx, '');
+}

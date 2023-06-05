@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import Block from '../../utils/Block';
 import template from './changeDataPage.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
 import { ChangeDataForm } from '../../components/ChangeDataForm/index';

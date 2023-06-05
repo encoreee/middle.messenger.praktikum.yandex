@@ -1,10 +1,13 @@
 import Block from '../../utils/Block';
 import template from './messageInput.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 interface MessageInputProps {
   id: string;
   name: string;
+  events: {
+    keypress: (event: KeyboardEvent) => void;
+  };
 }
 
 export class MessageInput extends Block<MessageInputProps> {

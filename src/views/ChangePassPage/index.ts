@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import Block from '../../utils/Block';
 import template from './changePassPage.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { NameLabel } from '../../components/NameLabel';
 import { TitleLabel } from '../../components/TitleLable/index';
 import { ChangePassForm } from '../../components/ChangePassForm/index';
@@ -13,11 +13,11 @@ import router from '../../utils/Router';
 import { Routes } from '../..';
 
 interface ChangePassPageProps extends Record<string, any> {
-  user: User
+  user: User;
 }
 
 class ChangePassPageBase extends Block<ChangePassPageProps> {
-  constructor(props : ChangePassPageProps) {
+  constructor(props: ChangePassPageProps) {
     super({ ...props });
   }
 

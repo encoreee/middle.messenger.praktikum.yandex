@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import Block from '../../utils/Block';
 import template from './messageConvArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { MyMessage } from '../MyMessage/index';
 import { UserMessage } from '../UserMessage/index';
 import { Message } from '../../contracts/message';
@@ -20,10 +20,7 @@ export class MessageConvArea extends Block<MessageConvAreaProps> {
     this.children.messages = MessageConvArea.createMessages(this.props);
   }
 
-  protected componentDidUpdate(
-    oldProps: MessageConvAreaProps,
-    newProps: MessageConvAreaProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: MessageConvAreaProps): boolean {
     this.children.messages = MessageConvArea.createMessages(newProps);
 
     return true;

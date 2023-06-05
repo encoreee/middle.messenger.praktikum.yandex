@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import template from './mainLabel.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 interface MainLabelProps {
   label: string;

@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import Block from '../../utils/Block';
 import template from './usersArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import { UserCell } from '../UserCell';
 import { withStore } from '../../utils/withStore';
 import { UserInfo } from '../../api/ChatsAPI';
@@ -10,6 +10,7 @@ import { SingupFormButton } from '../SingupFormButton';
 import { ModalAddChat } from '../ModalAddChat';
 import { ModalAddUser } from '../ModalAddUser';
 import { User } from '../../contracts/auth';
+import { ModalDeleteChat } from '../ModalDeleteChat';
 
 interface UsersAreaProps {
   usersData: UserInfo[];
@@ -22,9 +23,11 @@ interface UsersAreaProps {
 export const Buttons: {
   buttonChat: string;
   buttonUser: string;
+  buttonDeleteChat: string;
 } = {
   buttonChat: 'buttonChat',
   buttonUser: 'buttonUser',
+  buttonDeleteChat: 'buttonDeleteChat',
 };
 
 class UsersAreaBase extends Block<UsersAreaProps> {
@@ -36,10 +39,7 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     this.constractArea(this.props);
   }
 
-  protected componentDidUpdate(
-    oldProps: UsersAreaProps,
-    newProps: UsersAreaProps,
-  ): boolean {
+  protected componentDidUpdate(newProps: UsersAreaProps): boolean {
     this.constractArea(newProps);
     return true;
   }
@@ -54,6 +54,9 @@ class UsersAreaBase extends Block<UsersAreaProps> {
     const modalUser = new ModalAddUser({ ...props });
     this.children.modalAddUser = modalUser;
     modalUser.disable();
+
+    const modalDeleteChat = new ModalDeleteChat({ ...props });
+    this.children.modalDeleteChat = modalDeleteChat;
 
     this.children.buttonChat = new SingupFormButton({
       id: Buttons.buttonChat,
@@ -75,6 +78,18 @@ class UsersAreaBase extends Block<UsersAreaProps> {
         click: (event) => {
           event.preventDefault();
           modalUser.enable();
+        },
+      },
+    });
+
+    this.children.buttonDeleteChat = new SingupFormButton({
+      id: Buttons.buttonDeleteChat,
+      label: 'Удалить чат',
+      type: 'Submit',
+      events: {
+        click: (event) => {
+          event.preventDefault();
+          modalDeleteChat.enable();
         },
       },
     });

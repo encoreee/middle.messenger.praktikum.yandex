@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import Block from '../../utils/Block';
 import template from './myUserArea.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 import router from '../../utils/Router';
 import { Routes } from '../..';
 import { AvatarImage } from '../AvatarImage';
@@ -9,7 +9,7 @@ import { withStore } from '../../utils/withStore';
 import { User } from '../../contracts/auth';
 
 interface MyUserAreaProps {
-  user : User
+  user: User;
 }
 
 export class MyUserAreaBase extends Block<MyUserAreaProps> {

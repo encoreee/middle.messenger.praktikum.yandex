@@ -5,7 +5,7 @@ import { SingupFormButton } from '../SingupFormButton';
 import { SingupFormInput } from '../SingupFormInput';
 import { CloseSpan } from '../CloseSpan';
 import template from './modalAddChat.hbs';
-import * as styles from './styles.module.pcss';
+import styles from './styles.module.pcss';
 
 export interface ModalAddChatProps {
   text?: string;
@@ -97,7 +97,7 @@ export class ModalAddChat extends Block<ModalAddChatProps> {
   private onTarget(event: Event) {
     if (event.target as HTMLElement) {
       const element = event.target as HTMLElement;
-      if (element.className.includes('modal')) {
+      if (element.className.includes(styles.modal)) {
         this.element!.style.display = 'none';
       }
     }
