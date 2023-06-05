@@ -190,7 +190,7 @@ class Block<P extends Record<string, any> = any> {
     }
 
     this.elementPrivate = newElement;
-
+    console.log();
     this.addEvents();
   }
 
